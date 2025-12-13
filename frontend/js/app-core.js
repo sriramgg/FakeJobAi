@@ -3,10 +3,10 @@
  */
 
 /* ================= CONFIGURATION ================= */
-// Backend: PythonAnywhere (Free Forever)
+// Backend API Base - Uses relative path in production
 const API_BASE = window.location.hostname === "127.0.0.1" || window.location.hostname === "localhost"
     ? "http://127.0.0.1:8000/analyze"
-    : "https://sriramgg.pythonanywhere.com/analyze";
+    : "/analyze";
 
 // State
 let history = JSON.parse(localStorage.getItem('historyData') || '[]');

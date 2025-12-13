@@ -342,6 +342,7 @@
 
   <footer><small class="text-muted">© 2025 FakeJobAI. Secure & Encrypted.</small></footer>
 
+  <script src="js/auth.js"></script>
   <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"></script>
   <script src="https://unpkg.com/aos@2.3.4/dist/aos.js"></script>
   <script>AOS.init();</script>
@@ -368,7 +369,7 @@
     // Function to send welcome email via backend
     async function sendWelcomeEmail(email, name, source = 'google_login') {
       try {
-        const response = await fetch('http://127.0.0.1:8000/analyze/send-welcome-email', {
+        const response = await fetch('/analyze/send-welcome-email', {
           method: 'POST',
           headers: { 'Content-Type': 'application/json' },
           body: JSON.stringify({ email, name, source })
