@@ -4,8 +4,10 @@ const ASSETS = [
     '/index.html',
     '/dashboard.html',
     '/login.html',
-    '/css/style.css',
+    '/assets/css/style.css',
+    '/assets/css/mobile-app.css',
     '/js/app-core.js',
+    '/js/mobile-nav.js',
     '/js/globe-map.js'
 ];
 
