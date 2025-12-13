@@ -3,13 +3,13 @@ import { initializeApp } from "https://www.gstatic.com/firebasejs/10.12.2/fireba
 import { getAuth, GoogleAuthProvider } from "https://www.gstatic.com/firebasejs/10.12.2/firebase-auth.js";
 
 const firebaseConfig = {
-  apiKey: "AIzaSyAKtNnpQHdLKFN0D5vmda96zlMPDgrEoes",
-  authDomain: "sign-ed6c2.firebaseapp.com",
-  projectId: "sign-ed6c2",
-  storageBucket: "sign-ed6c2.appspot.com",
-  messagingSenderId: "155178314987",
-  appId: "1:155178314987:web:b31d722393e3d8ebcc62ae",
-  measurementId: "G-P6Y93V1L4K"
+  apiKey: "AIzaSyAh7MNkltNC56CczIaI3e0Cm_x4Vp2OkCQ",
+  authDomain: "fakejobaidetection.firebaseapp.com",
+  projectId: "fakejobaidetection",
+  storageBucket: "fakejobaidetection.firebasestorage.app",
+  messagingSenderId: "1082183297442",
+  appId: "1:1082183297442:web:833686742f461f4897eafb",
+  measurementId: "G-5PFBP2YBHK"
 };
 
 export const app = initializeApp(firebaseConfig);

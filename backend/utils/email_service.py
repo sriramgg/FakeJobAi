@@ -228,6 +228,9 @@ def send_welcome_email(user_email: str, user_name: str = "Job Seeker") -> dict:
             "error": "Email credentials not configured. Add FAKEJOBAI_EMAIL and FAKEJOBAI_EMAIL_PASSWORD to .env"
         }
     
+    # Remove spaces from password (common in Google App Passwords)
+    sender_password = sender_password.replace(" ", "")
+    
     try:
         # Create message
         msg = MIMEMultipart("alternative")

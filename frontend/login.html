@@ -6,104 +6,40 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <title>Login - FakeJobAI</title>
 
+  <!-- External Resources -->
   <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet">
   <link
     href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;500;600;700&family=Montserrat:wght@600;700&display=swap"
     rel="stylesheet">
-  <link href="https://unpkg.com/aos@2.3.4/dist/aos.css" rel="stylesheet">
   <script src="https://kit.fontawesome.com/a2e0b5a50f.js" crossorigin="anonymous"></script>
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/animate.css/4.1.1/animate.min.css" />
 
   <style>
+    /* --- Design System --- */
     :root {
       --primary-color: #4361ee;
-      --glass-bg: rgba(255, 255, 255, 0.85);
-      --glass-border: 1px solid rgba(255, 255, 255, 0.3);
-      --glass-shadow: 0 8px 32px 0 rgba(31, 38, 135, 0.1);
+      --glass-bg: rgba(255, 255, 255, 0.95);
     }
 
     body {
       font-family: 'Poppins', sans-serif;
       background: #f0f4f8;
-      margin: 0;
-      padding-top: 80px;
-      overflow-x: hidden;
       min-height: 100vh;
       display: flex;
       flex-direction: column;
     }
 
-    /* --- Background Blobs --- */
-    .bg-shape {
-      position: absolute;
-      border-radius: 50%;
-      filter: blur(80px);
-      z-index: -1;
-      opacity: 0.5;
-      animation: floatShape 20s infinite alternate;
-    }
-
-    .shape-1 {
-      width: 500px;
-      height: 500px;
-      background: #4cc9f0;
-      top: -150px;
-      left: -150px;
-    }
-
-    .shape-2 {
-      width: 400px;
-      height: 400px;
-      background: #4361ee;
-      bottom: 50px;
-      right: -100px;
-      animation-delay: -5s;
-    }
-
-    .shape-3 {
-      width: 300px;
-      height: 300px;
-      background: #7209b7;
-      top: 40%;
-      left: 30%;
-      animation-delay: -10s;
-      opacity: 0.3;
-    }
-
-    @keyframes floatShape {
-      0% {
-        transform: translate(0, 0) rotate(0deg);
-      }
-
-      100% {
-        transform: translate(50px, 40px) rotate(20deg);
-      }
-    }
-
-    /* --- Glass Card --- */
-    .glass-card {
-      background: var(--glass-bg);
-      backdrop-filter: blur(12px);
-      border: var(--glass-border);
-      box-shadow: var(--glass-shadow);
-      border-radius: 20px;
-      padding: 3rem 2.5rem;
-      width: 100%;
-      max-width: 480px;
-      margin: auto;
-    }
-
-    /* --- Navbar (Matches Index) --- */
+    /* --- Navbar --- */
     .navbar {
-      background: linear-gradient(to right, #ffffff, #e3f2fd);
-      box-shadow: 0 2px 8px rgba(0, 0, 0, 0.05);
-      border-bottom: none;
-      padding: 12px 0;
+      background: #fff;
+      box-shadow: 0 2px 10px rgba(0, 0, 0, 0.05);
+      padding: 15px 0;
     }
 
     .navbar-brand {
       font-family: 'Montserrat', sans-serif;
       font-weight: 700;
-      font-size: 1.7rem;
+      font-size: 1.5rem;
       color: #333;
     }
 
@@ -111,477 +47,539 @@
       color: var(--primary-color);
     }
 
-    .nav-link {
-      font-weight: 500;
-      color: #555 !important;
-      margin-left: 15px;
-      transition: color 0.3s;
+    /* --- Card & Form --- */
+    .login-container {
+      flex: 1;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      padding: 20px;
     }
 
-    .nav-link:hover,
-    .nav-link.active {
-      color: var(--primary-color) !important;
+    .glass-card {
+      background: #fff;
+      border-radius: 20px;
+      box-shadow: 0 10px 40px rgba(0, 0, 0, 0.08);
+      padding: 40px;
+      width: 100%;
+      max-width: 450px;
     }
 
-    .login-text span:first-child {
-      color: #4895ef;
-      font-weight: 600;
-    }
-
-    .login-text span:last-child {
-      color: #333;
-      font-weight: 700;
-    }
-
-    /* --- Form --- */
     .form-control {
       border-radius: 10px;
-      padding: 12px 15px;
+      padding: 12px;
       border: 1px solid #ddd;
-      background: rgba(255, 255, 255, 0.7);
+      background: #f9f9f9;
     }
 
     .form-control:focus {
       background: #fff;
-      box-shadow: 0 0 0 4px rgba(67, 97, 238, 0.1);
       border-color: var(--primary-color);
+      box-shadow: 0 0 0 4px rgba(67, 97, 238, 0.1);
     }
 
     .btn-primary {
-      background: linear-gradient(90deg, #4361ee, #4cc9f0);
+      background: var(--primary-color);
       border: none;
       border-radius: 10px;
       padding: 12px;
       font-weight: 600;
-      transition: all 0.3s;
+      width: 100%;
+      transition: transform 0.2s;
     }
 
-    .btn-primary:hover {
-      transform: translateY(-2px);
-      box-shadow: 0 5px 15px rgba(67, 97, 238, 0.3);
+    .btn-primary:active {
+      transform: scale(0.98);
     }
 
+    /* Google Button */
     .google-btn {
       background: #fff;
       border: 1px solid #ddd;
       border-radius: 10px;
-      padding: 10px;
+      padding: 12px;
       width: 100%;
       font-weight: 600;
+      color: #555;
       display: flex;
       align-items: center;
       justify-content: center;
       gap: 10px;
-      transition: all 0.3s;
-      color: #555;
+      transition: background 0.2s;
+      cursor: pointer;
     }
 
     .google-btn:hover {
-      background: #f8f9fa;
-      transform: translateY(-1px);
+      background: #f1f1f1;
     }
 
     .divider {
       display: flex;
       align-items: center;
-      text-align: center;
-      color: #888;
-      margin: 1.5rem 0;
-      font-size: 0.9rem;
+      color: #aaa;
+      margin: 20px 0;
+      font-size: 0.85rem;
     }
 
     .divider::before,
     .divider::after {
       content: '';
       flex: 1;
-      border-bottom: 1px solid #ddd;
+      border-bottom: 1px solid #eee;
     }
 
     .divider::before {
-      margin-right: .75em;
+      margin-right: 10px;
     }
 
     .divider::after {
-      margin-left: .75em;
+      margin-left: 10px;
     }
 
-    a.text-link {
-      color: var(--primary-color);
-      text-decoration: none;
+    /* --- Status Modal --- */
+    .overlay {
+      position: fixed;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      background: rgba(0, 0, 0, 0.5);
+      backdrop-filter: blur(5px);
+      display: none;
+      align-items: center;
+      justify-content: center;
+      z-index: 1000;
+    }
+
+    /* --- Premium Welcome Modal Styling --- */
+    .overlay {
+      background: rgba(15, 23, 42, 0.6);
+      backdrop-filter: blur(8px);
+    }
+
+    .status-box {
+      background: rgba(255, 255, 255, 0.95);
+      padding: 50px 40px;
+      border-radius: 24px;
+      text-align: center;
+      max-width: 480px;
+      width: 90%;
+      box-shadow: 0 25px 50px -12px rgba(0, 0, 0, 0.25);
+      border: 1px solid rgba(255, 255, 255, 0.5);
+      position: relative;
+      overflow: hidden;
+    }
+
+    .status-box::before {
+      content: '';
+      position: absolute;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 6px;
+      background: linear-gradient(90deg, #4361ee, #4cc9f0, #4361ee);
+      background-size: 200% 100%;
+      animation: shimmer 2s infinite linear;
+    }
+
+    @keyframes shimmer {
+      0% {
+        background-position: 100% 0;
+      }
+
+      100% {
+        background-position: -100% 0;
+      }
+    }
+
+    .status-header h2 {
+      font-weight: 800;
+      color: #1e293b;
+      font-family: 'Montserrat', sans-serif;
+      letter-spacing: -0.5px;
+      margin-bottom: 8px;
+    }
+
+    .status-header p {
+      color: #64748b;
+      margin-bottom: 35px;
+      font-size: 0.95rem;
+    }
+
+    .icon-large {
+      font-size: 56px;
+      color: #4361ee;
+      margin-bottom: 25px;
+      filter: drop-shadow(0 10px 15px rgba(67, 97, 238, 0.3));
+    }
+
+    .step-item {
+      background: #f8fafc;
+      padding: 12px 20px;
+      border-radius: 12px;
+      width: 100%;
+      margin-bottom: 12px;
+      border: 1px solid #e2e8f0;
+    }
+
+    .step-item.active {
+      background: #fff;
+      border-color: #4361ee;
+      box-shadow: 0 4px 12px rgba(67, 97, 238, 0.1);
+      transform: scale(1.02);
+    }
+
+    .step-icon {
+      width: 32px;
+      height: 32px;
+      font-size: 14px;
+      background: #e2e8f0;
+      color: #94a3b8;
+      transition: all 0.3s;
+    }
+
+    .step-item.done .step-icon {
+      background: #10b981;
+      color: #fff;
+    }
+
+    .step-item.done .step-text {
+      color: #0f172a;
       font-weight: 600;
     }
 
-    a.text-link:hover {
-      text-decoration: underline;
+    /* Timer Ring */
+    .timer-wrapper {
+      position: relative;
+      width: 100px;
+      height: 100px;
+      margin: 0 auto 20px;
     }
 
-    footer {
-      margin-top: auto;
-      padding: 20px 0;
-      text-align: center;
-      border-top: 1px solid #e0e0e0;
-      background: #fff;
+    .timer-ring {
+      transform: rotate(-90deg);
+      transform-origin: 50% 50%;
+    }
+
+    .timer-ring-circle {
+      stroke-dasharray: 251;
+      stroke-dashoffset: 0;
+      transition: stroke-dashoffset 1s linear;
+      stroke: #4361ee;
+    }
+
+    .timer-text {
+      position: absolute;
+      top: 50%;
+      left: 50%;
+      transform: translate(-50%, -50%);
+      font-size: 2.5rem;
+      font-weight: 800;
+      color: #4361ee;
     }
   </style>
 </head>
 
 <body>
 
-  <!-- Backgrounds -->
-  <div class="bg-shape shape-1"></div>
-  <div class="bg-shape shape-2"></div>
-  <div class="bg-shape shape-3"></div>
-
   <!-- Navbar -->
-  <nav class="navbar navbar-expand-lg fixed-top">
+  <nav class="navbar fixed-top">
     <div class="container">
       <a class="navbar-brand d-flex align-items-center" href="index.html">
-        <img src="logo.svg" alt="Logo" width="36" height="36" class="me-2">
-        FakeJob<span>AI</span>
+        <img src="logo.svg" alt="Logo" width="36" height="36" class="me-2">FakeJob<span>AI</span>
       </a>
-      <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav">
-        <span class="navbar-toggler-icon"></span>
-      </button>
-      <div class="collapse navbar-collapse justify-content-end" id="navbarNav">
-        <ul class="navbar-nav align-items-center">
-          <li class="nav-item"><a class="nav-link" href="index.html">Home</a></li>
-          <li class="nav-item"><a class="nav-link" href="dashboard.html">Dashboard</a></li>
-          <li class="nav-item"><a class="nav-link" href="history.html">History</a></li>
-          <li class="nav-item"><a class="nav-link" href="report.html">Report</a></li>
-          <li class="nav-item"><a class="nav-link" href="about.html">About</a></li>
-          <li class="nav-item ms-2">
-            <a class="nav-link active login-text" href="login.html"><span>Log</span><span>in</span></a>
-          </li>
-        </ul>
-      </div>
     </div>
   </nav>
 
-  <!-- Login Content -->
-  <div class="container d-flex align-items-center flex-grow-1 py-5">
-    <div class="glass-card" data-aos="zoom-in">
+  <!-- Main Layout -->
+  <div class="login-container">
+    <div class="glass-card">
 
       <!-- Login Form -->
-      <div id="loginForm">
-        <div class="text-center mb-4">
-          <h2 class="fw-bold" style="font-family:'Montserrat',sans-serif">Welcome Back</h2>
-          <p class="text-muted">Sign in to detect fake jobs instantly</p>
-        </div>
+      <div id="authContainer">
+        <h2 class="fw-bold text-center mb-2">Welcome Back</h2>
+        <p class="text-muted text-center mb-4 small">Secure Login to FakeJobAI</p>
 
-        <form onsubmit="event.preventDefault();">
-          <div class="mb-3">
-            <label class="form-label text-muted small fw-bold ms-1">Email Address</label>
-            <div class="input-group">
-              <span class="input-group-text border-end-0 bg-transparent ps-3"><i
-                  class="fas fa-envelope text-muted"></i></span>
-              <input type="email" class="form-control border-start-0" id="loginEmail" placeholder="name@example.com"
-                required>
-            </div>
-          </div>
-          <div class="mb-4">
-            <label class="form-label text-muted small fw-bold ms-1">Password</label>
-            <div class="input-group">
-              <span class="input-group-text border-end-0 bg-transparent ps-3"><i
-                  class="fas fa-lock text-muted"></i></span>
-              <input type="password" class="form-control border-start-0" id="loginPassword" placeholder="Enter password"
-                required>
-            </div>
-            <div class="text-end mt-2"><a href="#" class="small text-link fw-normal">Forgot password?</a></div>
-          </div>
-          <button type="submit" class="btn btn-primary w-100 shadow-sm py-3">Sign In</button>
-        </form>
+        <!-- Error Alert -->
+        <div id="errorAlert" class="alert alert-danger p-2 small" style="display:none;"></div>
 
-        <div class="divider">OR CONTINUE WITH</div>
-
-        <button class="google-btn shadow-sm py-2" id="googleLogin">
-          <img src="https://www.gstatic.com/firebasejs/ui/2.0.0/images/auth/google.svg" width="20" alt="Google">
-          Google
+        <!-- Google Login -->
+        <button id="googleBtn" class="google-btn mb-3">
+          <img src="https://www.gstatic.com/firebasejs/ui/2.0.0/images/auth/google.svg" width="20" alt="">
+          <span>Continue with Google</span>
         </button>
 
-        <button class="btn btn-outline-secondary w-100 mt-2 shadow-sm py-2" id="devLogin" title="Bypass for testing">
-          <i class="fas fa-code me-2"></i> Developer In (Bypass)
-        </button>
+        <div class="divider">OR EMAIL</div>
 
-        <p class="text-center mt-4 mb-0 text-muted">
-          New to FakeJobAI? <a href="#" class="text-link ms-1" id="showRegister">Create Account</a>
-        </p>
-      </div>
-
-      <!-- Register Form (Hidden) -->
-      <div id="registerForm" style="display:none;">
-        <div class="text-center mb-4">
-          <h2 class="fw-bold" style="font-family:'Montserrat',sans-serif">Create Account</h2>
-          <p class="text-muted">Join the community of safe job seekers</p>
-        </div>
-
-        <form onsubmit="event.preventDefault();">
+        <!-- Email Form -->
+        <form id="emailForm">
           <div class="mb-3">
-            <label class="form-label text-muted small fw-bold ms-1">Full Name</label>
-            <input type="text" class="form-control" id="regName" placeholder="John Doe" required>
+            <input type="email" class="form-control" id="emailInput" placeholder="Email Address" required>
           </div>
           <div class="mb-3">
-            <label class="form-label text-muted small fw-bold ms-1">Email Address</label>
-            <input type="email" class="form-control" id="regEmail" placeholder="name@example.com" required>
+            <input type="password" class="form-control" id="passInput" placeholder="Password" required>
           </div>
-          <div class="mb-4">
-            <label class="form-label text-muted small fw-bold ms-1">Password</label>
-            <input type="password" class="form-control" id="regPassword" placeholder="Create robust password" required>
-          </div>
-          <button type="submit" class="btn btn-primary w-100 shadow-sm py-3">Register Now</button>
+          <button type="submit" class="btn btn-primary">Sign In</button>
         </form>
 
-        <div class="divider">ALREADY A MEMBER?</div>
-
-        <p class="text-center mb-0 text-muted">
-          <a href="#" class="text-link" id="showLogin">Back to Login</a>
+        <p class="text-center mt-3 small text-muted">
+          New here? <a href="#" id="toggleRegister"
+            style="color:var(--primary-color); text-decoration:none; font-weight:600;">Create Account</a>
         </p>
       </div>
 
     </div>
   </div>
 
-  <footer><small class="text-muted">© 2025 FakeJobAI. Secure & Encrypted.</small></footer>
+  <!-- STATUS OVERLAY (The SBS Visualizer) -->
+  <div class="overlay" id="statusOverlay">
+    <div class="status-box animate__animated animate__zoomIn">
 
-  <script src="js/auth.js"></script>
-  <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"></script>
-  <script src="https://unpkg.com/aos@2.3.4/dist/aos.js"></script>
-  <script>AOS.init();</script>
+      <div class="status-header">
+        <i class="fas fa-shield-alt icon-large animate__animated animate__bounceIn"></i>
+        <h2>Welcome to FakeJobAI</h2>
+        <p>Establishing your secure session...</p>
+      </div>
 
-  <!-- Firebase Logic -->
+      <div class="d-flex flex-column align-items-start w-100 ps-4">
+
+        <div class="step-item" id="step1">
+          <div class="step-icon"><i class="fas fa-user-check"></i></div>
+          <div class="step-text">Verifying Credentials</div>
+        </div>
+
+        <div class="step-item" id="step2">
+          <div class="step-icon"><i class="fas fa-cloud-download-alt"></i></div>
+          <div class="step-text">Syncing User Profile</div>
+        </div>
+
+        <div class="step-item" id="step3">
+          <div class="step-icon"><i class="fas fa-paper-plane"></i></div>
+          <div class="step-text">Sending Welcome Email</div>
+        </div>
+
+        <div class="step-item" id="step4">
+          <div class="step-icon"><i class="fas fa-check-circle"></i></div>
+          <div class="step-text fw-bold">Setup Complete!</div>
+        </div>
+
+      </div>
+
+      <!-- Success & Timer Area -->
+      <div id="redirectBox" style="display:none; margin-top: 35px; border-top: 1px solid #e2e8f0; padding-top: 25px;">
+        <h5 class="text-success fw-bold animate__animated animate__fadeIn mb-4">🚀 Login Successful!</h5>
+
+        <div class="timer-wrapper">
+          <svg class="timer-ring" width="100" height="100">
+            <circle class="timer-ring-bg" stroke="#e2e8f0" stroke-width="4" fill="transparent" r="40" cx="50" cy="50" />
+            <circle class="timer-ring-circle" id="timerCircle" stroke-width="4" stroke-linecap="round"
+              fill="transparent" r="40" cx="50" cy="50" />
+          </svg>
+          <div class="timer-text" id="timer">10</div>
+        </div>
+
+        <p class="small text-muted mb-3">Redirecting to Dashboard automatically...</p>
+        <button class="btn btn-outline-primary btn-sm rounded-pill px-5 py-2 fw-bold" onclick="forceRedirect()">
+          Go Now <i class="fas fa-arrow-right ms-2"></i>
+        </button>
+      </div>
+
+    </div>
+  </div>
+
   <script type="module">
+    // --- 1. CONFIGURATION ---
     import { initializeApp } from "https://www.gstatic.com/firebasejs/10.14.0/firebase-app.js";
-    import { getAuth, GoogleAuthProvider, signInWithPopup, createUserWithEmailAndPassword, signInWithEmailAndPassword } from "https://www.gstatic.com/firebasejs/10.14.0/firebase-auth.js";
+    import { getAuth, GoogleAuthProvider, signInWithPopup, signInWithRedirect, getRedirectResult, onAuthStateChanged, signInWithEmailAndPassword, createUserWithEmailAndPassword, signOut } from "https://www.gstatic.com/firebasejs/10.14.0/firebase-auth.js";
 
     const firebaseConfig = {
-      apiKey: "AIzaSyD63aq7jMkqDFMDgDSmYzPM3ZLw2hzJyfs",
-      authDomain: "fakejobai.firebaseapp.com",
-      projectId: "fakejobai",
-      storageBucket: "fakejobai.firebasestorage.app",
-      messagingSenderId: "860090995812",
-      appId: "1:860090995812:web:3d387e46a0dfc8232bbb71",
-      measurementId: "G-H73F8ZG1JK"
+      apiKey: "AIzaSyAh7MNkltNC56CczIaI3e0Cm_x4Vp2OkCQ",
+      authDomain: "fakejobaidetection.firebaseapp.com",
+      projectId: "fakejobaidetection",
+      storageBucket: "fakejobaidetection.firebasestorage.app",
+      messagingSenderId: "1082183297442",
+      appId: "1:1082183297442:web:833686742f461f4897eafb",
+      measurementId: "G-5PFBP2YBHK"
     };
 
     const app = initializeApp(firebaseConfig);
     const auth = getAuth(app);
     const provider = new GoogleAuthProvider();
 
-    // Function to send welcome email via backend
-    async function sendWelcomeEmail(email, name, source = 'google_login') {
+    // --- 2. STATE MANAGEMENT ---
+    let isRegistering = false;
+    let loginInProgress = false;
+
+    // --- 3. UI HELPERS ---
+    const show = (id) => document.getElementById(id).style.display = 'flex';
+    const hide = (id) => document.getElementById(id).style.display = 'none';
+    const setStep = (num, status) => {
+      const el = document.getElementById(`step${num}`);
+      el.className = `step-item active ${status}`;
+      if (status === 'done') el.innerHTML = el.innerHTML.replace('Wait...', 'Done').replace('Processing', 'Complete');
+    };
+
+    // --- 4. THE CORE LOGIC (SBS PROCESS) ---
+    function startLoginProcess(user, source) {
+      if (loginInProgress) return;
+      loginInProgress = true;
+
+      // Prepare User Object for Dashboard
+      const appUser = {
+        email: user.email,
+        uid: user.uid,
+        name: user.displayName || user.email.split('@')[0],
+        photo: user.photoURL
+      };
+
+      // Save Data
+      localStorage.setItem("fakejobai_user", JSON.stringify(appUser));
+      localStorage.setItem("user", JSON.stringify(appUser));
+      localStorage.setItem("fakejobai_welcomed", Date.now().toString()); // Suppress dashboard modal
+
+      // Send Welcome Email (Fire and forget, or await if critical)
+      sendWelcomeEmail(user.email, user.displayName, source);
+
+      // REDIRECT TO WELCOME INTERSTITIAL PAGE
+      console.log("Redirecting to Welcome Page...");
+      window.location.href = "welcome.html";
+    }
+
+    // --- 5. REDIRECT TIMER ---
+    function startCountdown() {
+      let count = 10;
+      const totalTime = 10;
+      const timerEl = document.getElementById('timer');
+      const circle = document.getElementById('timerCircle');
+      const circumference = 2 * Math.PI * 40; // r=40
+
+      // Initialize circle
+      circle.style.strokeDasharray = `${circumference} ${circumference}`;
+      circle.style.strokeDashoffset = 0;
+
+      const interval = setInterval(() => {
+        count--;
+        timerEl.innerText = count;
+
+        // Update Ring Progress
+        const offset = circumference - (count / totalTime) * circumference;
+        circle.style.strokeDashoffset = offset;
+
+        if (count <= 0) {
+          clearInterval(interval);
+          forceRedirect();
+        }
+      }, 1000);
+    }
+
+    window.forceRedirect = function () {
+      window.location.href = "dashboard.html";
+    };
+
+    // --- 6. AUTH HANDLERS & LOGIC ---
+
+    // A. Main Auth Listener
+    onAuthStateChanged(auth, (user) => {
+      if (user) {
+        // Check if this is an intentional login flow (User clicked a button)
+        const isIntentional = sessionStorage.getItem('login_started');
+
+        if (isIntentional) {
+          console.log("✅ Intentional Login detected. Starting Flow...");
+          sessionStorage.removeItem('login_started'); // Clear flag
+          startLoginProcess(user, "session_or_redirect");
+        } else {
+          // If User is detected but NO login button was clicked (e.g., refresh),
+          // we force Sign Out so the user can see the login form again.
+          // This solves: "I cannot touch the google button, it automatically logs me in"
+          console.log("⚠️ Stale session detected. Signing out to allow fresh login.");
+          signOut(auth).then(() => {
+            console.log("Signed out. Ready for new input.");
+          });
+        }
+      }
+    });
+
+    // B. Google Login Button
+    document.getElementById('googleBtn').addEventListener('click', async () => {
+      // Set flag BEFORE starting auth
+      sessionStorage.setItem('login_started', 'true');
+
       try {
-        const response = await fetch('/analyze/send-welcome-email', {
+        await signInWithPopup(auth, provider);
+        // onAuthStateChanged will handle success because flag is set
+      } catch (error) {
+        console.warn("Popup blocked/failed, trying redirect...", error);
+
+        if (error.code === 'auth/popup-blocked' || error.message.includes('timeout')) {
+          await signInWithRedirect(auth, provider);
+          // Page will reload, onAuthStateChanged + flag will handle success
+        } else {
+          // Real error, clear flag
+          sessionStorage.removeItem('login_started');
+          document.getElementById('errorAlert').innerText = error.message;
+          document.getElementById('errorAlert').style.display = 'block';
+        }
+      }
+    });
+
+    // C. Email Form
+    document.getElementById('emailForm').addEventListener('submit', async (e) => {
+      e.preventDefault();
+      sessionStorage.setItem('login_started', 'true'); // Set flag
+
+      const email = document.getElementById('emailInput').value;
+      const pass = document.getElementById('passInput').value;
+      const errorBox = document.getElementById('errorAlert');
+      errorBox.style.display = 'none';
+
+      try {
+        if (isRegistering) {
+          await createUserWithEmailAndPassword(auth, email, pass);
+        } else {
+          await signInWithEmailAndPassword(auth, email, pass);
+        }
+        // onAuthStateChanged will handle success
+      } catch (error) {
+        sessionStorage.removeItem('login_started'); // Failed, clear flag
+        errorBox.style.display = 'block';
+        let msg = error.message;
+        if (error.code === 'auth/invalid-credential') msg = "Invalid Email or Password.";
+        if (error.code === 'auth/email-already-in-use') msg = "Email already in use.";
+        errorBox.innerText = msg;
+      }
+    });
+
+    // --- 7. BACKEND CALL ---
+    async function sendWelcomeEmail(email, name, source) {
+      try {
+        await fetch('/analyze/send-welcome-email', {
           method: 'POST',
           headers: { 'Content-Type': 'application/json' },
           body: JSON.stringify({ email, name, source })
         });
-        const data = await response.json();
-        console.log('Welcome email status:', data);
-        return data;
-      } catch (error) {
-        console.error('Failed to send welcome email:', error);
-        return { success: false, error: error.message };
-      }
+      } catch (e) { console.error(e); }
     }
 
-    // Google Login Handler
-    document.getElementById('googleLogin').addEventListener('click', async () => {
-      try {
-        const result = await signInWithPopup(auth, provider);
-        const user = result.user;
-
-        // Save user to localStorage
-        localStorage.setItem("user", JSON.stringify({
-          email: user.email,
-          name: user.displayName,
-          photo: user.photoURL,
-          uid: user.uid
-        }));
-
-        // Also save to our cookie/localStorage for auth checks
-        localStorage.setItem("fakejobai_user", JSON.stringify({
-          email: user.email,
-          name: user.displayName,
-          source: "google_login"
-        }));
-
-        // Send welcome email
-        const emailResult = await sendWelcomeEmail(user.email, user.displayName, 'google_login');
-
-        // Determine redirect - first time users go to welcome page
-        const isFirstTime = emailResult.is_new_user || !localStorage.getItem('onboarding_complete');
-
-        if (isFirstTime) {
-          // First time - show welcome page
-          window.location.href = "welcome.html";
-        } else {
-          // Returning user - go to dashboard
-          window.location.href = "dashboard.html";
-        }
-
-      } catch (error) {
-        console.error("Login Error:", error);
-        console.error("Error Code:", error.code);
-        console.error("Error Message:", error.message);
-
-        // Handle specific Firebase errors
-        let userMessage = "Authentication failed. ";
-
-        switch (error.code) {
-          case 'auth/unauthorized-domain':
-            userMessage = "⚠️ Domain not authorized!\n\n" +
-              "Please add 'localhost' to your Firebase authorized domains:\n" +
-              "1. Go to Firebase Console\n" +
-              "2. Authentication → Settings → Authorized domains\n" +
-              "3. Add 'localhost'";
-            break;
-          case 'auth/popup-blocked':
-            userMessage = "Popup was blocked! Please allow popups for this site.";
-            break;
-          case 'auth/popup-closed-by-user':
-            userMessage = "Login cancelled. Please try again.";
-            break;
-          case 'auth/network-request-failed':
-            userMessage = "Network error. Please check your internet connection.";
-            break;
-          case 'auth/invalid-api-key':
-            userMessage = "⚠️ Invalid Firebase API Key! Please check your configuration.";
-            break;
-          default:
-            userMessage = `Error: ${error.code}\n${error.message}`;
-        }
-
-        alert(userMessage);
-      }
-    });
-
-    // Email/Password Login Handler
-    document.querySelector('#loginForm form').addEventListener('submit', async (e) => {
+    // --- 8. TOGGLE REGISTER ---
+    document.getElementById('toggleRegister').addEventListener('click', (e) => {
       e.preventDefault();
-      const email = document.getElementById('loginEmail').value;
-      const password = document.getElementById('loginPassword').value;
+      isRegistering = !isRegistering;
+      const title = document.querySelector('#authContainer h2');
+      const btn = document.querySelector('#emailForm button');
+      const link = document.getElementById('toggleRegister');
 
-      try {
-        const result = await signInWithEmailAndPassword(auth, email, password);
-        const user = result.user;
-        const userName = user.email.split('@')[0];
-
-        // Save user to localStorage
-        localStorage.setItem("user", JSON.stringify({ email: user.email, name: userName }));
-        localStorage.setItem("fakejobai_user", JSON.stringify({
-          email: user.email,
-          name: userName,
-          source: "email_login"
-        }));
-
-        // Send welcome email
-        const emailResult = await sendWelcomeEmail(user.email, userName, 'email_login');
-        console.log('Welcome email result:', emailResult);
-
-        // Redirect to welcome page (which auto-redirects to home)
-        window.location.href = "welcome.html";
-
-      } catch (error) {
-        console.error("Login Error:", error.code, error.message);
-
-        let errorMsg = "Login failed. ";
-        switch (error.code) {
-          case 'auth/invalid-credential':
-          case 'auth/user-not-found':
-          case 'auth/wrong-password':
-            errorMsg = "❌ Invalid email or password.\n\nDon't have an account? Click 'Create Account' below to register first!";
-            break;
-          case 'auth/invalid-email':
-            errorMsg = "Please enter a valid email address.";
-            break;
-          case 'auth/too-many-requests':
-            errorMsg = "Too many failed attempts. Please try again later or use Google Sign-In.";
-            break;
-          case 'auth/operation-not-allowed':
-            errorMsg = "⚠️ Email/Password login is not enabled.\n\nPlease use Google Sign-In instead, or enable Email/Password in Firebase Console → Authentication → Sign-in method";
-            break;
-          default:
-            errorMsg = `Error: ${error.message}`;
-        }
-        alert(errorMsg);
+      if (isRegistering) {
+        title.innerText = "Create Account";
+        btn.innerText = "Register";
+        link.innerText = "Back to Login";
+      } else {
+        title.innerText = "Welcome Back";
+        btn.innerText = "Sign In";
+        link.innerText = "Create Account";
       }
     });
 
-    // Developer Login Bypass
-    document.getElementById('devLogin').addEventListener('click', () => {
-      const user = {
-        email: "dev@fakejobai.com",
-        name: "Developer",
-        uid: "dev_bypass_123",
-        photo: null
-      };
-      localStorage.setItem("user", JSON.stringify(user));
-      localStorage.setItem("fakejobai_user", JSON.stringify({
-        email: user.email,
-        name: user.name,
-        source: "dev_bypass"
-      }));
-      showToast("Developer Mode: Logging in...", "success");
-      setTimeout(() => window.location.href = "dashboard.html", 500);
-    });
-
-    // Email/Password Registration Handler
-    document.querySelector('#registerForm form').addEventListener('submit', async (e) => {
-      e.preventDefault();
-      const name = document.getElementById('regName').value;
-      const email = document.getElementById('regEmail').value;
-      const password = document.getElementById('regPassword').value;
-
-      try {
-        const result = await createUserWithEmailAndPassword(auth, email, password);
-        const user = result.user;
-
-        localStorage.setItem("user", JSON.stringify({ email: user.email, name }));
-        localStorage.setItem("fakejobai_user", JSON.stringify({ email: user.email, name, source: "email_register" }));
-
-        // Send welcome email for new registration
-        await sendWelcomeEmail(email, name, 'email_register');
-
-        // New user - always go to welcome page
-        window.location.href = "welcome.html";
-
-      } catch (error) {
-        console.error("Registration Error:", error.code, error.message);
-
-        let errorMsg = "Registration failed. ";
-        switch (error.code) {
-          case 'auth/operation-not-allowed':
-            errorMsg = "⚠️ Email/Password registration is not enabled!\n\n" +
-              "To enable it:\n" +
-              "1. Go to Firebase Console\n" +
-              "2. Authentication → Sign-in method\n" +
-              "3. Click 'Email/Password' → Enable\n\n" +
-              "Or simply use Google Sign-In instead!";
-            break;
-          case 'auth/email-already-in-use':
-            errorMsg = "This email is already registered. Please use Login instead.";
-            break;
-          case 'auth/weak-password':
-            errorMsg = "Password is too weak. Please use at least 6 characters.";
-            break;
-          case 'auth/invalid-email':
-            errorMsg = "Please enter a valid email address.";
-            break;
-          default:
-            errorMsg = `Error: ${error.message}`;
-        }
-        alert(errorMsg);
-      }
-    });
-
-    // Toggle forms
-    document.getElementById('showRegister').addEventListener('click', () => {
-      document.getElementById('loginForm').style.display = 'none';
-      document.getElementById('registerForm').style.display = 'block';
-    });
-    document.getElementById('showLogin').addEventListener('click', () => {
-      document.getElementById('registerForm').style.display = 'none';
-      document.getElementById('loginForm').style.display = 'block';
-    });
   </script>
 </body>
 
