@@ -1,0 +1,16 @@
+services:
+  - type: web
+    name: fakejobai
+    runtime: python
+    rootDir: .
+    buildCommand: pip install -r backend/requirements.txt
+    startCommand: cd backend && uvicorn app:app --host 0.0.0.0 --port $PORT
+    healthCheckPath: /analyze/analytics
+    envVars:
+      - key: PYTHON_VERSION
+        value: "3.11.0"
+      - key: OPENAI_API_KEY
+        sync: false
+      - key: GEMINI_API_KEY
+        sync: false
+

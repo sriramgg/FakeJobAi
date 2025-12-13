@@ -1,0 +1,1111 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=5.0, viewport-fit=cover" />
+  <meta name="theme-color" content="#4361ee">
+  <meta name="apple-mobile-web-app-capable" content="yes">
+  <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
+  <title>FakeJobAI - Professional Dashboard</title>
+
+  <!-- Bootstrap 5 CSS -->
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet" />
+
+  <!-- AOS Animation CSS -->
+  <link href="https://unpkg.com/aos@2.3.4/dist/aos.css" rel="stylesheet" />
+
+  <!-- FontAwesome -->
+  <script src="https://kit.fontawesome.com/a2e0b5a50f.js" crossorigin="anonymous"></script>
+
+  <!-- Google Fonts -->
+  <link
+    href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;500;600;700&family=Montserrat:wght@600;700&display=swap"
+    rel="stylesheet">
+
+  <link rel="manifest" href="manifest.json">
+
+  <!-- Chart.js -->
+  <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+
+
+  <style>
+    :root {
+      --primary-color: #4361ee;
+      --secondary-color: #3f37c9;
+      --accent-color: #4895ef;
+      --success-color: #10b981;
+      --warning-color: #f59e0b;
+      --danger-color: #ef4444;
+      --critical-color: #dc2626;
+      --font-main: 'Poppins', sans-serif;
+      --font-brand: 'Montserrat', sans-serif;
+      --glass-bg: rgba(255, 255, 255, 0.85);
+      --glass-border: 1px solid rgba(255, 255, 255, 0.3);
+      --glass-shadow: 0 8px 32px 0 rgba(31, 38, 135, 0.1);
+    }
+
+    body {
+      font-family: var(--font-main);
+      background-color: #f8f9fa;
+      color: #2b2d42;
+      overflow-x: hidden;
+      margin: 0;
+      padding-top: 80px;
+    }
+
+    /* --- Animated Background Shapes --- */
+    .bg-shape {
+      position: absolute;
+      border-radius: 50%;
+      filter: blur(80px);
+      z-index: -1;
+      opacity: 0.5;
+      animation: floatShape 20s infinite alternate;
+    }
+
+    .shape-1 {
+      width: 500px;
+      height: 500px;
+      background: #4cc9f0;
+      top: -150px;
+      left: -150px;
+    }
+
+    .shape-2 {
+      width: 400px;
+      height: 400px;
+      background: #4361ee;
+      bottom: 50px;
+      right: -100px;
+      animation-delay: -5s;
+    }
+
+    .shape-3 {
+      width: 300px;
+      height: 300px;
+      background: #7209b7;
+      top: 40%;
+      left: 30%;
+      animation-delay: -10s;
+      opacity: 0.3;
+    }
+
+    @keyframes floatShape {
+      0% {
+        transform: translate(0, 0) rotate(0deg);
+      }
+
+      100% {
+        transform: translate(50px, 40px) rotate(20deg);
+      }
+    }
+
+    /* --- Glassmorphism Utils --- */
+    .glass-card {
+      background: var(--glass-bg);
+      backdrop-filter: blur(12px);
+      -webkit-backdrop-filter: blur(12px);
+      border: var(--glass-border);
+      box-shadow: var(--glass-shadow);
+      border-radius: 16px;
+    }
+
+    .glass-modal {
+      background: rgba(255, 255, 255, 0.95);
+      backdrop-filter: blur(14px);
+      border: var(--glass-border);
+      box-shadow: 0 20px 50px rgba(0, 0, 0, 0.2);
+      border-radius: 16px;
+    }
+
+    /* --- Navbar Styling --- */
+    .navbar {
+      background: linear-gradient(to right, #ffffff, #e3f2fd);
+      box-shadow: 0 2px 8px rgba(0, 0, 0, 0.05);
+      border-bottom: none;
+      padding: 12px 0;
+    }
+
+    .navbar-brand {
+      font-family: var(--font-brand);
+      font-weight: 700;
+      font-size: 1.5rem;
+      color: #333;
+    }
+
+    .navbar-brand span {
+      color: var(--primary-color);
+    }
+
+    .nav-link {
+      font-weight: 500;
+      color: #555 !important;
+      margin-left: 15px;
+      transition: color 0.3s;
+    }
+
+    .nav-link:hover,
+    .nav-link.active {
+      color: var(--primary-color) !important;
+    }
+
+
+
+    .login-text span:first-child {
+      color: var(--accent-color);
+      font-weight: 600;
+    }
+
+    .login-text span:last-child {
+      color: #333;
+      font-weight: 700;
+    }
+
+    /* --- Dashboard Layout --- */
+    .page-header {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      margin-bottom: 2rem;
+    }
+
+    .page-title {
+      font-family: var(--font-brand);
+      font-weight: 700;
+      color: #1f2937;
+    }
+
+    /* --- Stats Grid --- */
+    .stat-card {
+      padding: 20px;
+      text-align: center;
+      transition: transform 0.3s;
+    }
+
+    .stat-card:hover {
+      transform: translateY(-5px);
+    }
+
+    .stat-card h6 {
+      color: #6c757d;
+      font-weight: 600;
+      margin-bottom: 5px;
+    }
+
+    .stat-card h3 {
+      font-weight: 700;
+      font-size: 2rem;
+      margin: 0;
+    }
+
+    /* --- Risk Meter --- */
+    .risk-meter {
+      width: 100%;
+      height: 12px;
+      background: linear-gradient(to right, #10b981 0%, #f59e0b 50%, #ef4444 75%, #dc2626 100%);
+      border-radius: 6px;
+      position: relative;
+      margin: 10px 0;
+    }
+
+    .risk-meter-indicator {
+      width: 20px;
+      height: 20px;
+      background: white;
+      border: 3px solid #333;
+      border-radius: 50%;
+      position: absolute;
+      top: 50%;
+      transform: translate(-50%, -50%);
+      transition: left 0.5s ease;
+      box-shadow: 0 2px 8px rgba(0, 0, 0, 0.2);
+    }
+
+    /* --- Risk Badges --- */
+    .risk-badge {
+      padding: 6px 16px;
+      border-radius: 20px;
+      font-weight: 600;
+      font-size: 0.85rem;
+      display: inline-block;
+    }
+
+    .risk-badge.critical {
+      background: var(--critical-color);
+      color: white;
+    }
+
+    .risk-badge.high {
+      background: var(--danger-color);
+      color: white;
+    }
+
+    .risk-badge.medium {
+      background: var(--warning-color);
+      color: #333;
+    }
+
+    .risk-badge.low {
+      background: var(--success-color);
+      color: white;
+    }
+
+    /* --- Controls Section --- */
+    .controls-bar {
+      padding: 1.5rem;
+      margin-bottom: 1.5rem;
+      display: flex;
+      flex-wrap: wrap;
+      justify-content: space-between;
+      gap: 15px;
+      align-items: center;
+    }
+
+    .action-buttons button,
+    .action-buttons label {
+      margin-right: 10px;
+      border-radius: 8px;
+    }
+
+    /* --- Charts & History --- */
+    .chart-section {
+      padding: 20px;
+      margin-bottom: 1.5rem;
+      height: 100%;
+    }
+
+    .recent-table-container {
+      max-height: 350px;
+      overflow-y: auto;
+    }
+
+    /* --- Main Results Table --- */
+    .results-table th {
+      background-color: #f1f5f9;
+      font-weight: 600;
+      border-bottom: 2px solid #e2e8f0;
+    }
+
+    .results-table td {
+      vertical-align: middle;
+    }
+
+    /* --- Loading Spinner --- */
+    #loadingSpinner {
+      display: none;
+      margin-left: 10px;
+    }
+
+    /* --- Enhanced Result Modal --- */
+    #resultModalCustom {
+      display: none;
+      position: fixed;
+      top: 50%;
+      left: 50%;
+      transform: translate(-50%, -50%);
+      width: 95%;
+      max-width: 550px;
+      max-height: 90vh;
+      overflow-y: auto;
+      z-index: 1055;
+      padding: 25px;
+      background: #fff;
+      border-radius: 20px;
+      box-shadow: 0 25px 60px rgba(0, 0, 0, 0.25);
+    }
+
+    .overlay {
+      display: none;
+      position: fixed;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      background: rgba(0, 0, 0, 0.5);
+      z-index: 1050;
+      backdrop-filter: blur(4px);
+    }
+
+    /* --- Flag Pills --- */
+    .flag-pill {
+      display: inline-block;
+      padding: 4px 12px;
+      margin: 3px;
+      border-radius: 15px;
+      font-size: 0.8rem;
+      font-weight: 500;
+    }
+
+    .flag-pill.danger {
+      background: #fee2e2;
+      color: #dc2626;
+    }
+
+    .flag-pill.warning {
+      background: #fef3c7;
+      color: #d97706;
+    }
+
+    .flag-pill.success {
+      background: #d1fae5;
+      color: #059669;
+    }
+
+    /* --- Word Highlight Animation --- */
+    .word-highlight {
+      background: linear-gradient(120deg, #fbbf24 0%, #f59e0b 100%);
+      padding: 2px 6px;
+      border-radius: 4px;
+      animation: pulse 1.5s infinite;
+      font-weight: 600;
+    }
+
+    @keyframes pulse {
+
+      0%,
+      100% {
+        opacity: 1;
+      }
+
+      50% {
+        opacity: 0.7;
+      }
+    }
+
+    /* --- Feedback Buttons --- */
+    .feedback-btn {
+      width: 50px;
+      height: 50px;
+      border-radius: 50%;
+      border: 2px solid;
+      font-size: 1.3rem;
+      transition: all 0.3s;
+    }
+
+    .feedback-btn.yes {
+      border-color: var(--success-color);
+      color: var(--success-color);
+    }
+
+    .feedback-btn.no {
+      border-color: var(--danger-color);
+      color: var(--danger-color);
+    }
+
+    .feedback-btn:hover {
+      transform: scale(1.1);
+    }
+
+    .feedback-btn.yes:hover {
+      background: var(--success-color);
+      color: white;
+    }
+
+    .feedback-btn.no:hover {
+      background: var(--danger-color);
+      color: white;
+    }
+
+    /* --- Map Animations --- */
+    .pulse-text {
+      animation: textPulse 1.5s infinite;
+    }
+
+    @keyframes textPulse {
+      0% {
+        opacity: 0.6;
+      }
+
+      50% {
+        opacity: 1;
+      }
+
+      100% {
+        opacity: 0.6;
+      }
+    }
+
+    .pulse-icon {
+      position: relative;
+    }
+
+    .pulse-dot {
+      width: 10px;
+      height: 10px;
+      background: #ef4444;
+      border-radius: 50%;
+      position: absolute;
+      top: 5px;
+      left: 5px;
+      box-shadow: 0 0 10px #ef4444;
+    }
+
+    .pulse-ring {
+      width: 20px;
+      height: 20px;
+      border: 2px solid #ef4444;
+      border-radius: 50%;
+      position: absolute;
+      top: 0;
+      left: 0;
+      animation: ringPulse 1.5s ease-out infinite;
+    }
+
+    @keyframes ringPulse {
+      0% {
+        transform: scale(0.5);
+        opacity: 1;
+      }
+
+      100% {
+        transform: scale(2);
+        opacity: 0;
+      }
+    }
+
+    /* --- Responsive - Tablets --- */
+    @media (max-width: 991px) {
+      .controls-bar {
+        flex-direction: column;
+        align-items: stretch;
+        gap: 15px;
+      }
+
+      .action-buttons {
+        display: flex;
+        flex-wrap: wrap;
+        gap: 10px;
+      }
+
+      .page-header {
+        flex-direction: column;
+        align-items: flex-start;
+        gap: 15px;
+      }
+
+      .page-header button {
+        width: 100%;
+      }
+    }
+
+    /* --- Responsive - Mobile Phones --- */
+    @media (max-width: 767px) {
+
+      /* Body */
+      body {
+        padding-top: 70px;
+        font-size: 15px;
+      }
+
+      /* Safe areas for notched phones */
+      .navbar {
+        padding-top: env(safe-area-inset-top, 8px);
+        padding-left: env(safe-area-inset-left, 10px);
+        padding-right: env(safe-area-inset-right, 10px);
+      }
+
+      /* Navbar mobile */
+      .navbar-brand {
+        font-size: 1.3rem;
+      }
+
+      .navbar-collapse {
+        background: white;
+        padding: 15px;
+        margin-top: 10px;
+        border-radius: 15px;
+        box-shadow: 0 10px 30px rgba(0, 0, 0, 0.1);
+      }
+
+      .nav-link {
+        padding: 12px 15px !important;
+        margin: 5px 0 !important;
+        border-radius: 10px;
+        text-align: center;
+      }
+
+      .nav-link:hover,
+      .nav-link.active {
+        background: #f0f7ff;
+      }
+
+      /* Page Header */
+      .page-header {
+        flex-direction: column;
+        align-items: stretch;
+        text-align: center;
+        gap: 15px;
+        margin-bottom: 1.5rem;
+      }
+
+      .page-title {
+        font-size: 1.4rem;
+      }
+
+      .page-header p {
+        font-size: 0.9rem;
+      }
+
+      .page-header button {
+        width: 100%;
+      }
+
+      /* Stats Grid - 2 columns on mobile */
+      .stat-card {
+        padding: 15px 12px;
+      }
+
+      .stat-card h6 {
+        font-size: 0.75rem;
+      }
+
+      .stat-card h3 {
+        font-size: 1.5rem;
+      }
+
+      /* Controls Bar */
+      .controls-bar {
+        padding: 15px;
+        flex-direction: column;
+        align-items: stretch;
+        gap: 15px;
+      }
+
+      .action-buttons {
+        display: grid;
+        grid-template-columns: 1fr 1fr;
+        gap: 10px;
+      }
+
+      .action-buttons button,
+      .action-buttons label {
+        margin: 0 !important;
+        padding: 12px 10px;
+        font-size: 0.85rem;
+        width: 100%;
+        text-align: center;
+      }
+
+      .action-buttons button i,
+      .action-buttons label i {
+        margin-right: 5px !important;
+      }
+
+      .filter-group {
+        width: 100%;
+        justify-content: space-between;
+      }
+
+      .filter-group select {
+        flex: 1;
+        min-height: 44px;
+        font-size: 16px;
+      }
+
+      /* Charts */
+      .chart-section {
+        padding: 15px;
+        margin-bottom: 15px;
+      }
+
+      .chart-section h5 {
+        font-size: 1rem;
+      }
+
+      #trendChart,
+      #pieChart {
+        max-height: 200px !important;
+      }
+
+      /* Tables */
+      .recent-table-container {
+        max-height: 300px;
+      }
+
+      .results-table {
+        font-size: 0.8rem;
+        min-width: 500px;
+      }
+
+      .results-table th,
+      .results-table td {
+        padding: 10px 8px;
+        white-space: nowrap;
+      }
+
+      /* Glass cards on mobile */
+      .glass-card {
+        border-radius: 15px;
+        margin-bottom: 15px;
+      }
+
+      /* Threat Map */
+      #threatMap {
+        height: 300px !important;
+      }
+
+      /* Result Modal */
+      #resultModalCustom {
+        width: 95%;
+        max-width: 100%;
+        max-height: 85vh;
+        padding: 20px;
+        border-radius: 20px;
+        left: 50%;
+        transform: translateX(-50%);
+      }
+
+      #modalTitle {
+        font-size: 1.1rem;
+      }
+
+      .risk-meter {
+        height: 10px;
+      }
+
+      .risk-meter-indicator {
+        width: 16px;
+        height: 16px;
+      }
+
+      .flag-pill {
+        font-size: 0.7rem;
+        padding: 3px 8px;
+        margin: 2px;
+      }
+
+      .feedback-btn {
+        width: 45px;
+        height: 45px;
+        font-size: 1.1rem;
+      }
+
+      /* Modals */
+      .modal-dialog {
+        margin: 10px;
+        max-width: calc(100% - 20px);
+      }
+
+      .modal-content {
+        border-radius: 20px;
+      }
+
+      .modal-body {
+        padding: 20px;
+      }
+
+      .modal-body input,
+      .modal-body textarea {
+        font-size: 16px !important;
+        min-height: 48px;
+        padding: 12px 15px !important;
+      }
+
+      .modal-body button {
+        min-height: 48px;
+        font-size: 1rem;
+      }
+
+      /* Background shapes smaller on mobile */
+      .bg-shape {
+        opacity: 0.3;
+      }
+
+      .shape-1 {
+        width: 300px;
+        height: 300px;
+      }
+
+      .shape-2 {
+        width: 250px;
+        height: 250px;
+      }
+
+      .shape-3 {
+        width: 150px;
+        height: 150px;
+      }
+    }
+
+    /* --- Responsive - Small Phones --- */
+    @media (max-width: 375px) {
+      .page-title {
+        font-size: 1.2rem;
+      }
+
+      .stat-card h3 {
+        font-size: 1.3rem;
+      }
+
+      .stat-card h6 {
+        font-size: 0.7rem;
+      }
+
+      .action-buttons {
+        grid-template-columns: 1fr;
+      }
+
+      .navbar-brand {
+        font-size: 1.1rem;
+      }
+
+      #threatMap {
+        height: 250px !important;
+      }
+    }
+  </style>
+</head>
+
+<body>
+
+  <!-- Background Blobs -->
+  <div class="bg-shape shape-1"></div>
+  <div class="bg-shape shape-2"></div>
+  <div class="bg-shape shape-3"></div>
+
+  <!-- Navbar -->
+  <nav class="navbar navbar-expand-lg fixed-top">
+    <div class="container">
+      <a class="navbar-brand d-flex align-items-center" href="index.html"><img src="logo.svg" alt="Logo" width="36"
+          height="36" class="me-2">FakeJob<span>AI</span></a>
+      <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav">
+        <span class="navbar-toggler-icon"></span>
+      </button>
+      <div class="collapse navbar-collapse justify-content-end" id="navbarNav">
+        <ul class="navbar-nav align-items-center">
+          <li class="nav-item"><a class="nav-link" href="index.html">Home</a></li>
+          <li class="nav-item"><a class="nav-link active" href="dashboard.html">Dashboard</a></li>
+          <li class="nav-item"><a class="nav-link" href="history.html">History</a></li>
+          <li class="nav-item"><a class="nav-link" href="report.html">Report</a></li>
+          <li class="nav-item"><a class="nav-link" href="about.html">About</a></li>
+          <li class="nav-item ms-2">
+            <a class="nav-link login-text" href="login.html"><span>Log</span><span>in</span></a>
+          </li>
+        </ul>
+      </div>
+    </div>
+  </nav>
+
+
+
+  <!-- Main Container -->
+  <div class="container py-4">
+
+    <!-- Page Header -->
+    <div class="page-header" data-aos="fade-down">
+      <div>
+        <h2 class="page-title">Dashboard Overview</h2>
+        <p class="text-muted mb-0">AI-Powered Fraud Detection & Risk Analysis</p>
+      </div>
+      <button id="exportPdfBtn" class="btn btn-outline-dark shadow-sm">
+        <i class="fas fa-file-pdf me-2"></i>Export Report
+      </button>
+    </div>
+
+    <!-- Stats Grid -->
+    <div class="row g-2 g-md-3 mb-4" data-aos="fade-up">
+      <div class="col-6 col-md-3">
+        <div class="stat-card glass-card">
+          <h6><i class="fas fa-chart-bar me-1 text-primary"></i> Total Analyzed</h6>
+          <h3 id="statTotal">0</h3>
+        </div>
+      </div>
+      <div class="col-6 col-md-3">
+        <div class="stat-card glass-card">
+          <h6><i class="fas fa-skull-crossbones me-1 text-danger"></i> Fake Detected</h6>
+          <h3 id="statFake" class="text-danger">0</h3>
+        </div>
+      </div>
+      <div class="col-6 col-md-3">
+        <div class="stat-card glass-card">
+          <h6><i class="fas fa-check-circle me-1 text-success"></i> Verified Real</h6>
+          <h3 id="statReal" class="text-success">0</h3>
+        </div>
+      </div>
+      <div class="col-6 col-md-3">
+        <div class="stat-card glass-card">
+          <h6><i class="fas fa-ban me-1 text-warning"></i> Blacklisted</h6>
+          <h3 id="statBlacklist" class="text-warning">0</h3>
+        </div>
+      </div>
+    </div>
+
+
+
+    <!-- Actions Control Bar -->
+    <div class="controls-bar glass-card" data-aos="fade-up" data-aos-delay="100">
+      <div class="action-buttons d-flex align-items-center flex-wrap">
+        <button id="manualBtn" class="btn btn-primary shadow-sm mb-2 mb-md-0"><i class="fas fa-keyboard me-2"></i>Manual
+          Entry</button>
+        <button id="urlBtn" class="btn btn-info text-white shadow-sm mb-2 mb-md-0"><i class="fas fa-globe me-2"></i>Scan
+          URL</button>
+        <button id="domainCheckBtn" class="btn btn-warning shadow-sm mb-2 mb-md-0"><i
+            class="fas fa-shield-alt me-2"></i>Domain Check</button>
+
+        <!-- Hidden CSV Input -->
+        <input id="csvFile" type="file" accept=".csv" style="display:none" />
+        <label for="csvFile" class="btn btn-success shadow-sm mb-2 mb-md-0" style="cursor: pointer;">
+          <i class="fas fa-file-csv me-2"></i>Upload CSV
+        </label>
+
+        <div id="loadingSpinner" class="spinner-border spinner-border-sm text-primary" role="status">
+          <span class="visually-hidden">Loading...</span>
+        </div>
+      </div>
+
+      <div class="filter-group d-flex align-items-center">
+        <span class="me-2 fw-bold text-muted">Filter:</span>
+        <select id="filterPred" class="form-select w-auto">
+          <option value="all">All Results</option>
+          <option value="real">Real Jobs Only</option>
+          <option value="fake">Fake Jobs Only</option>
+          <option value="critical">Critical Risk</option>
+        </select>
+      </div>
+    </div>
+
+    <!-- Charts Row -->
+    <div class="row g-3 mb-4" data-aos="fade-up" data-aos-delay="200">
+      <div class="col-12 col-lg-8">
+        <div class="glass-card chart-section">
+          <div class="d-flex justify-content-between align-items-center mb-3">
+            <h5 class="fw-bold m-0"><i class="fas fa-chart-line me-2 text-primary"></i>Analysis Trend</h5>
+            <small class="text-muted">Last 10 Scans</small>
+          </div>
+          <canvas id="trendChart" style="max-height: 250px;"></canvas>
+        </div>
+      </div>
+      <div class="col-12 col-lg-4">
+        <div class="glass-card chart-section">
+          <div class="d-flex justify-content-between align-items-center mb-3">
+            <h5 class="fw-bold m-0"><i class="fas fa-chart-pie me-2 text-info"></i>Distribution</h5>
+            <small class="text-muted">Real vs Fake</small>
+          </div>
+          <div style="height: 250px;">
+            <canvas id="pieChart"></canvas>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- Recent Results Table -->
+    <div class="glass-card p-4" data-aos="fade-up" data-aos-delay="300">
+      <div class="d-flex justify-content-between align-items-center mb-3">
+        <h5 class="fw-bold m-0"><i class="fas fa-list-alt me-2 text-primary"></i>Recent Predictions</h5>
+        <div>
+          <button id="copyResults" class="btn btn-sm btn-outline-secondary me-1">Copy</button>
+          <button id="clearLocalBtn" class="btn btn-sm btn-outline-danger">Clear</button>
+        </div>
+      </div>
+
+      <div class="table-responsive recent-table-container">
+        <table class="table table-hover results-table">
+          <thead>
+            <tr>
+              <th>Title</th>
+              <th>Company</th>
+              <th>Status</th>
+              <th>Risk</th>
+              <th>Confidence</th>
+              <th>Date</th>
+            </tr>
+          </thead>
+          <tbody id="recentHistoryTbody">
+            <tr>
+              <td colspan="6" class="text-center text-muted py-3">No analysis data found. Start by scanning a job!</td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+    </div>
+
+    <!-- Live Threat Map Section -->
+    <div class="glass-card p-0 mb-4 position-relative" style="overflow: hidden; min-height: 400px;" data-aos="fade-up">
+      <div class="p-3 border-bottom d-flex justify-content-between align-items-center bg-white bg-opacity-75">
+        <div>
+          <h5 class="fw-bold m-0"><i class="fas fa-globe-americas me-2 text-danger"></i>Live Fraud Monitor</h5>
+          <small class="text-muted">Real-time detections from the FakeJobAI global network</small>
+        </div>
+        <div class="badge bg-danger bg-opacity-10 text-danger border border-danger pulse-text">
+          LIVE: <span id="liveThreatCount">14,204</span> THREATS
+        </div>
+      </div>
+      <div id="threatMap" style="height: 400px; width: 100%; z-index: 1;"></div>
+    </div>
+
+  </div> <!-- End Container -->
+
+  <!-- ================= MODALS ================= -->
+
+  <!-- 1. URL Input Modal -->
+  <div class="modal fade" id="urlInputModal" tabindex="-1" aria-hidden="true">
+    <div class="modal-dialog modal-dialog-centered">
+      <div class="modal-content glass-modal border-0">
+        <div class="modal-header border-0 pb-0">
+          <h5 class="modal-title fw-bold"><i class="fas fa-globe me-2 text-info"></i>Scan Job URL</h5>
+          <button type="button" class="btn-close" data-bs-dismiss="modal"></button>
+        </div>
+        <div class="modal-body">
+          <form id="urlForm" onsubmit="event.preventDefault();">
+            <div class="mb-3">
+              <label class="form-label text-muted fw-bold small">Job Posting Link</label>
+              <input type="url" class="form-control p-3 bg-light border-0" id="inputUrl"
+                placeholder="https://linkedin.com/jobs/view/..." required>
+              <div class="form-text">We support LinkedIn, Indeed, Glassdoor, and more.</div>
+            </div>
+            <div class="d-grid">
+              <button type="button" id="submitUrlBtn" class="btn btn-info text-white py-2 fw-bold">
+                <i class="fas fa-search me-2"></i>Analyze URL
+              </button>
+            </div>
+          </form>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- 2. Manual Entry Modal -->
+  <div class="modal fade" id="manualInputModal" tabindex="-1" aria-hidden="true">
+    <div class="modal-dialog modal-dialog-centered">
+      <div class="modal-content glass-modal border-0">
+        <div class="modal-header border-0 pb-0">
+          <h5 class="modal-title fw-bold"><i class="fas fa-keyboard me-2 text-primary"></i>Manual Entry</h5>
+          <button type="button" class="btn-close" data-bs-dismiss="modal"></button>
+        </div>
+        <div class="modal-body">
+          <form id="manualForm">
+            <div class="mb-2">
+              <label class="form-label text-muted small fw-bold">Job Title</label>
+              <input type="text" class="form-control bg-light border-0" id="inputTitle"
+                placeholder="e.g. Senior Developer" required>
+            </div>
+            <div class="mb-2">
+              <label class="form-label text-muted small fw-bold">Location</label>
+              <input type="text" class="form-control bg-light border-0" id="inputLocation"
+                placeholder="e.g. New York, London, Remote" required>
+            </div>
+            <div class="mb-2">
+              <label class="form-label text-muted small fw-bold">Company</label>
+              <input type="text" class="form-control bg-light border-0" id="inputCompany" placeholder="e.g. Acme Corp">
+            </div>
+            <div class="mb-3">
+              <label class="form-label text-muted small fw-bold">Description</label>
+              <textarea class="form-control bg-light border-0" id="inputDesc" rows="4"
+                placeholder="Paste full job description..." required></textarea>
+            </div>
+            <div class="d-grid">
+              <button type="button" id="submitManualBtn" class="btn btn-primary py-2 fw-bold">
+                <i class="fas fa-brain me-2"></i>Analyze Text
+              </button>
+            </div>
+          </form>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- 3. Domain Check Modal -->
+  <div class="modal fade" id="domainCheckModal" tabindex="-1" aria-hidden="true">
+    <div class="modal-dialog modal-dialog-centered">
+      <div class="modal-content glass-modal border-0">
+        <div class="modal-header border-0 pb-0">
+          <h5 class="modal-title fw-bold"><i class="fas fa-shield-alt me-2 text-warning"></i>Domain Security Check</h5>
+          <button type="button" class="btn-close" data-bs-dismiss="modal"></button>
+        </div>
+        <div class="modal-body">
+          <form id="domainForm">
+            <div class="mb-3">
+              <label class="form-label text-muted fw-bold small">Website URL or Domain</label>
+              <input type="text" class="form-control p-3 bg-light border-0" id="inputDomain"
+                placeholder="example.com or https://example.com/job" required>
+              <div class="form-text">Check domain age, DNS, and security indicators</div>
+            </div>
+            <div class="d-grid">
+              <button type="button" id="submitDomainBtn" class="btn btn-warning py-2 fw-bold">
+                <i class="fas fa-search me-2"></i>Check Domain
+              </button>
+            </div>
+          </form>
+          <div id="domainResults" class="mt-3" style="display:none;"></div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- 4. Enhanced Result Modal -->
+  <div class="overlay" id="modalOverlay" onclick="closeResultModal()"></div>
+  <div id="resultModalCustom">
+    <!-- Header -->
+    <div class="text-center mb-3">
+      <h5 id="modalTitle" class="fw-bold mb-1">Job Title</h5>
+      <p id="modalCompany" class="text-muted small mb-2">Company Name</p>
+    </div>
+
+    <!-- Main Prediction Badge -->
+    <div class="text-center mb-3">
+      <div id="modalPrediction" class="mb-2"></div>
+      <small id="modalConfidence" class="text-secondary fw-bold"></small>
+    </div>
+
+    <!-- Risk Meter -->
+    <div class="mb-4">
+      <div class="d-flex justify-content-between mb-1">
+        <small class="text-success fw-bold">Low Risk</small>
+        <small id="modalRiskScore" class="fw-bold">0/100</small>
+        <small class="text-danger fw-bold">High Risk</small>
+      </div>
+      <div class="risk-meter">
+        <div class="risk-meter-indicator" id="riskIndicator" style="left: 0%;"></div>
+      </div>
+    </div>
+
+    <!-- Risk Flags -->
+    <div id="modalFlags" class="mb-3"></div>
+
+    <!-- Positive Signals -->
+    <div id="modalPositive" class="mb-3"></div>
+
+    <!-- Explanation -->
+    <div id="modalExplanation" class="bg-light p-3 rounded-3 small mb-3 border-start border-4 border-primary">
+    </div>
+
+    <!-- Recommendations -->
+    <div id="modalRecommendations" class="mb-3"></div>
+
+    <!-- Feedback Section -->
+    <div class="text-center mb-3 pt-3 border-top">
+      <p class="mb-2 text-muted small">Was this analysis accurate?</p>
+      <div class="d-flex justify-content-center gap-3">
+        <button class="feedback-btn yes" onclick="submitFeedback(true)" title="Yes, correct!">
+          <i class="fas fa-thumbs-up"></i>
+        </button>
+        <button class="feedback-btn no" onclick="submitFeedback(false)" title="No, wrong!">
+          <i class="fas fa-thumbs-down"></i>
+        </button>
+      </div>
+      <div id="feedbackMsg" class="mt-2 small text-success" style="display:none;">Thanks for your feedback!</div>
+    </div>
+
+    <!-- Close Button -->
+    <div class="d-grid">
+      <button class="btn btn-outline-secondary" onclick="closeResultModal()">Close</button>
+    </div>
+  </div>
+
+  <!-- Scripts -->
+
+  <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"></script>
+  <script src="https://unpkg.com/aos@2.3.4/dist/aos.js"></script>
+
+  <!-- External Clean Scripts -->
+  <script src="js/auth.js"></script>
+  <script src="js/welcome-modal.js"></script>
+  <script src="js/chatbot.js"></script>
+  <script src="https://unpkg.com/three"></script>
+  <script src="https://unpkg.com/globe.gl"></script>
+  <script src="js/globe-map.js"></script>
+  <script src="js/app-core.js"></script>
+</body>
+
+</html>

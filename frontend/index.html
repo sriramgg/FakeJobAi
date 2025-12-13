@@ -1,0 +1,822 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=5.0, viewport-fit=cover">
+  <meta name="theme-color" content="#4361ee">
+  <meta name="apple-mobile-web-app-capable" content="yes">
+  <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
+  <title>FakeJobAI - The Standard in Job Safety</title>
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet">
+  <link href="https://unpkg.com/aos@2.3.4/dist/aos.css" rel="stylesheet">
+  <script src="https://kit.fontawesome.com/a2e0b5a50f.js" crossorigin="anonymous"></script>
+  <link href="https://fonts.googleapis.com/css2?family=Outfit:wght@300;400;500;700&display=swap" rel="stylesheet">
+  <link rel="manifest" href="manifest.json">
+  <script>
+    if ('serviceWorker' in navigator) {
+      navigator.serviceWorker.register('sw.js');
+    }
+  </script>
+  <style>
+    /* --- CORE THEME --- */
+    :root {
+      --primary: #4361ee;
+      --secondary: #3f37c9;
+      --accent: #4895ef;
+      --glass-bg: rgba(255, 255, 255, 0.65);
+      --glass-border: rgba(255, 255, 255, 0.4);
+      --glass-shadow: 0 8px 32px 0 rgba(31, 38, 135, 0.15);
+    }
+
+    body {
+      font-family: 'Outfit', sans-serif;
+      margin: 0;
+      padding: 0;
+      color: #2b2d42;
+      overflow-x: hidden;
+      background: #f0f4f8;
+      position: relative;
+    }
+
+    /* BACKGROUND ANIMATION BLOBS */
+    .bg-shape {
+      position: absolute;
+      border-radius: 50%;
+      filter: blur(80px);
+      z-index: -1;
+      opacity: 0.6;
+      animation: floatShape 20s infinite alternate;
+    }
+
+    .shape-1 {
+      width: 500px;
+      height: 500px;
+      background: #4cc9f0;
+      top: -100px;
+      left: -100px;
+      animation-delay: 0s;
+    }
+
+    .shape-2 {
+      width: 400px;
+      height: 400px;
+      background: #4361ee;
+      bottom: 10%;
+      right: -50px;
+      animation-delay: -5s;
+    }
+
+    .shape-3 {
+      width: 300px;
+      height: 300px;
+      background: #7209b7;
+      top: 40%;
+      left: 30%;
+      animation-delay: -10s;
+      opacity: 0.4;
+    }
+
+    @keyframes floatShape {
+      0% {
+        transform: translate(0, 0) rotate(0deg);
+      }
+
+      100% {
+        transform: translate(50px, 80px) rotate(20deg);
+      }
+    }
+
+    /* GLASSMORPHISM UTILS */
+    .glass {
+      background: var(--glass-bg);
+      backdrop-filter: blur(12px);
+      -webkit-backdrop-filter: blur(12px);
+      border: 1px solid var(--glass-border);
+      box-shadow: var(--glass-shadow);
+      border-radius: 20px;
+    }
+
+    /* NAVBAR */
+    .navbar {
+      background: linear-gradient(to right, #ffffff, #e3f2fd);
+      box-shadow: 0 2px 8px rgba(0, 0, 0, 0.05);
+      border-bottom: none;
+    }
+
+    .navbar-brand {
+      font-family: 'Montserrat', sans-serif;
+      font-weight: 700;
+      font-size: 1.7rem;
+    }
+
+    .navbar-brand span {
+      color: #007bff;
+    }
+
+    .nav-link {
+      color: #333 !important;
+      font-weight: 500;
+      margin-left: 10px;
+      transition: 0.3s;
+    }
+
+    .nav-link:hover,
+    .nav-link.active {
+      color: #007bff !important;
+    }
+
+    .login-text span:first-child {
+      color: #00c6ff;
+      font-weight: 600;
+    }
+
+    .login-text span:last-child {
+      color: #000;
+      font-weight: 700;
+    }
+
+    /* HERO SECTION */
+    .hero {
+      padding: 140px 0 100px;
+      position: relative;
+    }
+
+    .hero h1 {
+      font-size: 3.5rem;
+      font-weight: 800;
+      line-height: 1.2;
+      margin-bottom: 20px;
+      text-shadow: 0 2px 4px rgba(0, 0, 0, 0.05);
+    }
+
+    .hero h1 span {
+      background: linear-gradient(135deg, var(--primary), #f72585);
+      -webkit-background-clip: text;
+      background-clip: text;
+      -webkit-text-fill-color: transparent;
+    }
+
+    .hero p {
+      font-size: 1.2rem;
+      color: #555;
+      margin-bottom: 30px;
+      font-weight: 300;
+    }
+
+    .hero-img {
+      animation: float 6s ease-in-out infinite;
+      max-width: 100%;
+      border-radius: 20px;
+      filter: drop-shadow(0 20px 30px rgba(0, 0, 0, 0.15));
+    }
+
+    @keyframes float {
+
+      0%,
+      100% {
+        transform: translateY(0);
+      }
+
+      50% {
+        transform: translateY(-20px);
+      }
+    }
+
+    /* QUICK SCAN INPUT */
+    .quick-scan-wrapper {
+      background: white;
+      padding: 10px;
+      border-radius: 50px;
+      display: flex;
+      box-shadow: 0 10px 40px rgba(0, 0, 0, 0.1);
+      border: 1px solid rgba(0, 0, 0, 0.05);
+      max-width: 500px;
+      position: relative;
+      z-index: 10;
+    }
+
+    .quick-scan-wrapper input {
+      border: none;
+      flex: 1;
+      padding: 10px 20px;
+      outline: none;
+      font-size: 1rem;
+      border-radius: 50px;
+    }
+
+    .quick-scan-wrapper button {
+      background: var(--primary);
+      color: white;
+      border: none;
+      padding: 10px 30px;
+      border-radius: 40px;
+      font-weight: 600;
+      transition: 0.3s;
+    }
+
+    .quick-scan-wrapper button:hover {
+      transform: scale(1.05);
+      background: var(--secondary);
+    }
+
+    /* FEATURES SECTION */
+    .features {
+      padding: 80px 0;
+    }
+
+    .section-title {
+      text-align: center;
+      margin-bottom: 60px;
+    }
+
+    .section-title h2 {
+      font-weight: 700;
+      font-size: 2.5rem;
+      margin-bottom: 15px;
+    }
+
+    .section-title p {
+      color: #666;
+      font-size: 1.1rem;
+    }
+
+    .feature-card {
+      padding: 40px 30px;
+      text-align: center;
+      transition: 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+      height: 100%;
+      border-radius: 24px;
+    }
+
+    .feature-card:hover {
+      transform: translateY(-15px);
+      background: white;
+      border-color: white;
+      box-shadow: 0 20px 50px rgba(0, 0, 0, 0.1);
+    }
+
+    .icon-box {
+      width: 70px;
+      height: 70px;
+      background: linear-gradient(135deg, rgba(67, 97, 238, 0.1), rgba(72, 149, 239, 0.1));
+      color: var(--primary);
+      border-radius: 50%;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 1.8rem;
+      margin: 0 auto 25px;
+      transition: 0.3s;
+    }
+
+    .feature-card:hover .icon-box {
+      background: var(--primary);
+      color: white;
+      transform: rotateY(180deg);
+    }
+
+    .feature-card h5 {
+      font-weight: 700;
+      font-size: 1.25rem;
+      margin-bottom: 15px;
+    }
+
+    .feature-card p {
+      font-size: 0.95rem;
+      color: #666;
+      line-height: 1.6;
+    }
+
+    /* HOW IT WORKS STEPS */
+    .step-card {
+      position: relative;
+      padding: 30px;
+      text-align: center;
+      z-index: 1;
+    }
+
+    .step-number {
+      font-size: 4rem;
+      font-weight: 900;
+      color: rgba(67, 97, 238, 0.1);
+      position: absolute;
+      top: 0;
+      left: 50%;
+      transform: translateX(-50%);
+      z-index: -1;
+    }
+
+    .step-content {
+      margin-top: 20px;
+    }
+
+    .step-content h5 {
+      font-weight: 700;
+      margin-bottom: 10px;
+    }
+
+    /* FOOTER */
+    footer {
+      background: white;
+      padding: 60px 0 20px;
+      position: relative;
+      border-top: 1px solid #eee;
+    }
+
+    .footer-logo {
+      font-size: 1.8rem;
+      font-weight: 700;
+      margin-bottom: 20px;
+      display: block;
+    }
+
+    footer h5 {
+      font-weight: 700;
+      margin-bottom: 20px;
+      font-size: 1.1rem;
+    }
+
+    footer a {
+      color: #666;
+      text-decoration: none;
+      display: block;
+      margin-bottom: 12px;
+      transition: 0.2s;
+    }
+
+    footer a:hover {
+      color: var(--primary);
+      padding-left: 5px;
+    }
+
+    .social-links a {
+      display: inline-block;
+      width: 40px;
+      height: 40px;
+      background: #f0f4f8;
+      border-radius: 50%;
+      text-align: center;
+      line-height: 40px;
+      color: var(--primary);
+      margin-right: 10px;
+      padding: 0;
+    }
+
+    .social-links a:hover {
+      background: var(--primary);
+      color: white;
+      transform: translateY(-3px);
+    }
+
+    /* RESPONSIVE - TABLETS */
+    @media (max-width: 991px) {
+      .hero h1 {
+        font-size: 2.5rem;
+      }
+
+      .hero-img {
+        margin-top: 40px;
+        max-width: 80%;
+      }
+
+      .feature-card {
+        margin-bottom: 20px;
+      }
+    }
+
+    /* RESPONSIVE - MOBILE */
+    @media (max-width: 767px) {
+
+      /* Hero Mobile */
+      .hero {
+        padding: 120px 0 60px;
+      }
+
+      .hero h1 {
+        font-size: 1.8rem;
+        line-height: 1.3;
+        text-align: center;
+      }
+
+      .hero p {
+        font-size: 1rem;
+        text-align: center;
+      }
+
+      .hero-img {
+        margin-top: 30px;
+        max-width: 70%;
+      }
+
+      /* Glass Card Mobile */
+      .glass {
+        padding: 30px 20px !important;
+        margin: 0 10px;
+      }
+
+      /* Quick Scan Mobile */
+      .quick-scan-wrapper {
+        flex-direction: column;
+        border-radius: 20px;
+        padding: 15px;
+      }
+
+      .quick-scan-wrapper input {
+        width: 100%;
+        margin-bottom: 12px;
+        text-align: center;
+        border-radius: 15px;
+        padding: 14px;
+        font-size: 16px;
+      }
+
+      .quick-scan-wrapper button {
+        width: 100%;
+        padding: 14px 20px;
+        border-radius: 15px;
+        font-size: 1rem;
+      }
+
+      .quick-scan-wrapper i {
+        display: none;
+      }
+
+      /* Features Mobile */
+      .features {
+        padding: 50px 0;
+      }
+
+      .section-title {
+        margin-bottom: 40px;
+        padding: 0 15px;
+      }
+
+      .section-title h2 {
+        font-size: 1.6rem;
+      }
+
+      .section-title p {
+        font-size: 0.95rem;
+      }
+
+      .feature-card {
+        padding: 30px 20px;
+        margin: 0 10px 20px;
+      }
+
+      .icon-box {
+        width: 60px;
+        height: 60px;
+        font-size: 1.5rem;
+      }
+
+      .feature-card h5 {
+        font-size: 1.1rem;
+      }
+
+      .feature-card p {
+        font-size: 0.9rem;
+      }
+
+      /* Steps Mobile */
+      .step-card {
+        padding: 20px 15px;
+      }
+
+      .step-number {
+        font-size: 3rem;
+      }
+
+      .step-content h5 {
+        font-size: 1.1rem;
+      }
+
+      .step-content p {
+        font-size: 0.9rem;
+      }
+
+      /* Footer Mobile */
+      footer {
+        padding: 40px 15px 20px;
+        text-align: center;
+      }
+
+      footer .row>div {
+        margin-bottom: 30px;
+      }
+
+      .footer-logo {
+        font-size: 1.5rem;
+      }
+
+      footer h5 {
+        margin-bottom: 15px;
+      }
+
+      footer a {
+        margin: 5px 10px;
+      }
+
+      footer .d-flex {
+        flex-direction: column;
+        gap: 10px;
+      }
+
+      footer .d-flex input {
+        font-size: 16px;
+      }
+
+      footer .d-flex button {
+        width: 100%;
+      }
+
+      /* Background shapes - smaller on mobile */
+      .bg-shape {
+        opacity: 0.4;
+      }
+
+      .shape-1 {
+        width: 300px;
+        height: 300px;
+      }
+
+      .shape-2 {
+        width: 250px;
+        height: 250px;
+      }
+
+      .shape-3 {
+        width: 200px;
+        height: 200px;
+      }
+
+      /* Navbar Mobile */
+      .navbar {
+        padding: 10px 15px;
+      }
+
+      .navbar-brand {
+        font-size: 1.4rem;
+      }
+
+      .navbar-collapse {
+        background: white;
+        padding: 20px;
+        margin-top: 15px;
+        border-radius: 15px;
+        box-shadow: 0 10px 40px rgba(0, 0, 0, 0.1);
+      }
+
+      .nav-link {
+        padding: 12px 15px !important;
+        margin: 5px 0 !important;
+        border-radius: 10px;
+        text-align: center;
+      }
+
+      .nav-link:hover,
+      .nav-link.active {
+        background: #f0f7ff;
+      }
+    }
+
+    /* RESPONSIVE - SMALL PHONES */
+    @media (max-width: 375px) {
+      .hero h1 {
+        font-size: 1.5rem;
+      }
+
+      .hero p {
+        font-size: 0.9rem;
+      }
+
+      .section-title h2 {
+        font-size: 1.4rem;
+      }
+
+      .navbar-brand {
+        font-size: 1.2rem;
+      }
+    }
+  </style>
+</head>
+
+<body>
+
+  <!-- ANIMATED BACKGROUND -->
+  <div class="bg-shape shape-1"></div>
+  <div class="bg-shape shape-2"></div>
+  <div class="bg-shape shape-3"></div>
+
+  <!-- NAVBAR -->
+  <nav class="navbar navbar-expand-lg fixed-top">
+    <div class="container">
+      <a class="navbar-brand d-flex align-items-center" href="index.html">
+        <img src="logo.svg" alt="Logo" width="36" height="36" class="me-2">
+        FakeJob<span>AI</span>
+      </a>
+      <button class="navbar-toggler border-0" type="button" data-bs-toggle="collapse" data-bs-target="#navContent">
+        <span class="navbar-toggler-icon"></span>
+      </button>
+      <div class="collapse navbar-collapse" id="navContent">
+        <ul class="navbar-nav ms-auto align-items-center">
+          <li class="nav-item"><a class="nav-link active" href="index.html">Home</a></li>
+          <li class="nav-item"><a class="nav-link" href="dashboard.html">Dashboard</a></li>
+          <li class="nav-item"><a class="nav-link" href="history.html">History</a></li>
+          <li class="nav-item"><a class="nav-link" href="report.html">Report</a></li>
+          <li class="nav-item"><a class="nav-link" href="about.html">About</a></li>
+          <li class="nav-item ms-lg-3">
+            <a class="nav-link login-text" href="login.html"><span>Log</span><span>in</span></a>
+          </li>
+        </ul>
+      </div>
+    </div>
+  </nav>
+
+  <!-- HERO SECTION -->
+  <section class="hero d-flex align-items-center">
+    <div class="container">
+      <div class="row align-items-center">
+        <div class="col-lg-6" data-aos="fade-right">
+          <div class="glass p-5 mb-4 mb-lg-0">
+            <h1>Stop <span>Job Scams</span> <br>Before You Apply.</h1>
+            <p>Protect your career with our AI-powered fraud detection system. Inspect job postings instantly just by
+              pasting a link.</p>
+            <div class="quick-scan-wrapper mt-4">
+              <i class="fas fa-search text-muted align-self-center ps-3"></i>
+              <input type="text" id="quickUrlInput" placeholder="Paste job URL (LinkedIn, Indeed)...">
+              <button id="quickScanBtn">Scan</button>
+            </div>
+            <small class="text-muted mt-2 d-block ms-3">Try specific job URLs for best results.</small>
+          </div>
+        </div>
+        <div class="col-lg-6 text-center" data-aos="fade-left">
+          <img src="assets/images/ai-logo.png" alt="AI Shield" class="hero-img">
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- FEATURES SECTION -->
+  <section class="features">
+    <div class="container">
+      <div class="section-title" data-aos="fade-up">
+        <h2>Why Choose FakeJobAI?</h2>
+        <p>Advanced technology meeting real-world security needs.</p>
+      </div>
+      <div class="row g-4">
+        <!-- Feature 1 -->
+        <div class="col-md-3" data-aos="fade-up" data-aos-delay="100">
+          <div class="feature-card glass">
+            <div class="icon-box"><i class="fas fa-brain"></i></div>
+            <h5>Deep Learning</h5>
+            <p>Trained on thousands of real and fake job postings to recognize subtle fraud patterns.</p>
+          </div>
+        </div>
+        <!-- Feature 2 -->
+        <div class="col-md-3" data-aos="fade-up" data-aos-delay="200">
+          <div class="feature-card glass">
+            <div class="icon-box"><i class="fas fa-globe"></i></div>
+            <h5>URL Scanner</h5>
+            <p>Paste a link from any major job board. Our scraper extracts and analyzes content automatically.</p>
+          </div>
+        </div>
+        <!-- Feature 3 -->
+        <div class="col-md-3" data-aos="fade-up" data-aos-delay="300">
+          <div class="feature-card glass">
+            <div class="icon-box"><i class="fas fa-lightbulb"></i></div>
+            <h5>Explainable AI</h5>
+            <p>Don't just get a 'Yes/No'. See exactly which words triggered the alert so you learn to spot scams safely.
+            </p>
+          </div>
+        </div>
+        <!-- Feature 4 -->
+        <div class="col-md-3" data-aos="fade-up" data-aos-delay="400">
+          <div class="feature-card glass">
+            <div class="icon-box"><i class="fas fa-shield-alt"></i></div>
+            <h5>Privacy First</h5>
+            <p>Your data is yours. We process predictions securely and offer a local history log.</p>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- HOW IT WORKS -->
+  <section class="py-5" style="background: white;">
+    <div class="container">
+      <div class="section-title" data-aos="fade-up">
+        <h2>How It Works</h2>
+      </div>
+      <div class="row text-center">
+        <div class="col-md-4 mb-4" data-aos="zoom-in" data-aos-delay="100">
+          <div class="step-card">
+            <div class="step-number">1</div>
+            <div class="step-content">
+              <i class="fas fa-copy fa-3x text-primary mb-3"></i>
+              <h5>Copy Link</h5>
+              <p class="text-muted">Find a job posting on LinkedIn or Glassdoor and copy the URL.</p>
+            </div>
+          </div>
+        </div>
+        <div class="col-md-4 mb-4" data-aos="zoom-in" data-aos-delay="200">
+          <div class="step-card">
+            <div class="step-number">2</div>
+            <div class="step-content">
+              <i class="fas fa-search-dollar fa-3x text-primary mb-3"></i>
+              <h5>Quick Scan</h5>
+              <p class="text-muted">Paste it into our dashboard or use the bulk CSV upload feature.</p>
+            </div>
+          </div>
+        </div>
+        <div class="col-md-4 mb-4" data-aos="zoom-in" data-aos-delay="300">
+          <div class="step-card">
+            <div class="step-number">3</div>
+            <div class="step-content">
+              <i class="fas fa-check-double fa-3x text-primary mb-3"></i>
+              <h5>Get Results</h5>
+              <p class="text-muted">Receive an instant "Real" or "Fake" verdict with confidence score.</p>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- FOOTER -->
+  <footer>
+    <div class="container">
+      <div class="row">
+        <div class="col-lg-4 mb-4">
+          <a href="#" class="footer-logo">FakeJob<span>AI</span></a>
+          <p class="text-muted">Empowering job seekers with AI-driven security tools. Stop wasting time on scams looking
+            for work.</p>
+          <div class="social-links mt-4">
+            <a href="#"><i class="fab fa-twitter"></i></a>
+            <a href="#"><i class="fab fa-github"></i></a>
+            <a href="#"><i class="fab fa-linkedin-in"></i></a>
+          </div>
+        </div>
+        <div class="col-lg-2 col-6 mb-4">
+          <h5>Product</h5>
+          <a href="dashboard.html">Dashboard</a>
+          <a href="history.html">History</a>
+          <a href="#">API Access</a>
+        </div>
+        <div class="col-lg-2 col-6 mb-4">
+          <h5>Resources</h5>
+          <a href="#">Scam Awareness</a>
+          <a href="#">Blog</a>
+          <a href="#">Support Center</a>
+        </div>
+        <div class="col-lg-4 mb-4">
+          <h5>Stay Updated</h5>
+          <p class="text-muted small">Join our newsletter for latest scam alerts.</p>
+          <div class="d-flex">
+            <input type="email" class="form-control me-2" placeholder="Email address">
+            <button class="btn btn-primary">Join</button>
+          </div>
+        </div>
+      </div>
+      <div class="text-center pt-4 border-top">
+        <p class="mb-0 text-muted small">© 2025 FakeJobAI. All rights reserved.</p>
+      </div>
+    </div>
+  </footer>
+
+  <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"></script>
+  <script src="https://unpkg.com/aos@2.3.4/dist/aos.js"></script>
+  <script>
+    AOS.init({ duration: 1000, once: true });
+
+    // Quick Scan Logic
+    document.getElementById('quickScanBtn').addEventListener('click', () => {
+      const url = document.getElementById('quickUrlInput').value.trim();
+      if (url) {
+        sessionStorage.setItem('pendingUrl', url);
+        window.location.href = 'dashboard.html';
+      } else {
+        document.getElementById('quickUrlInput').focus();
+        window.location.href = 'dashboard.html';
+      }
+    });
+
+    document.getElementById('quickUrlInput').addEventListener('keypress', (e) => {
+      if (e.key === 'Enter') document.getElementById('quickScanBtn').click();
+    });
+  </script>
+
+
+
+  <!-- Authentication Handler -->
+  <script src="js/auth.js"></script>
+
+  <!-- Welcome Modal for First-Time Visitors -->
+  <script src="js/welcome-modal.js"></script>
+
+  <!-- GuardAI Chatbot -->
+  <script src="js/chatbot.js"></script>
+</body>
+
+</html>

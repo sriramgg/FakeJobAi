@@ -1,0 +1,587 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Login - FakeJobAI</title>
+
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet">
+  <link
+    href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;500;600;700&family=Montserrat:wght@600;700&display=swap"
+    rel="stylesheet">
+  <link href="https://unpkg.com/aos@2.3.4/dist/aos.css" rel="stylesheet">
+  <script src="https://kit.fontawesome.com/a2e0b5a50f.js" crossorigin="anonymous"></script>
+
+  <style>
+    :root {
+      --primary-color: #4361ee;
+      --glass-bg: rgba(255, 255, 255, 0.85);
+      --glass-border: 1px solid rgba(255, 255, 255, 0.3);
+      --glass-shadow: 0 8px 32px 0 rgba(31, 38, 135, 0.1);
+    }
+
+    body {
+      font-family: 'Poppins', sans-serif;
+      background: #f0f4f8;
+      margin: 0;
+      padding-top: 80px;
+      overflow-x: hidden;
+      min-height: 100vh;
+      display: flex;
+      flex-direction: column;
+    }
+
+    /* --- Background Blobs --- */
+    .bg-shape {
+      position: absolute;
+      border-radius: 50%;
+      filter: blur(80px);
+      z-index: -1;
+      opacity: 0.5;
+      animation: floatShape 20s infinite alternate;
+    }
+
+    .shape-1 {
+      width: 500px;
+      height: 500px;
+      background: #4cc9f0;
+      top: -150px;
+      left: -150px;
+    }
+
+    .shape-2 {
+      width: 400px;
+      height: 400px;
+      background: #4361ee;
+      bottom: 50px;
+      right: -100px;
+      animation-delay: -5s;
+    }
+
+    .shape-3 {
+      width: 300px;
+      height: 300px;
+      background: #7209b7;
+      top: 40%;
+      left: 30%;
+      animation-delay: -10s;
+      opacity: 0.3;
+    }
+
+    @keyframes floatShape {
+      0% {
+        transform: translate(0, 0) rotate(0deg);
+      }
+
+      100% {
+        transform: translate(50px, 40px) rotate(20deg);
+      }
+    }
+
+    /* --- Glass Card --- */
+    .glass-card {
+      background: var(--glass-bg);
+      backdrop-filter: blur(12px);
+      border: var(--glass-border);
+      box-shadow: var(--glass-shadow);
+      border-radius: 20px;
+      padding: 3rem 2.5rem;
+      width: 100%;
+      max-width: 480px;
+      margin: auto;
+    }
+
+    /* --- Navbar (Matches Index) --- */
+    .navbar {
+      background: linear-gradient(to right, #ffffff, #e3f2fd);
+      box-shadow: 0 2px 8px rgba(0, 0, 0, 0.05);
+      border-bottom: none;
+      padding: 12px 0;
+    }
+
+    .navbar-brand {
+      font-family: 'Montserrat', sans-serif;
+      font-weight: 700;
+      font-size: 1.7rem;
+      color: #333;
+    }
+
+    .navbar-brand span {
+      color: var(--primary-color);
+    }
+
+    .nav-link {
+      font-weight: 500;
+      color: #555 !important;
+      margin-left: 15px;
+      transition: color 0.3s;
+    }
+
+    .nav-link:hover,
+    .nav-link.active {
+      color: var(--primary-color) !important;
+    }
+
+    .login-text span:first-child {
+      color: #4895ef;
+      font-weight: 600;
+    }
+
+    .login-text span:last-child {
+      color: #333;
+      font-weight: 700;
+    }
+
+    /* --- Form --- */
+    .form-control {
+      border-radius: 10px;
+      padding: 12px 15px;
+      border: 1px solid #ddd;
+      background: rgba(255, 255, 255, 0.7);
+    }
+
+    .form-control:focus {
+      background: #fff;
+      box-shadow: 0 0 0 4px rgba(67, 97, 238, 0.1);
+      border-color: var(--primary-color);
+    }
+
+    .btn-primary {
+      background: linear-gradient(90deg, #4361ee, #4cc9f0);
+      border: none;
+      border-radius: 10px;
+      padding: 12px;
+      font-weight: 600;
+      transition: all 0.3s;
+    }
+
+    .btn-primary:hover {
+      transform: translateY(-2px);
+      box-shadow: 0 5px 15px rgba(67, 97, 238, 0.3);
+    }
+
+    .google-btn {
+      background: #fff;
+      border: 1px solid #ddd;
+      border-radius: 10px;
+      padding: 10px;
+      width: 100%;
+      font-weight: 600;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      gap: 10px;
+      transition: all 0.3s;
+      color: #555;
+    }
+
+    .google-btn:hover {
+      background: #f8f9fa;
+      transform: translateY(-1px);
+    }
+
+    .divider {
+      display: flex;
+      align-items: center;
+      text-align: center;
+      color: #888;
+      margin: 1.5rem 0;
+      font-size: 0.9rem;
+    }
+
+    .divider::before,
+    .divider::after {
+      content: '';
+      flex: 1;
+      border-bottom: 1px solid #ddd;
+    }
+
+    .divider::before {
+      margin-right: .75em;
+    }
+
+    .divider::after {
+      margin-left: .75em;
+    }
+
+    a.text-link {
+      color: var(--primary-color);
+      text-decoration: none;
+      font-weight: 600;
+    }
+
+    a.text-link:hover {
+      text-decoration: underline;
+    }
+
+    footer {
+      margin-top: auto;
+      padding: 20px 0;
+      text-align: center;
+      border-top: 1px solid #e0e0e0;
+      background: #fff;
+    }
+  </style>
+</head>
+
+<body>
+
+  <!-- Backgrounds -->
+  <div class="bg-shape shape-1"></div>
+  <div class="bg-shape shape-2"></div>
+  <div class="bg-shape shape-3"></div>
+
+  <!-- Navbar -->
+  <nav class="navbar navbar-expand-lg fixed-top">
+    <div class="container">
+      <a class="navbar-brand d-flex align-items-center" href="index.html">
+        <img src="logo.svg" alt="Logo" width="36" height="36" class="me-2">
+        FakeJob<span>AI</span>
+      </a>
+      <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav">
+        <span class="navbar-toggler-icon"></span>
+      </button>
+      <div class="collapse navbar-collapse justify-content-end" id="navbarNav">
+        <ul class="navbar-nav align-items-center">
+          <li class="nav-item"><a class="nav-link" href="index.html">Home</a></li>
+          <li class="nav-item"><a class="nav-link" href="dashboard.html">Dashboard</a></li>
+          <li class="nav-item"><a class="nav-link" href="history.html">History</a></li>
+          <li class="nav-item"><a class="nav-link" href="report.html">Report</a></li>
+          <li class="nav-item"><a class="nav-link" href="about.html">About</a></li>
+          <li class="nav-item ms-2">
+            <a class="nav-link active login-text" href="login.html"><span>Log</span><span>in</span></a>
+          </li>
+        </ul>
+      </div>
+    </div>
+  </nav>
+
+  <!-- Login Content -->
+  <div class="container d-flex align-items-center flex-grow-1 py-5">
+    <div class="glass-card" data-aos="zoom-in">
+
+      <!-- Login Form -->
+      <div id="loginForm">
+        <div class="text-center mb-4">
+          <h2 class="fw-bold" style="font-family:'Montserrat',sans-serif">Welcome Back</h2>
+          <p class="text-muted">Sign in to detect fake jobs instantly</p>
+        </div>
+
+        <form onsubmit="event.preventDefault();">
+          <div class="mb-3">
+            <label class="form-label text-muted small fw-bold ms-1">Email Address</label>
+            <div class="input-group">
+              <span class="input-group-text border-end-0 bg-transparent ps-3"><i
+                  class="fas fa-envelope text-muted"></i></span>
+              <input type="email" class="form-control border-start-0" id="loginEmail" placeholder="name@example.com"
+                required>
+            </div>
+          </div>
+          <div class="mb-4">
+            <label class="form-label text-muted small fw-bold ms-1">Password</label>
+            <div class="input-group">
+              <span class="input-group-text border-end-0 bg-transparent ps-3"><i
+                  class="fas fa-lock text-muted"></i></span>
+              <input type="password" class="form-control border-start-0" id="loginPassword" placeholder="Enter password"
+                required>
+            </div>
+            <div class="text-end mt-2"><a href="#" class="small text-link fw-normal">Forgot password?</a></div>
+          </div>
+          <button type="submit" class="btn btn-primary w-100 shadow-sm py-3">Sign In</button>
+        </form>
+
+        <div class="divider">OR CONTINUE WITH</div>
+
+        <button class="google-btn shadow-sm py-2" id="googleLogin">
+          <img src="https://www.gstatic.com/firebasejs/ui/2.0.0/images/auth/google.svg" width="20" alt="Google">
+          Google
+        </button>
+
+        <button class="btn btn-outline-secondary w-100 mt-2 shadow-sm py-2" id="devLogin" title="Bypass for testing">
+          <i class="fas fa-code me-2"></i> Developer In (Bypass)
+        </button>
+
+        <p class="text-center mt-4 mb-0 text-muted">
+          New to FakeJobAI? <a href="#" class="text-link ms-1" id="showRegister">Create Account</a>
+        </p>
+      </div>
+
+      <!-- Register Form (Hidden) -->
+      <div id="registerForm" style="display:none;">
+        <div class="text-center mb-4">
+          <h2 class="fw-bold" style="font-family:'Montserrat',sans-serif">Create Account</h2>
+          <p class="text-muted">Join the community of safe job seekers</p>
+        </div>
+
+        <form onsubmit="event.preventDefault();">
+          <div class="mb-3">
+            <label class="form-label text-muted small fw-bold ms-1">Full Name</label>
+            <input type="text" class="form-control" id="regName" placeholder="John Doe" required>
+          </div>
+          <div class="mb-3">
+            <label class="form-label text-muted small fw-bold ms-1">Email Address</label>
+            <input type="email" class="form-control" id="regEmail" placeholder="name@example.com" required>
+          </div>
+          <div class="mb-4">
+            <label class="form-label text-muted small fw-bold ms-1">Password</label>
+            <input type="password" class="form-control" id="regPassword" placeholder="Create robust password" required>
+          </div>
+          <button type="submit" class="btn btn-primary w-100 shadow-sm py-3">Register Now</button>
+        </form>
+
+        <div class="divider">ALREADY A MEMBER?</div>
+
+        <p class="text-center mb-0 text-muted">
+          <a href="#" class="text-link" id="showLogin">Back to Login</a>
+        </p>
+      </div>
+
+    </div>
+  </div>
+
+  <footer><small class="text-muted">© 2025 FakeJobAI. Secure & Encrypted.</small></footer>
+
+  <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"></script>
+  <script src="https://unpkg.com/aos@2.3.4/dist/aos.js"></script>
+  <script>AOS.init();</script>
+
+  <!-- Firebase Logic -->
+  <script type="module">
+    import { initializeApp } from "https://www.gstatic.com/firebasejs/10.14.0/firebase-app.js";
+    import { getAuth, GoogleAuthProvider, signInWithPopup, createUserWithEmailAndPassword, signInWithEmailAndPassword } from "https://www.gstatic.com/firebasejs/10.14.0/firebase-auth.js";
+
+    const firebaseConfig = {
+      apiKey: "AIzaSyD63aq7jMkqDFMDgDSmYzPM3ZLw2hzJyfs",
+      authDomain: "fakejobai.firebaseapp.com",
+      projectId: "fakejobai",
+      storageBucket: "fakejobai.firebasestorage.app",
+      messagingSenderId: "860090995812",
+      appId: "1:860090995812:web:3d387e46a0dfc8232bbb71",
+      measurementId: "G-H73F8ZG1JK"
+    };
+
+    const app = initializeApp(firebaseConfig);
+    const auth = getAuth(app);
+    const provider = new GoogleAuthProvider();
+
+    // Function to send welcome email via backend
+    async function sendWelcomeEmail(email, name, source = 'google_login') {
+      try {
+        const response = await fetch('http://127.0.0.1:8000/analyze/send-welcome-email', {
+          method: 'POST',
+          headers: { 'Content-Type': 'application/json' },
+          body: JSON.stringify({ email, name, source })
+        });
+        const data = await response.json();
+        console.log('Welcome email status:', data);
+        return data;
+      } catch (error) {
+        console.error('Failed to send welcome email:', error);
+        return { success: false, error: error.message };
+      }
+    }
+
+    // Google Login Handler
+    document.getElementById('googleLogin').addEventListener('click', async () => {
+      try {
+        const result = await signInWithPopup(auth, provider);
+        const user = result.user;
+
+        // Save user to localStorage
+        localStorage.setItem("user", JSON.stringify({
+          email: user.email,
+          name: user.displayName,
+          photo: user.photoURL,
+          uid: user.uid
+        }));
+
+        // Also save to our cookie/localStorage for auth checks
+        localStorage.setItem("fakejobai_user", JSON.stringify({
+          email: user.email,
+          name: user.displayName,
+          source: "google_login"
+        }));
+
+        // Send welcome email
+        const emailResult = await sendWelcomeEmail(user.email, user.displayName, 'google_login');
+
+        // Determine redirect - first time users go to welcome page
+        const isFirstTime = emailResult.is_new_user || !localStorage.getItem('onboarding_complete');
+
+        if (isFirstTime) {
+          // First time - show welcome page
+          window.location.href = "welcome.html";
+        } else {
+          // Returning user - go to dashboard
+          window.location.href = "dashboard.html";
+        }
+
+      } catch (error) {
+        console.error("Login Error:", error);
+        console.error("Error Code:", error.code);
+        console.error("Error Message:", error.message);
+
+        // Handle specific Firebase errors
+        let userMessage = "Authentication failed. ";
+
+        switch (error.code) {
+          case 'auth/unauthorized-domain':
+            userMessage = "⚠️ Domain not authorized!\n\n" +
+              "Please add 'localhost' to your Firebase authorized domains:\n" +
+              "1. Go to Firebase Console\n" +
+              "2. Authentication → Settings → Authorized domains\n" +
+              "3. Add 'localhost'";
+            break;
+          case 'auth/popup-blocked':
+            userMessage = "Popup was blocked! Please allow popups for this site.";
+            break;
+          case 'auth/popup-closed-by-user':
+            userMessage = "Login cancelled. Please try again.";
+            break;
+          case 'auth/network-request-failed':
+            userMessage = "Network error. Please check your internet connection.";
+            break;
+          case 'auth/invalid-api-key':
+            userMessage = "⚠️ Invalid Firebase API Key! Please check your configuration.";
+            break;
+          default:
+            userMessage = `Error: ${error.code}\n${error.message}`;
+        }
+
+        alert(userMessage);
+      }
+    });
+
+    // Email/Password Login Handler
+    document.querySelector('#loginForm form').addEventListener('submit', async (e) => {
+      e.preventDefault();
+      const email = document.getElementById('loginEmail').value;
+      const password = document.getElementById('loginPassword').value;
+
+      try {
+        const result = await signInWithEmailAndPassword(auth, email, password);
+        const user = result.user;
+        const userName = user.email.split('@')[0];
+
+        // Save user to localStorage
+        localStorage.setItem("user", JSON.stringify({ email: user.email, name: userName }));
+        localStorage.setItem("fakejobai_user", JSON.stringify({
+          email: user.email,
+          name: userName,
+          source: "email_login"
+        }));
+
+        // Send welcome email
+        const emailResult = await sendWelcomeEmail(user.email, userName, 'email_login');
+        console.log('Welcome email result:', emailResult);
+
+        // Redirect to welcome page (which auto-redirects to home)
+        window.location.href = "welcome.html";
+
+      } catch (error) {
+        console.error("Login Error:", error.code, error.message);
+
+        let errorMsg = "Login failed. ";
+        switch (error.code) {
+          case 'auth/invalid-credential':
+          case 'auth/user-not-found':
+          case 'auth/wrong-password':
+            errorMsg = "❌ Invalid email or password.\n\nDon't have an account? Click 'Create Account' below to register first!";
+            break;
+          case 'auth/invalid-email':
+            errorMsg = "Please enter a valid email address.";
+            break;
+          case 'auth/too-many-requests':
+            errorMsg = "Too many failed attempts. Please try again later or use Google Sign-In.";
+            break;
+          case 'auth/operation-not-allowed':
+            errorMsg = "⚠️ Email/Password login is not enabled.\n\nPlease use Google Sign-In instead, or enable Email/Password in Firebase Console → Authentication → Sign-in method";
+            break;
+          default:
+            errorMsg = `Error: ${error.message}`;
+        }
+        alert(errorMsg);
+      }
+    });
+
+    // Developer Login Bypass
+    document.getElementById('devLogin').addEventListener('click', () => {
+      const user = {
+        email: "dev@fakejobai.com",
+        name: "Developer",
+        uid: "dev_bypass_123",
+        photo: null
+      };
+      localStorage.setItem("user", JSON.stringify(user));
+      localStorage.setItem("fakejobai_user", JSON.stringify({
+        email: user.email,
+        name: user.name,
+        source: "dev_bypass"
+      }));
+      showToast("Developer Mode: Logging in...", "success");
+      setTimeout(() => window.location.href = "dashboard.html", 500);
+    });
+
+    // Email/Password Registration Handler
+    document.querySelector('#registerForm form').addEventListener('submit', async (e) => {
+      e.preventDefault();
+      const name = document.getElementById('regName').value;
+      const email = document.getElementById('regEmail').value;
+      const password = document.getElementById('regPassword').value;
+
+      try {
+        const result = await createUserWithEmailAndPassword(auth, email, password);
+        const user = result.user;
+
+        localStorage.setItem("user", JSON.stringify({ email: user.email, name }));
+        localStorage.setItem("fakejobai_user", JSON.stringify({ email: user.email, name, source: "email_register" }));
+
+        // Send welcome email for new registration
+        await sendWelcomeEmail(email, name, 'email_register');
+
+        // New user - always go to welcome page
+        window.location.href = "welcome.html";
+
+      } catch (error) {
+        console.error("Registration Error:", error.code, error.message);
+
+        let errorMsg = "Registration failed. ";
+        switch (error.code) {
+          case 'auth/operation-not-allowed':
+            errorMsg = "⚠️ Email/Password registration is not enabled!\n\n" +
+              "To enable it:\n" +
+              "1. Go to Firebase Console\n" +
+              "2. Authentication → Sign-in method\n" +
+              "3. Click 'Email/Password' → Enable\n\n" +
+              "Or simply use Google Sign-In instead!";
+            break;
+          case 'auth/email-already-in-use':
+            errorMsg = "This email is already registered. Please use Login instead.";
+            break;
+          case 'auth/weak-password':
+            errorMsg = "Password is too weak. Please use at least 6 characters.";
+            break;
+          case 'auth/invalid-email':
+            errorMsg = "Please enter a valid email address.";
+            break;
+          default:
+            errorMsg = `Error: ${error.message}`;
+        }
+        alert(errorMsg);
+      }
+    });
+
+    // Toggle forms
+    document.getElementById('showRegister').addEventListener('click', () => {
+      document.getElementById('loginForm').style.display = 'none';
+      document.getElementById('registerForm').style.display = 'block';
+    });
+    document.getElementById('showLogin').addEventListener('click', () => {
+      document.getElementById('registerForm').style.display = 'none';
+      document.getElementById('loginForm').style.display = 'block';
+    });
+  </script>
+</body>
+
+</html>

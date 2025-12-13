@@ -1,0 +1,52 @@
+# FakeJobAI - Docker Compose Configuration
+# Run with: docker-compose up --build
+
+version: '3.8'
+
+services:
+  # ============= BACKEND (FastAPI) =============
+  backend:
+    build:
+      context: .
+      dockerfile: Dockerfile.backend
+    container_name: fakejobai-backend
+    ports:
+      - "8000:8000"
+    environment:
+      - PYTHONUNBUFFERED=1
+      - OPENAI_API_KEY=${OPENAI_API_KEY}
+      - GEMINI_API_KEY=${GEMINI_API_KEY}
+      - CLEARBIT_API_KEY=${CLEARBIT_API_KEY:-}
+      - GOOGLE_API_KEY=${GOOGLE_API_KEY:-}
+    volumes:
+      - ./backend/data:/app/data  # Persist database
+      - ./backend/models:/app/models  # Mount ML models
+    healthcheck:
+      test: ["CMD", "curl", "-f", "http://localhost:8000/"]
+      interval: 30s
+      timeout: 10s
+      retries: 3
+    restart: unless-stopped
+    networks:
+      - fakejobai-network
+
+  # ============= FRONTEND (Nginx) =============
+  frontend:
+    build:
+      context: .
+      dockerfile: Dockerfile.frontend
+    container_name: fakejobai-frontend
+    ports:
+      - "80:80"
+    depends_on:
+      - backend
+    restart: unless-stopped
+    networks:
+      - fakejobai-network
+
+networks:
+  fakejobai-network:
+    driver: bridge
+
+volumes:
+  backend-data:

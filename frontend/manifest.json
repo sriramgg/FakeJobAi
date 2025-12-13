@@ -1,0 +1,42 @@
+{
+    "name": "FakeJobAI - Job Scam Detector",
+    "short_name": "FakeJobAI",
+    "description": "AI-powered job scam detector. Protect yourself from fake job postings.",
+    "start_url": "/index.html",
+    "display": "standalone",
+    "background_color": "#0f172a",
+    "theme_color": "#4f46e5",
+    "orientation": "portrait-primary",
+    "categories": [
+        "productivity",
+        "utilities",
+        "business"
+    ],
+    "icons": [
+        {
+            "src": "assets/images/ai-logo.png",
+            "sizes": "192x192",
+            "type": "image/png",
+            "purpose": "any maskable"
+        },
+        {
+            "src": "assets/images/ai-logo.png",
+            "sizes": "512x512",
+            "type": "image/png",
+            "purpose": "any maskable"
+        }
+    ],
+    "screenshots": [],
+    "shortcuts": [
+        {
+            "name": "Scan Job",
+            "url": "/dashboard.html",
+            "description": "Analyze a job posting"
+        },
+        {
+            "name": "View History",
+            "url": "/history.html",
+            "description": "See past scans"
+        }
+    ]
+}
