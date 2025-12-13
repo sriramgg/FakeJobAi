@@ -336,11 +336,7 @@ function createWelcomeModal() {
     
     <div class="fjai-overlay" id="fjaOverlay">
         <div class="fjai-modal" style="position: relative;">
-            <button class="fjai-close" onclick="closeWelcomeModal()" aria-label="Close">
-                <svg width="14" height="14" viewBox="0 0 14 14" fill="none" stroke="currentColor" stroke-width="2">
-                    <path d="M1 1l12 12M13 1L1 13"/>
-                </svg>
-            </button>
+
             
             <div class="fjai-header">
                 <div class="fjai-logo">
@@ -386,9 +382,7 @@ function createWelcomeModal() {
                 </div>
             </div>
             
-            <div class="fjai-footer">
-                <a class="fjai-skip" onclick="skipWelcome()">Maybe later</a>
-            </div>
+
         </div>
     </div>
     `;
