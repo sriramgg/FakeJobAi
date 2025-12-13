@@ -4,6 +4,10 @@
  */
 
 (function () {
+    const API_BASE = window.location.hostname === "127.0.0.1" || window.location.hostname === "localhost"
+        ? "http://127.0.0.1:8000/analyze"
+        : "/analyze";
+
     // 1. Inject CSS Styles
     const style = document.createElement('style');
     style.innerHTML = `
@@ -309,10 +313,11 @@
 
         try {
             // 3. API Call
-            const response = await fetch('/chat_reply', {
+            // 3. API Call
+            const response = await fetch(`${API_BASE}/chat`, {
                 method: 'POST',
-                headers: { 'Content-Type': 'application/json' },
-                body: JSON.stringify({ message: text, history: history })
+                // body is URLSearchParams, so Content-Type will be application/x-www-form-urlencoded automatically
+                body: new URLSearchParams({ message: text })
             });
 
             const data = await response.json();

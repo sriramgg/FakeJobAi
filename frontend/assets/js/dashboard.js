@@ -2,7 +2,9 @@
 // Professional dashboard logic: connects to backend endpoints, updates cards, charts, table, and localStorage.
 
 (() => {
-  const API_BASE = "http://127.0.0.1:8000/analyze";
+  const API_BASE = window.location.hostname === "127.0.0.1" || window.location.hostname === "localhost"
+    ? "http://127.0.0.1:8000/analyze"
+    : "/analyze";
   const csvFileInput = document.getElementById("csvFile");
   const loadingSpinner = document.getElementById("loadingSpinner");
   const csvResults = document.getElementById("csvResults");
@@ -23,7 +25,7 @@
   // small helpers
   function escapeHtml(s) {
     if (s === null || s === undefined) return "";
-    return String(s).replace(/[&<>"'`]/g, c => ({ '&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;','`':'&#96;' }[c]));
+    return String(s).replace(/[&<>"'`]/g, c => ({ '&': '&amp;', '<': '&lt;', '>': '&gt;', '"': '&quot;', "'": '&#39;', '`': '&#96;' }[c]));
   }
   function showToast(message, type = "info", timeout = 3000) {
     alertArea.innerHTML = `<div class="alert alert-${type} alert-inline">${escapeHtml(message)}</div>`;
@@ -100,7 +102,7 @@
     // Trend - simple 0/1 per record
     const trendEl = document.getElementById("trendChart");
     if (trendEl) {
-      const labels = history.map((_, i) => `#${i+1}`);
+      const labels = history.map((_, i) => `#${i + 1}`);
       const dataReal = history.map(h => (h.prediction || "").toLowerCase().includes("real") ? 1 : 0);
       const dataFake = history.map(h => (h.prediction || "").toLowerCase().includes("fake") ? 1 : 0);
       if (trendChart) trendChart.destroy();
@@ -217,7 +219,7 @@
   });
 
   document.getElementById('downloadHistory').addEventListener('click', () => {
-    const csv = 'Title,Company,Prediction,Confidence\n' + history.map(h => `"${String(h.title).replace(/"/g,'""')}","${String(h.company).replace(/"/g,'""')}","${String(h.prediction).replace(/"/g,'""')}","${String(h.confidence).replace(/"/g,'""')}"`).join('\n');
+    const csv = 'Title,Company,Prediction,Confidence\n' + history.map(h => `"${String(h.title).replace(/"/g, '""')}","${String(h.company).replace(/"/g, '""')}","${String(h.prediction).replace(/"/g, '""')}","${String(h.confidence).replace(/"/g, '""')}"`).join('\n');
     const blob = new Blob([csv], { type: 'text/csv' });
     const a = document.createElement('a');
     a.href = URL.createObjectURL(blob);

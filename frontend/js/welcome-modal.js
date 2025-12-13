@@ -11,6 +11,10 @@ const MODAL_CONFIG = {
     daysToRemember: 30
 };
 
+const API_BASE = window.location.hostname === "127.0.0.1" || window.location.hostname === "localhost"
+    ? "http://127.0.0.1:8000/analyze"
+    : "/analyze";
+
 // ============== CHECK IF SHOULD SHOW ==============
 function shouldShowWelcomeModal() {
     const user = localStorage.getItem(MODAL_CONFIG.userKey);
@@ -436,7 +440,7 @@ function submitWelcomeEmail() {
     showWelcomeSuccess(email);
 
     // Send to backend
-    fetch('http://127.0.0.1:8000/analyze/register-visitor', {
+    fetch(`${API_BASE}/register-visitor`, {
         method: 'POST',
         headers: { 'Content-Type': 'application/json' },
         body: JSON.stringify(userData)

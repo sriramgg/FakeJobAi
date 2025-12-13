@@ -57,6 +57,16 @@ If you are using API keys (e.g., Google Gemini, OpenAI, Firebase), you must add 
 2.  Render will start building your app. It may take a few minutes.
 3.  Once "Live", you will get a URL like `https://fakejobai.onrender.com`.
 
+### Step 5: Configure Firebase Auth (CRITICAL)
+Since your app is now hosted on a new domain, you **MUST** authorize it in Firebase for login to work.
+1.  Go to the [Firebase Console](https://console.firebase.google.com/).
+2.  Select your project (**fakejobaidetection**).
+3.  Go to **Authentication** > **Settings** > **Authorized domains**.
+4.  Click **"Add domain"**.
+5.  Paste your Render URL (e.g., `fakejobai.onrender.com` without `https://`).
+6.  Click **Add**.
+*Wait a few minutes for changes to propagate. If you skip this, Google Login will fail.*
+
 ---
 
 ## 🌐 Alternative: Vercel (Frontend) + Render (Backend)
