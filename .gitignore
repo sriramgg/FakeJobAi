@@ -44,6 +44,7 @@ build/
 # Logs
 *.log
 logs/
+email_logs.txt
 
 # Local environment files
 .env.local
