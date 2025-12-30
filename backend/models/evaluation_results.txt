@@ -1,0 +1,47 @@
+Model Evaluation Results
+========================
+
+Model: Logistic Regression
+Accuracy: 1.0000
+Precision: 1.0000
+Recall: 1.0000
+F1-Score: 1.0000
+------------------------------
+Model: Random Forest
+Accuracy: 1.0000
+Precision: 1.0000
+Recall: 1.0000
+F1-Score: 1.0000
+------------------------------
+
+Detailed Classification Reports:
+
+📊 Logistic Regression
+              precision    recall  f1-score   support
+
+           0       1.00      1.00      1.00         8
+           1       1.00      1.00      1.00        12
+
+    accuracy                           1.00        20
+   macro avg       1.00      1.00      1.00        20
+weighted avg       1.00      1.00      1.00        20
+
+Confusion Matrix:
+[[ 8  0]
+ [ 0 12]]
+==================================================
+
+📊 Random Forest
+              precision    recall  f1-score   support
+
+           0       1.00      1.00      1.00         8
+           1       1.00      1.00      1.00        12
+
+    accuracy                           1.00        20
+   macro avg       1.00      1.00      1.00        20
+weighted avg       1.00      1.00      1.00        20
+
+Confusion Matrix:
+[[ 8  0]
+ [ 0 12]]
+==================================================

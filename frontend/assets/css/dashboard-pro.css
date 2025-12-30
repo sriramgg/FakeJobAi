@@ -1,0 +1,117 @@
+/* 0. Dashboard Extensions */
+.analysis-card {
+    transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1);
+}
+
+.analysis-card:hover {
+    box-shadow: 0 0 30px rgba(124, 77, 255, 0.15);
+}
+
+/* 1. Stat Cards Grid */
+.stats-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+    gap: 1.5rem;
+    margin-bottom: 2rem;
+}
+
+.stat-card {
+    padding: 1.5rem;
+    text-align: center;
+}
+
+.stat-card h6 {
+    font-size: 0.7rem;
+    color: var(--text-muted);
+    text-transform: uppercase;
+    letter-spacing: 0.1em;
+    margin-bottom: 0.5rem;
+}
+
+.stat-card .value {
+    font-size: 2rem;
+    font-weight: 800;
+}
+
+/* 2. Analysis Widgets */
+.analysis-container {
+    display: grid;
+    grid-template-columns: 2fr 1fr;
+    gap: 2rem;
+}
+
+@media (max-width: 991px) {
+    .analysis-container {
+        grid-template-columns: 1fr;
+    }
+}
+
+/* 3. Risk Gauges and indicators */
+.risk-gauge-container {
+    position: relative;
+    width: 200px;
+    height: 100px;
+    margin: 0 auto 20px;
+    overflow: hidden;
+}
+
+/* 4. Timeline / History specific to dashboard */
+.history-compact-list {
+    list-style: none;
+    padding: 0;
+}
+
+.history-item {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding: 15px 0;
+    border-bottom: 1px solid rgba(0, 0, 0, 0.05);
+}
+
+.history-item:last-child {
+    border-bottom: none;
+}
+
+/* 5. Prediction Animations */
+.scan-animation {
+    width: 120px;
+    height: 120px;
+    margin: 20px auto;
+    position: relative;
+}
+
+.scanner-line {
+    width: 100%;
+    height: 3px;
+    background: var(--primary);
+    position: absolute;
+    top: 0;
+    animation: scannerMove 3s ease-in-out infinite;
+    box-shadow: 0 0 15px var(--primary);
+}
+
+@keyframes scannerMove {
+
+    0%,
+    100% {
+        top: 0;
+        opacity: 0;
+    }
+
+    50% {
+        top: 100%;
+        opacity: 1;
+    }
+}
+
+/* Clean up duplicate body/bg styles */
+body {
+    padding-top: 0 !important;
+}
+
+.bg-shape {
+    display: none;
+}
+
+/* Handled by style.css now */

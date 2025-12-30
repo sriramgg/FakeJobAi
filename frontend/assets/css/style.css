@@ -1,0 +1,394 @@
+@import url('https://fonts.googleapis.com/css2?family=Outfit:wght@300;400;500;600;700;800&display=swap');
+
+:root {
+  /* Premium Purple Design System - SHARED GLOBALLY */
+  --primary: #7c4dff;
+  --primary-hover: #651fff;
+  --secondary: #b39ddb;
+  --accent: #00d2ff;
+  --bg-main: #fbf9ff;
+  /* Back to light theme */
+  --text-main: #1a152e;
+  --text-muted: #6b668a;
+  --font-main: 'Outfit', sans-serif;
+  --font-brand: 'Bahnschrift SemiBold SemiConden', 'Bahnschrift', 'Segoe UI', sans-serif;
+
+  --glass-bg: rgba(255, 255, 255, 0.75);
+  --glass-border: 1px solid rgba(124, 77, 255, 0.15);
+  --card-shadow: 0 20px 40px rgba(124, 77, 255, 0.08);
+  --navbar-height: 80px;
+}
+
+/* 1. Base Reset & Layout */
+* {
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+}
+
+body {
+  font-family: var(--font-main);
+  background-color: var(--bg-main);
+  color: var(--text-main);
+  overflow-x: hidden;
+  line-height: 1.6;
+  display: flex;
+  flex-direction: column;
+  min-height: 100vh;
+}
+
+main {
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+}
+
+/* 2. Global Alignment Utilities */
+.container,
+.container-fluid {
+  max-width: 1400px;
+  width: 100%;
+  margin: 0 auto;
+}
+
+.page-content {
+  padding-top: calc(var(--navbar-height) + 40px);
+  padding-bottom: 80px;
+  flex: 1;
+}
+
+/* 3. Typography & Branding */
+h1,
+h2,
+h3,
+h4,
+h5,
+h6 {
+  font-weight: 700;
+  letter-spacing: -0.03em;
+  color: var(--text-main);
+}
+
+.sky-blue-ai {
+  color: #4cc9f0 !important;
+  font-weight: 700;
+  position: relative;
+}
+
+/* Custom Heart Dot for 'i' */
+.brand-ai {
+  display: inline-flex;
+  align-items: baseline;
+  position: relative;
+  color: #4cc9f0 !important;
+}
+
+.heart-i {
+  position: relative;
+  display: inline-block;
+  line-height: 1;
+}
+
+.heart-i::after {
+  content: '❤';
+  position: absolute;
+  top: -0.1em;
+  /* Adjusted for smaller size */
+  left: 50%;
+  transform: translateX(-50%);
+  font-size: 0.35em;
+  /* Smaller heart */
+  color: #7c4dff;
+  /* Explicit deep purple heart */
+  transition: all 0.3s ease;
+  filter: drop-shadow(0 0 2px rgba(124, 77, 255, 0.4));
+}
+
+.navbar-brand:hover .heart-i::after {
+  transform: translateX(-50%) scale(1.3);
+  /* Slightly reduced scale to keep it elegant */
+  filter: drop-shadow(0 0 5px rgba(124, 77, 255, 0.6));
+}
+
+.gradient-text {
+  background: linear-gradient(135deg, var(--primary), #a29bfe);
+  -webkit-background-clip: text;
+  background-clip: text;
+  -webkit-text-fill-color: transparent;
+}
+
+/* 4. Navbar - Perfect Consistency */
+.navbar {
+  height: var(--navbar-height);
+  background: linear-gradient(to right, #ffffff, #f3eeff);
+  backdrop-filter: blur(20px);
+  -webkit-backdrop-filter: blur(20px);
+  border-bottom: 2px solid rgba(124, 77, 255, 0.15);
+  display: flex !important;
+  align-items: center !important;
+  z-index: 1050;
+  padding: 0 !important;
+}
+
+.navbar .container-fluid {
+  height: 100%;
+  display: flex !important;
+  align-items: center !important;
+  justify-content: space-between;
+}
+
+.navbar-brand {
+  font-family: var(--font-brand);
+  font-size: 1.8rem;
+  font-weight: 600;
+  color: var(--text-main) !important;
+  display: flex !important;
+  align-items: center;
+  gap: 12px;
+  text-decoration: none;
+  margin: 0;
+  padding: 0;
+  transform: translateY(1px);
+  /* Perfect optical alignment */
+}
+
+.navbar-nav {
+  display: flex !important;
+  align-items: center !important;
+}
+
+.nav-link {
+  font-size: 0.9rem;
+  font-weight: 600;
+  text-transform: uppercase;
+  letter-spacing: 0.05em;
+  padding: 10px 16px !important;
+  color: var(--text-muted) !important;
+  transition: 0.3s;
+  display: flex !important;
+  align-items: center;
+  gap: 8px;
+}
+
+.nav-link i {
+  font-size: 1.1rem;
+}
+
+.nav-link:hover,
+.nav-link.active {
+  color: var(--primary) !important;
+}
+
+.login-text {
+  background: var(--primary);
+  color: white !important;
+  padding: 10px 24px !important;
+  border-radius: 50px;
+  font-weight: 700;
+  box-shadow: 0 4px 15px rgba(124, 77, 255, 0.2);
+  margin-left: 15px;
+}
+
+/* 5. Components - Glassmorphism */
+.glass-card {
+  background: linear-gradient(135deg, rgba(255, 255, 255, 0.95) 0%, rgba(230, 218, 255, 0.9) 100%);
+  backdrop-filter: blur(20px);
+  -webkit-backdrop-filter: blur(20px);
+  border: 2px solid rgba(124, 77, 255, 0.15);
+  box-shadow: 0 15px 35px rgba(124, 77, 255, 0.1);
+  border-radius: 24px;
+  padding: 30px;
+  transition: all 0.4s ease;
+}
+
+.icon-box {
+  width: 60px;
+  height: 60px;
+  background: rgba(124, 77, 255, 0.1);
+  color: var(--primary);
+  border-radius: 16px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 1.5rem;
+  margin-bottom: 20px;
+}
+
+/* Glass card hover effect */
+.glass-card:hover {
+  transform: translateY(-5px);
+  border-color: rgba(124, 77, 255, 0.3);
+  box-shadow: 0 25px 50px rgba(124, 77, 255, 0.1);
+}
+
+.hero-card {
+  background: linear-gradient(135deg, #ffffff 0%, #f8f5ff 100%);
+  border-radius: 32px;
+  padding: 50px;
+  box-shadow: 0 40px 100px rgba(124, 77, 255, 0.08);
+  border: 1px solid rgba(124, 77, 255, 0.1);
+  position: relative;
+  overflow: hidden;
+  backdrop-filter: blur(10px);
+}
+
+.hero-card::before {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 5px;
+  background: linear-gradient(90deg, var(--primary), var(--accent));
+}
+
+/* 6. Background shapes - Shared globally */
+.bg-shape {
+  position: fixed;
+  border-radius: 50%;
+  filter: blur(80px);
+  z-index: -1;
+  opacity: 0.3;
+  pointer-events: none;
+}
+
+.shape-1 {
+  width: 500px;
+  height: 500px;
+  background: #b39ddb;
+  top: -100px;
+  left: -100px;
+}
+
+.shape-2 {
+  width: 400px;
+  height: 400px;
+  background: #7c4dff;
+  bottom: -50px;
+  right: -50px;
+}
+
+.shape-3 {
+  width: 300px;
+  height: 300px;
+  background: #9575cd;
+  top: 40%;
+  left: 30%;
+  opacity: 0.1;
+}
+
+/* 7. Footer - Card Style Redesign */
+footer {
+  background: transparent;
+  padding: 40px 0 60px;
+  border-top: none;
+}
+
+.footer-card {
+  background: linear-gradient(135deg, #ffffff 0%, #f3eeff 100%);
+  backdrop-filter: blur(20px);
+  -webkit-backdrop-filter: blur(20px);
+  border: 2px solid rgba(124, 77, 255, 0.15);
+  border-radius: 32px;
+  padding: 50px;
+  box-shadow: 0 25px 60px rgba(124, 77, 255, 0.1);
+}
+
+.footer-section-card {
+  background: rgba(255, 255, 255, 0.5);
+  border: 1px solid rgba(124, 77, 255, 0.1);
+  border-radius: 20px;
+  padding: 25px;
+  height: 100%;
+  transition: all 0.3s ease;
+}
+
+.footer-section-card:hover {
+  background: rgba(255, 255, 255, 0.8);
+  transform: translateY(-5px);
+  border-color: var(--primary);
+  box-shadow: 0 10px 25px rgba(124, 77, 255, 0.05);
+}
+
+.footer-link {
+  color: var(--text-muted);
+  text-decoration: none;
+  font-weight: 500;
+  transition: 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+  display: inline-block;
+  margin-bottom: 12px;
+  position: relative;
+}
+
+.footer-link::after {
+  content: '';
+  position: absolute;
+  bottom: -2px;
+  left: 0;
+  width: 0;
+  height: 2px;
+  background: var(--primary);
+  transition: 0.3s;
+  border-radius: 2px;
+}
+
+.footer-link:hover {
+  color: var(--primary);
+  transform: translateX(5px);
+}
+
+.footer-link:hover::after {
+  width: 100%;
+}
+
+.social-btn {
+  width: 45px;
+  height: 45px;
+  background: rgba(124, 77, 255, 0.05);
+  border: 1px solid rgba(124, 77, 255, 0.1);
+  border-radius: 12px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  color: var(--text-muted);
+  font-size: 1.2rem;
+  transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+  text-decoration: none;
+}
+
+.social-btn:hover {
+  background: var(--primary);
+  color: white;
+  transform: translateY(-5px);
+  box-shadow: 0 10px 20px rgba(124, 77, 255, 0.2);
+  border-color: var(--primary);
+}
+
+/* Custom Scrollbar */
+::-webkit-scrollbar {
+  width: 8px;
+}
+
+::-webkit-scrollbar-track {
+  background: var(--bg-main);
+}
+
+::-webkit-scrollbar-thumb {
+  background: #d1d5db;
+  border-radius: 10px;
+}
+
+::-webkit-scrollbar-thumb:hover {
+  background: #9ca3af;
+}
+
+/* Responsive adjustments */
+@media (max-width: 991px) {
+  .navbar-collapse {
+    background: white;
+    padding: 20px;
+    border-radius: 20px;
+    margin-top: 10px;
+    box-shadow: 0 10px 40px rgba(0, 0, 0, 0.1);
+  }
+}

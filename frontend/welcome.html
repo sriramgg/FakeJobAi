@@ -1,0 +1,335 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Setting Up Your Account... - FakeJobAI</title>
+
+    <!-- External Resources -->
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;500;600&display=swap" rel="stylesheet">
+    <script src="https://kit.fontawesome.com/a2e0b5a50f.js" crossorigin="anonymous"></script>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/animate.css/4.1.1/animate.min.css" />
+    <link rel="manifest" href="manifest.json">
+    <link href="assets/css/style.css" rel="stylesheet" />
+
+    <style>
+        /* Inline styles reduced */
+
+        /* --- Premium Welcome Modal Styling --- */
+        .overlay {
+            position: fixed;
+            inset: 0;
+            background: rgba(15, 23, 42, 0.6);
+            backdrop-filter: blur(8px);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            z-index: 1000;
+        }
+
+        .status-box {
+            background: rgba(255, 255, 255, 0.95);
+            padding: 50px 40px;
+            border-radius: 24px;
+            text-align: center;
+            max-width: 480px;
+            width: 90%;
+            box-shadow: 0 25px 50px -12px rgba(0, 0, 0, 0.25);
+            border: 1px solid rgba(255, 255, 255, 0.5);
+            position: relative;
+            overflow: hidden;
+            transform: scale(0.9);
+            opacity: 0;
+            animation: popIn 0.5s cubic-bezier(0.175, 0.885, 0.32, 1.275) forwards;
+        }
+
+        @keyframes popIn {
+            to {
+                transform: scale(1);
+                opacity: 1;
+            }
+        }
+
+        .status-box::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 6px;
+            background: linear-gradient(90deg, #4361ee, #4cc9f0, #4361ee);
+            background-size: 200% 100%;
+            animation: shimmer 2s infinite linear;
+        }
+
+        @keyframes shimmer {
+            0% {
+                background-position: 100% 0;
+            }
+
+            100% {
+                background-position: -100% 0;
+            }
+        }
+
+        .status-header h2 {
+            font-weight: 800;
+            color: #1e293b;
+            font-family: 'Gadugi', sans-serif;
+            letter-spacing: -0.5px;
+            margin-bottom: 8px;
+        }
+
+        .status-header p {
+            color: #64748b;
+            margin-bottom: 35px;
+            font-size: 0.95rem;
+        }
+
+        .icon-large {
+            font-size: 56px;
+            color: #4361ee;
+            margin-bottom: 25px;
+            filter: drop-shadow(0 10px 15px rgba(67, 97, 238, 0.3));
+        }
+
+        .step-item {
+            display: flex;
+            align-items: center;
+            background: #f8fafc;
+            padding: 12px 20px;
+            border-radius: 12px;
+            width: 100%;
+            margin-bottom: 12px;
+            border: 1px solid #e2e8f0;
+            transition: all 0.5s;
+            opacity: 0.6;
+        }
+
+        .step-item.active {
+            opacity: 1;
+            background: #fff;
+            border-color: #4361ee;
+            box-shadow: 0 4px 12px rgba(67, 97, 238, 0.1);
+            transform: scale(1.02);
+        }
+
+        .step-icon {
+            width: 32px;
+            height: 32px;
+            font-size: 14px;
+            border-radius: 50%;
+            background: #e2e8f0;
+            color: #94a3b8;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            margin-right: 15px;
+            transition: all 0.3s;
+        }
+
+        .step-item.done .step-icon {
+            background: #10b981;
+            color: #fff;
+        }
+
+        .step-item.done .step-text {
+            color: #0f172a;
+            font-weight: 600;
+        }
+
+
+        .timer-text {
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            font-size: 2.5rem;
+            font-weight: 800;
+            color: #4361ee;
+        }
+    </style>
+</head>
+
+<body>
+
+    <!-- NAVBAR -->
+    <nav class="navbar navbar-expand-lg fixed-top">
+        <div class="container-fluid px-4 px-lg-5">
+            <a class="navbar-brand" href="index.html"><img src="assets/images/logo.svg" alt="Logo" width="32"
+                    height="32"><span>FakeJob<span class="brand-ai">A<span class="heart-i">ı</span></span></span></a>
+            <button class="navbar-toggler border-0" type="button" data-bs-toggle="collapse"
+                data-bs-target="#navContent">
+                <span class="navbar-toggler-icon"></span>
+            </button>
+            <div class="collapse navbar-collapse" id="navContent">
+                <ul class="navbar-nav ms-auto align-items-center">
+                    <li class="nav-item"><a class="nav-link" href="index.html">Home</a></li>
+                    <li class="nav-item"><a class="nav-link" href="dashboard.html">Dashboard</a></li>
+                    <li class="nav-item"><a class="nav-link" href="history.html">History</a></li>
+                    <li class="nav-item"><a class="nav-link" href="report.html">Report</a></li>
+                    <li class="nav-item"><a class="nav-link" href="about.html">About</a></li>
+                    <li class="nav-item ms-lg-3">
+                        <button id="pwaInstallBtn" class="btn btn-outline-primary rounded-pill px-4"
+                            style="display: none;">
+                            <i class="fas fa-download me-2"></i>Install App
+                        </button>
+                    </li>
+                    <li class="nav-item ms-lg-3">
+                        <a class="nav-link login-text" href="login.html"><span>Log</span><span>in</span></a>
+                    </li>
+                </ul>
+            </div>
+        </div>
+    </nav>
+
+    <!-- Main Content -->
+    <main class="page-content container d-flex align-items-center justify-content-center">
+
+        <!-- Backgrounds -->
+        <!-- Backgrounds -->
+        <script src="assets/js/neural-bg.js"></script>
+
+        <!-- Main Status Card -->
+        <div class="status-box">
+
+            <div class="status-header">
+                <i class="fas fa-shield-alt icon-large animate__animated animate__bounceIn"></i>
+                <h2>Welcome to FakeJob<span class="brand-ai">A<span class="heart-i">ı</span></span></h2>
+                <p>Establishing your secure session...</p>
+            </div>
+
+            <div class="d-flex flex-column align-items-start w-100 ps-4">
+
+                <div class="step-item" id="step1">
+                    <div class="step-icon"><i class="fas fa-user-check"></i></div>
+                    <div class="step-text">Verifying Credentials</div>
+                </div>
+
+                <div class="step-item" id="step2">
+                    <div class="step-icon"><i class="fas fa-cloud-download-alt"></i></div>
+                    <div class="step-text">Syncing User Profile</div>
+                </div>
+
+                <div class="step-item" id="step3">
+                    <div class="step-icon"><i class="fas fa-paper-plane"></i></div>
+                    <div class="step-text">Sending Welcome Email</div>
+                </div>
+
+                <div class="step-item" id="step4">
+                    <div class="step-icon"><i class="fas fa-check-circle"></i></div>
+                    <div class="step-text fw-bold">Setup Complete!</div>
+                </div>
+
+            </div>
+
+            <!-- Success & Timer Area -->
+            <div id="redirectBox"
+                style="display:none; margin-top: 35px; border-top: 1px solid #e2e8f0; padding-top: 25px;">
+                <h5 class="text-success fw-bold animate__animated animate__fadeIn mb-4">🚀 Login Successful!</h5>
+
+                <div class="timer-wrapper">
+                    <svg class="timer-ring" width="100" height="100">
+                        <circle class="timer-ring-bg" stroke="#e2e8f0" stroke-width="4" fill="transparent" r="40"
+                            cx="50" cy="50" />
+                        <circle class="timer-ring-circle" id="timerCircle" stroke-width="4" stroke-linecap="round"
+                            fill="transparent" r="40" cx="50" cy="50" />
+                    </svg>
+                    <div class="timer-text" id="timer">5</div>
+                </div>
+
+                <p class="small text-muted mb-3">Redirecting to Dashboard automatically...</p>
+                <button class="btn btn-outline-primary btn-sm rounded-pill px-5 py-2 fw-bold" onclick="forceRedirect()">
+                    Go Now <i class="fas fa-arrow-right ms-2"></i>
+                </button>
+            </div>
+
+        </div>
+    </main>
+
+    <script type="module">
+        // Logic to run visual flow on page load
+
+        // Check if we have user data (passed from login via localStorage)
+        const initPage = () => {
+            const userStr = localStorage.getItem("fakejobai_user");
+            if (!userStr) {
+                // Safety fallback if accessed directly
+                window.location.href = "login.html";
+                return;
+            }
+
+            const user = JSON.parse(userStr);
+            console.log("Welcome Page: User loaded", user.email);
+
+            startVisualFlow(user);
+        };
+
+        const setStep = (num, status) => {
+            const el = document.getElementById(`step${num}`);
+            el.className = `step-item active ${status}`;
+            if (status === 'done') el.innerHTML = el.innerHTML.replace('Wait...', 'Done').replace('Processing', 'Complete');
+        };
+
+        function startVisualFlow(user) {
+            // Step 1: Verify
+            setTimeout(() => setStep(1, 'done'), 500);
+
+            // Step 2: Data
+            setTimeout(() => setStep(2, 'done'), 1200);
+
+            // Step 3: Email (Mock visual, actual send happens in background usually or we trigger here)
+            setTimeout(() => {
+                setStep(3, 'done');
+                // Actually trigger email in background for safety? Or rely on login.html having done it?
+                // Let's rely on login.html or re-trigger if needed. 
+                // For visual smoothness, we just assume it's sent.
+            }, 2000);
+
+            // Step 4: Complete
+            setTimeout(() => {
+                setStep(4, 'done');
+                document.getElementById('redirectBox').style.display = 'block';
+                startCountdown();
+            }, 2800);
+        }
+
+        function startCountdown() {
+            let count = 5;
+            const totalTime = 5;
+            const timerEl = document.getElementById('timer');
+            const circle = document.getElementById('timerCircle');
+            const circumference = 2 * Math.PI * 40;
+
+            // Initialize circle
+            circle.style.strokeDasharray = `${circumference} ${circumference}`;
+            circle.style.strokeDashoffset = 0;
+
+            const interval = setInterval(() => {
+                count--;
+                timerEl.innerText = count;
+
+                // Update Ring Progress
+                const offset = circumference - (count / totalTime) * circumference;
+                circle.style.strokeDashoffset = offset;
+
+                if (count <= 0) {
+                    clearInterval(interval);
+                    forceRedirect();
+                }
+            }, 1000);
+        }
+
+        window.forceRedirect = function () {
+            window.location.href = "dashboard.html";
+        };
+
+        // Run
+        initPage();
+    </script>
+    <script src="assets/js/auth.js"></script>
+</body>
+
+</html>

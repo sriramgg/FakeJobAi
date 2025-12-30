@@ -1,0 +1,1324 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=5.0, viewport-fit=cover" />
+  <meta name="theme-color" content="#7c4dff">
+  <title>FakeJobAI - Professional Dashboard</title>
+  <link rel="icon" type="image/svg+xml" href="assets/images/logo.svg">
+
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet">
+  <link href="https://unpkg.com/aos@2.3.4/dist/aos.css" rel="stylesheet">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+  <link rel="manifest" href="manifest.json">
+
+  <link href="assets/css/style.css" rel="stylesheet">
+  <link href="assets/css/dashboard-pro.css" rel="stylesheet">
+  <link href="assets/css/mobile-app.css" rel="stylesheet">
+
+  <!-- Chart.js -->
+  <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+
+  <!-- Leaflet Map -->
+  <link rel="stylesheet" href="https://unpkg.com/leaflet@1.9.4/dist/leaflet.css" />
+  <script src="https://unpkg.com/leaflet@1.9.4/dist/leaflet.js"></script>
+
+  <style>
+    /* Dashboard specific refinements that don't conflict with style.css */
+    .controls-bar {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      flex-wrap: wrap;
+      gap: 1rem;
+      padding: 1.5rem;
+      margin-bottom: 1.5rem;
+    }
+
+    .action-buttons {
+      display: flex;
+      gap: 0.75rem;
+      flex-wrap: wrap;
+    }
+
+    .action-buttons .btn {
+      border-radius: 12px;
+      padding: 0.65rem 1.25rem;
+      font-weight: 600;
+      font-size: 0.9rem;
+      transition: all 0.3s ease;
+    }
+
+
+    .chart-section {
+      padding: 1.5rem;
+    }
+
+    .page-header {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      flex-wrap: wrap;
+      gap: 1rem;
+      margin-bottom: 1.5rem;
+      padding-top: 1rem;
+    }
+
+    .page-title {
+      font-size: 1.75rem;
+      font-weight: 700;
+      color: #1f2937;
+      margin: 0;
+    }
+
+    .result-overlay {
+      display: none;
+      position: fixed;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      background: rgba(0, 0, 0, 0.6);
+      backdrop-filter: blur(5px);
+      z-index: 1055;
+    }
+
+    .result-popup {
+      display: none;
+      position: fixed;
+      top: 50%;
+      left: 50%;
+      transform: translate(-50%, -50%);
+      background: white;
+      padding: 2.5rem;
+      border-radius: 24px;
+      box-shadow: 0 25px 80px rgba(0, 0, 0, 0.3);
+      z-index: 1060;
+      width: 90%;
+      max-width: 520px;
+      max-height: 85vh;
+      overflow-y: auto;
+    }
+
+    .result-popup .btn-close {
+      position: absolute;
+      top: 20px;
+      right: 20px;
+      opacity: 0.6;
+      transition: all 0.2s;
+      background-color: #f8f9fa;
+      padding: 10px;
+      border-radius: 50%;
+    }
+
+    .result-popup .btn-close:hover {
+      opacity: 1;
+      background-color: #e9ecef;
+      transform: rotate(90deg);
+    }
+
+    @media (max-width: 576px) {
+      .result-popup {
+        padding: 1.5rem;
+        width: 95%;
+      }
+    }
+
+    .risk-meter {
+      height: 10px;
+      background: linear-gradient(to right, #10b981 0%, #f59e0b 50%, #ef4444 100%);
+      border-radius: 10px;
+      position: relative;
+    }
+
+    .risk-indicator {
+      position: absolute;
+      top: -6px;
+      width: 22px;
+      height: 22px;
+      background: white;
+      border: 4px solid #333;
+      border-radius: 50%;
+      transition: left 0.5s ease;
+      box-shadow: 0 2px 8px rgba(0, 0, 0, 0.2);
+    }
+
+    #loadingSpinner {
+      display: none;
+    }
+
+    .results-table th {
+      font-size: 0.8rem;
+      font-weight: 600;
+      text-transform: uppercase;
+      color: #6b7280;
+    }
+
+    .results-table td {
+      vertical-align: middle;
+    }
+
+    .glass-modal {
+      background: rgba(255, 255, 255, 0.98);
+      backdrop-filter: blur(20px);
+      border-radius: 20px;
+    }
+
+    /* 2D Map Threat Dots */
+    .dot-indicator {
+      display: inline-block;
+      width: 8px;
+      height: 8px;
+      border-radius: 50%;
+      margin-right: 6px;
+    }
+
+    .threat-dot {
+      position: absolute;
+      width: 12px;
+      height: 12px;
+      border-radius: 50%;
+      animation: pulse-dot 2s ease-out infinite;
+      transform: translate(-50%, -50%);
+    }
+
+    .threat-dot.danger {
+      background: #ef4444;
+      box-shadow: 0 0 20px #ef4444, 0 0 40px rgba(239, 68, 68, 0.5);
+    }
+
+    .threat-dot.success {
+      background: #10b981;
+      box-shadow: 0 0 20px #10b981, 0 0 40px rgba(16, 185, 129, 0.5);
+    }
+
+    @keyframes pulse-dot {
+      0% {
+        transform: translate(-50%, -50%) scale(1);
+        opacity: 1;
+      }
+
+      50% {
+        transform: translate(-50%, -50%) scale(1.5);
+        opacity: 0.7;
+      }
+
+      100% {
+        transform: translate(-50%, -50%) scale(1);
+        opacity: 0;
+      }
+    }
+
+    .pulse-text {
+      animation: pulse-text 1.5s ease-in-out infinite;
+    }
+
+    @keyframes pulse-text {
+
+      0%,
+      100% {
+        opacity: 1;
+      }
+
+      50% {
+        opacity: 0.6;
+      }
+    }
+
+    .job-pin {
+      position: absolute;
+      width: 16px;
+      height: 16px;
+      border-radius: 50%;
+      border: 3px solid white;
+      transform: translate(-50%, -50%);
+      z-index: 1000;
+      cursor: help;
+      box-shadow: 0 0 15px rgba(0, 0, 0, 0.3);
+      animation: pin-drop 0.5s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+    }
+
+    .job-pin.real {
+      background-color: #10b981;
+    }
+
+    .job-pin.fake {
+      background-color: #ef4444;
+    }
+
+    .job-pin::after {
+      content: attr(data-label);
+      position: absolute;
+      bottom: 20px;
+      left: 50%;
+      transform: translateX(-50%);
+      background: rgba(0, 0, 0, 0.8);
+      color: white;
+      padding: 2px 8px;
+      border-radius: 4px;
+      font-size: 10px;
+      white-space: nowrap;
+      opacity: 0;
+      transition: opacity 0.2s;
+      pointer-events: none;
+    }
+
+    .job-pin:hover::after {
+      opacity: 1;
+    }
+
+    @keyframes pin-drop {
+      from {
+        transform: translate(-50%, -150%) scale(0);
+        opacity: 0;
+      }
+
+      to {
+        transform: translate(-50%, -50%) scale(1);
+        opacity: 1;
+      }
+    }
+
+    @media (max-width: 768px) {
+      .controls-bar {
+        flex-direction: column;
+        align-items: stretch;
+      }
+
+      .action-buttons {
+        justify-content: center;
+      }
+
+      .page-header {
+        flex-direction: column;
+        text-align: center;
+      }
+    }
+  </style>
+</head>
+
+<body>
+
+  <!-- Background Blobs -->
+  <div class="bg-shape shape-1"></div>
+  <div class="bg-shape shape-2"></div>
+  <div class="bg-shape shape-3"></div>
+
+  <!-- NAVBAR -->
+  <nav class="navbar navbar-expand-lg fixed-top">
+    <div class="container-fluid px-4 px-lg-5">
+      <a class="navbar-brand" href="index.html">
+        <img src="assets/images/logo.svg" alt="FakeJobAI" width="32" height="32">
+        <span>FakeJob<span class="brand-ai">A<span class="heart-i">ı</span></span></span>
+      </a>
+      <button class="navbar-toggler border-0" type="button" data-bs-toggle="collapse" data-bs-target="#navContent">
+        <i class="fas fa-bars"></i>
+      </button>
+      <div class="collapse navbar-collapse" id="navContent">
+        <ul class="navbar-nav ms-auto">
+          <li class="nav-item"><a class="nav-link" href="index.html">Home</a></li>
+          <li class="nav-item"><a class="nav-link active" href="dashboard.html">Dashboard</a></li>
+          <li class="nav-item"><a class="nav-link" href="history.html">History</a></li>
+          <li class="nav-item"><a class="nav-link" href="report.html">Report</a></li>
+          <li class="nav-item"><a class="nav-link" href="about.html">About</a></li>
+          <li class="nav-item ms-lg-3"><a class="nav-link login-text" href="login.html">Log in</a></li>
+        </ul>
+      </div>
+    </div>
+  </nav>
+
+  <!-- Main Container -->
+  <main class="page-content container">
+
+    <!-- Page Header -->
+    <div class="page-header" data-aos="fade-down">
+      <div>
+        <h2 class="page-title">Dashboard Overview</h2>
+        <p class="text-muted mb-0">AI-Powered Fraud Detection & Risk Analysis</p>
+      </div>
+      <button id="exportPdfBtn" class="btn btn-outline-dark shadow-sm">
+        <i class="fas fa-file-pdf me-2"></i>Export Report
+      </button>
+    </div>
+
+    <!-- Stats Grid -->
+    <div class="row g-3 mb-4">
+      <div class="col-6 col-md-3" data-aos="fade-up" data-aos-delay="0">
+        <div class="stat-card glass-card">
+          <h6>Total Analyzed</h6>
+          <h3 id="statTotal" class="text-primary">0</h3>
+        </div>
+      </div>
+      <div class="col-6 col-md-3" data-aos="fade-up" data-aos-delay="100">
+        <div class="stat-card glass-card">
+          <h6>Fake Detected</h6>
+          <h3 id="statFake" class="text-danger">0</h3>
+        </div>
+      </div>
+      <div class="col-6 col-md-3" data-aos="fade-up" data-aos-delay="200">
+        <div class="stat-card glass-card">
+          <h6>Verified Real</h6>
+          <h3 id="statReal" class="text-success">0</h3>
+        </div>
+      </div>
+      <div class="col-6 col-md-3" data-aos="fade-up" data-aos-delay="300">
+        <div class="stat-card glass-card">
+          <h6>Blacklisted</h6>
+          <h3 id="statBlacklist" class="text-warning">0</h3>
+        </div>
+      </div>
+    </div>
+
+    <!-- Actions Control Bar -->
+    <div class="controls-bar glass-card" data-aos="fade-up">
+      <div class="action-buttons d-flex align-items-center flex-wrap">
+        <button class="btn btn-primary shadow-sm mb-2 mb-md-0" data-bs-toggle="modal" data-bs-target="#manualModal">
+          <i class="fas fa-keyboard me-2"></i>Manual Entry
+        </button>
+        <button class="btn btn-info text-white shadow-sm mb-2 mb-md-0" data-bs-toggle="modal"
+          data-bs-target="#urlModal">
+          <i class="fas fa-globe me-2"></i>Scan URL
+        </button>
+        <button class="btn btn-warning shadow-sm mb-2 mb-md-0" data-bs-toggle="modal" data-bs-target="#domainModal">
+          <i class="fas fa-shield-alt me-2"></i>Domain Check
+        </button>
+
+        <!-- Hidden CSV Input -->
+        <input id="csvFile" type="file" accept=".csv" style="display:none" />
+        <label for="csvFile" class="btn btn-success shadow-sm mb-2 mb-md-0" style="cursor: pointer;">
+          <i class="fas fa-file-csv me-2"></i>Upload CSV
+        </label>
+
+        <div id="loadingSpinner" class="spinner-border spinner-border-sm text-primary ms-2" role="status">
+          <span class="visually-hidden">Loading...</span>
+        </div>
+      </div>
+
+      <div class="filter-group d-flex align-items-center">
+        <span class="me-2 fw-bold text-muted">Filter:</span>
+        <select id="filterPred" class="form-select w-auto">
+          <option value="all">All Results</option>
+          <option value="real">Real Jobs Only</option>
+          <option value="fake">Fake Jobs Only</option>
+          <option value="critical">Critical Risk</option>
+        </select>
+      </div>
+    </div>
+
+    <!-- Charts Row -->
+    <div class="row g-3 mb-4">
+      <div class="col-12 col-lg-8" data-aos="fade-right">
+        <div class="glass-card chart-section">
+          <div class="d-flex justify-content-between align-items-center mb-3">
+            <h5 class="fw-bold m-0"><i class="fas fa-chart-line me-2 text-primary"></i>Analysis Trend</h5>
+            <small class="text-muted">Last 10 Scans</small>
+          </div>
+          <canvas id="trendChart" style="max-height: 250px;"></canvas>
+        </div>
+      </div>
+      <div class="col-12 col-lg-4" data-aos="fade-left">
+        <div class="glass-card chart-section">
+          <div class="d-flex justify-content-between align-items-center mb-3">
+            <h5 class="fw-bold m-0"><i class="fas fa-chart-pie me-2 text-info"></i>Distribution</h5>
+            <small class="text-muted">Real vs Fake</small>
+          </div>
+          <div style="height: 250px;">
+            <canvas id="pieChart"></canvas>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- Recent Results Table -->
+    <div class="glass-card p-4 mb-4" data-aos="fade-up">
+      <div class="d-flex justify-content-between align-items-center mb-3">
+        <h5 class="fw-bold m-0"><i class="fas fa-list-alt me-2 text-primary"></i>Recent Predictions</h5>
+        <div>
+          <button id="copyResults" class="btn btn-sm btn-outline-secondary me-1">Copy</button>
+          <button id="clearLocalBtn" class="btn btn-sm btn-outline-danger">Clear</button>
+        </div>
+      </div>
+
+      <div class="table-responsive recent-table-container">
+        <table class="table table-hover results-table">
+          <thead>
+            <tr>
+              <th>Title</th>
+              <th>Company</th>
+              <th>Location</th>
+              <th>Status</th>
+              <th>Risk</th>
+              <th>Confidence</th>
+              <th>Date</th>
+            </tr>
+          </thead>
+          <tbody id="recentHistoryTbody">
+            <tr>
+              <td colspan="6" class="text-center text-muted py-3">No analysis data found. Start by scanning a job!</td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+    </div>
+
+    <!-- Live Threat Map Section (Modern 2D) -->
+    <div class="glass-card p-0 mb-4 position-relative" style="overflow: hidden;" data-aos="zoom-in">
+      <div class="p-3 border-bottom d-flex justify-content-between align-items-center bg-white bg-opacity-75">
+        <div>
+          <h5 class="fw-bold m-0"><i class="fas fa-globe-americas me-2 text-danger"></i>Live Fraud Monitor</h5>
+          <small class="text-muted">Real-time detections from the FakeJob<span class="brand-ai">A<span
+                class="heart-i">ı</span></span> global
+            network</small>
+        </div>
+        <div class="badge bg-danger bg-opacity-10 text-danger border border-danger pulse-text">
+          LIVE: <span id="liveThreatCount">14,204</span> THREATS
+        </div>
+      </div>
+      <!-- Interactive Leaflet Map -->
+      <div id="threatMap"
+        style="height: 450px; position: relative; background: #1a1a2e; border-radius: 12px; overflow: hidden; z-index: 1;">
+      </div>
+
+      <style>
+        /* Modern Leaflet Styling */
+        #threatMap {
+          background: #111 !important;
+        }
+
+        .leaflet-container {
+          background: #111 !important;
+        }
+
+        .leaflet-bar a {
+          background: rgba(255, 255, 255, 0.9) !important;
+          color: #333 !important;
+          border: none !important;
+        }
+
+        .custom-pin {
+          width: 20px;
+          height: 20px;
+          border-radius: 50%;
+          border: 3px solid white;
+          box-shadow: 0 0 15px rgba(0, 0, 0, 0.5);
+          animation: pin-pulse 2s infinite;
+        }
+
+        @keyframes pin-pulse {
+          0% {
+            transform: scale(1);
+            box-shadow: 0 0 0 0 rgba(255, 255, 255, 0.7);
+          }
+
+          70% {
+            transform: scale(1.1);
+            box-shadow: 0 0 0 10px rgba(255, 255, 255, 0);
+          }
+
+          100% {
+            transform: scale(1);
+            box-shadow: 0 0 0 0 rgba(255, 255, 255, 0);
+          }
+        }
+      </style>
+
+      <!-- Map Legend -->
+      <div
+        style="position: absolute; bottom: 20px; left: 20px; background: rgba(255,255,255,0.9); padding: 12px 18px; border-radius: 12px; color: #333; font-size: 13px; box-shadow: 0 8px 32px rgba(0,0,0,0.2); z-index: 1000; backdrop-filter: blur(10px);">
+        <div class="d-flex align-items-center gap-3">
+          <div class="d-flex align-items-center"><span class="dot-indicator bg-danger"
+              style="width:10px;height:10px;"></span> <span class="fw-bold">Fake Job</span></div>
+          <div class="d-flex align-items-center"><span class="dot-indicator bg-success"
+              style="width:10px;height:10px;"></span> <span class="fw-bold">Safe Job</span></div>
+        </div>
+      </div>
+
+      <!-- Stats Overlay (Live) -->
+      <div
+        style="position: absolute; top: 20px; right: 20px; background: rgba(255,255,255,0.9); padding: 12px 20px; border-radius: 12px; color: #333; box-shadow: 0 8px 32px rgba(0,0,0,0.2); z-index: 1000; backdrop-filter: blur(10px);">
+        <div class="text-center">
+          <div style="font-size: 20px; font-weight: 800; color: var(--primary-color);" id="activeScans">14,204</div>
+          <div style="font-size: 10px; text-transform: uppercase; letter-spacing: 1px; font-weight: 700; color: #666;">
+            Global Detections</div>
+        </div>
+      </div>
+    </div>
+    </div>
+
+    </div> <!-- End Container -->
+
+    <!-- ================= MODALS ================= -->
+
+    <!-- 1. Manual Entry Modal -->
+    <div class="modal fade" id="manualModal" tabindex="-1" aria-hidden="true">
+      <div class="modal-dialog modal-dialog-centered">
+        <div class="modal-content glass-modal border-0">
+          <div class="modal-header border-0 pb-0">
+            <h5 class="modal-title fw-bold"><i class="fas fa-keyboard me-2 text-primary"></i>Manual Entry</h5>
+            <button type="button" class="btn-close" data-bs-dismiss="modal"></button>
+          </div>
+          <div class="modal-body">
+            <div class="mb-2">
+              <label class="form-label text-muted small fw-bold">Job Title *</label>
+              <input type="text" class="form-control bg-light border-0" id="inputTitle"
+                placeholder="e.g. Senior Developer">
+            </div>
+            <div class="mb-2">
+              <label class="form-label text-muted small fw-bold">Location</label>
+              <input type="text" class="form-control bg-light border-0" id="inputLocation"
+                placeholder="e.g. New York, Remote">
+            </div>
+            <div class="mb-2">
+              <label class="form-label text-muted small fw-bold">Company</label>
+              <input type="text" class="form-control bg-light border-0" id="inputCompany" placeholder="e.g. Acme Corp">
+            </div>
+            <div class="mb-3">
+              <label class="form-label text-muted small fw-bold">Description *</label>
+              <textarea class="form-control bg-light border-0" id="inputDesc" rows="4"
+                placeholder="Paste full job description..."></textarea>
+            </div>
+            <div class="mb-3 form-check form-switch p-3 bg-white rounded border">
+              <input class="form-check-input" type="checkbox" id="deepScanCheck" style="margin-left: 0.5em;">
+              <label class="form-check-label small fw-bold" for="deepScanCheck" style="margin-left: 2.5em;">
+                <i class="fas fa-network-wired text-primary me-1"></i> Perform Deep Social Scan (Beta)
+              </label>
+            </div>
+            <div class="d-grid">
+              <button type="button" id="submitManualBtn" class="btn btn-primary py-2 fw-bold">
+                <i class="fas fa-brain me-2"></i>Analyze Text
+              </button>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- 2. URL Modal -->
+    <div class="modal fade" id="urlModal" tabindex="-1" aria-hidden="true">
+      <div class="modal-dialog modal-dialog-centered">
+        <div class="modal-content glass-modal border-0">
+          <div class="modal-header border-0 pb-0">
+            <h5 class="modal-title fw-bold"><i class="fas fa-globe me-2 text-info"></i>Scan Job URL</h5>
+            <button type="button" class="btn-close" data-bs-dismiss="modal"></button>
+          </div>
+          <div class="modal-body">
+            <div class="mb-3">
+              <label class="form-label text-muted fw-bold small">Job Posting Link *</label>
+              <input type="url" class="form-control p-3 bg-light border-0" id="inputUrl"
+                placeholder="https://linkedin.com/jobs/view/...">
+              <div class="form-text">We support LinkedIn, Indeed, Glassdoor, and more.</div>
+            </div>
+            <div class="d-grid">
+              <button type="button" id="submitUrlBtn" class="btn btn-info text-white py-2 fw-bold">
+                <i class="fas fa-search me-2"></i>Analyze URL
+              </button>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- 3. Domain Check Modal -->
+    <div class="modal fade" id="domainModal" tabindex="-1" aria-hidden="true">
+      <div class="modal-dialog modal-dialog-centered">
+        <div class="modal-content glass-modal border-0">
+          <div class="modal-header border-0 pb-0">
+            <h5 class="modal-title fw-bold"><i class="fas fa-shield-alt me-2 text-warning"></i>Domain Security Check
+            </h5>
+            <button type="button" class="btn-close" data-bs-dismiss="modal"></button>
+          </div>
+          <div class="modal-body">
+            <div class="mb-3">
+              <label class="form-label text-muted fw-bold small">Website URL or Domain *</label>
+              <input type="text" class="form-control p-3 bg-light border-0" id="inputDomain"
+                placeholder="example.com or https://example.com/job">
+              <div class="form-text">Check domain age, DNS, and security indicators</div>
+            </div>
+            <div class="d-grid">
+              <button type="button" id="submitDomainBtn" class="btn btn-warning py-2 fw-bold">
+                <i class="fas fa-search me-2"></i>Check Domain
+              </button>
+            </div>
+            <div id="domainResults" class="mt-3" style="display:none;"></div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- 4. Result Popup (Custom) -->
+    <div class="result-overlay" id="resultOverlay"></div>
+    <div class="result-popup" id="resultPopup">
+      <button type="button" class="btn-close position-absolute top-0 end-0 m-3" id="closeResultBtnIcon"
+        aria-label="Close" onclick="closeResult()"></button>
+      <div class="text-center mb-3">
+        <h5 id="resultTitle" class="fw-bold mb-1">Job Title</h5>
+        <p id="resultCompany" class="text-muted small mb-0">Company Name</p>
+        <div id="resultLocation" class="text-muted small mb-2" style="font-size: 0.8rem;">
+          <i class="fas fa-map-marker-alt me-1"></i> <span>Unknown Location</span>
+        </div>
+      </div>
+
+      <div class="text-center mb-3">
+        <div id="resultBadge" class="mb-2"></div>
+        <small id="resultConfidence" class="text-secondary fw-bold"></small>
+      </div>
+
+      <div class="mb-4">
+        <div class="d-flex justify-content-between mb-1">
+          <small class="text-success fw-bold">Low Risk</small>
+          <small id="resultRiskScore" class="fw-bold">0/100</small>
+          <small class="text-danger fw-bold">High Risk</small>
+        </div>
+        <div class="risk-meter">
+          <div class="risk-indicator" id="riskIndicator" style="left: 0%;"></div>
+        </div>
+      </div>
+
+      <div id="resultFlags" class="mb-3"></div>
+      <div id="resultPositive" class="mb-3"></div>
+      <div id="resultExplanation" class="bg-light p-3 rounded-3 small mb-3 border-start border-4 border-primary"></div>
+      <div id="resultRecommendation" class="mb-3"></div>
+
+      <div class="text-center mb-3 pt-3 border-top">
+        <p class="mb-2 text-muted small">Was this analysis accurate?</p>
+        <div class="d-flex justify-content-center gap-3">
+          <button class="btn btn-outline-success btn-sm" id="feedbackYes">
+            <i class="fas fa-thumbs-up me-1"></i> Yes
+          </button>
+          <button class="btn btn-outline-danger btn-sm" id="feedbackNo">
+            <i class="fas fa-thumbs-down me-1"></i> No
+          </button>
+        </div>
+        <div id="feedbackMsg" class="mt-2 small text-success" style="display:none;">Thanks for your feedback!</div>
+      </div>
+
+      <div class="d-grid">
+        <button class="btn btn-outline-secondary" id="closeResultBtn">Close</button>
+      </div>
+    </div>
+
+    <!-- ================= SCRIPTS ================= -->
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"></script>
+    <script src="https://unpkg.com/aos@2.3.4/dist/aos.js"></script>
+    <script src="assets/js/pwa-install.js" defer></script>
+
+    <!-- Neural Network Animated Background -->
+    <script src="assets/js/neural-bg.js"></script>
+
+    <script>
+      // ============== CONFIG ==============
+      var API_BASE = window.location.port === "8000" ? "/analyze" : "http://127.0.0.1:8000/analyze";
+      var jobHistory = [];
+      var pieChartInstance = null;
+      var trendChartInstance = null;
+
+      try { jobHistory = JSON.parse(localStorage.getItem('jobHistory') || '[]'); } catch (e) { }
+      if (!Array.isArray(jobHistory)) jobHistory = [];
+
+      // ============== INIT ==============
+      document.addEventListener('DOMContentLoaded', function () {
+        // Check Auth
+        if (typeof requireAuth === 'function' && !requireAuth()) return;
+
+        console.log("Dashboard Ready!");
+
+        // AOS Animation
+        if (typeof AOS !== 'undefined') AOS.init({ duration: 800, once: true });
+
+        // Event Listeners
+        document.getElementById('submitManualBtn').addEventListener('click', analyzeManual);
+        document.getElementById('submitUrlBtn').addEventListener('click', analyzeUrl);
+        document.getElementById('submitDomainBtn').addEventListener('click', checkDomain);
+        document.getElementById('closeResultBtn').addEventListener('click', closeResult);
+        document.getElementById('resultOverlay').addEventListener('click', closeResult);
+        document.getElementById('feedbackYes').addEventListener('click', function () { submitFeedback(true); });
+        document.getElementById('feedbackNo').addEventListener('click', function () { submitFeedback(false); });
+
+        // CSV Upload
+        document.getElementById('csvFile').addEventListener('change', handleCsvUpload);
+
+        document.getElementById('clearLocalBtn').addEventListener('click', function () {
+          if (confirm('Clear all history?')) {
+            jobHistory = [];
+            localStorage.setItem('jobHistory', '[]');
+            renderAll();
+          }
+        });
+        document.getElementById('copyResults').addEventListener('click', function () {
+          var text = jobHistory.map(function (h) { return h.title + ' | ' + h.company + ' | ' + h.result; }).join('\n');
+          navigator.clipboard.writeText(text).then(function () { alert('Copied to clipboard!'); });
+        });
+
+        // Press Enter to Analyze support
+        const inputs = [
+          { id: 'inputUrl', btn: 'submitUrlBtn' },
+          { id: 'inputTitle', btn: 'submitManualBtn' },
+          { id: 'inputCompany', btn: 'submitManualBtn' },
+          { id: 'inputLocation', btn: 'submitManualBtn' },
+          { id: 'inputDesc', btn: 'submitManualBtn' },
+          { id: 'inputDomain', btn: 'submitDomainBtn' }
+        ];
+        inputs.forEach(item => {
+          const el = document.getElementById(item.id);
+          if (el) {
+            el.addEventListener('keypress', function (e) {
+              if (e.key === 'Enter') {
+                e.preventDefault();
+                document.getElementById(item.btn).click();
+              }
+            });
+          }
+        });
+
+        // Check for Quick Scan URL from Index Page
+        const pendingUrl = sessionStorage.getItem('pendingUrl');
+        if (pendingUrl) {
+          sessionStorage.removeItem('pendingUrl');
+          const input = document.getElementById('urlInput');
+          if (input) {
+            input.value = pendingUrl;
+            // Add slight delay to ensure everything is ready
+            setTimeout(() => {
+              if (typeof analyzeUrl === 'function') analyzeUrl();
+            }, 500);
+          }
+        }
+
+        // Instant Initial Render from LocalStorage
+        renderAll();
+
+        // Defer heavyweight initializations for speed
+        setTimeout(() => {
+          initGlobe();
+          fetchHistory();
+        }, 300);
+      });
+
+      // ============== FETCH HISTORY ==============
+      async function fetchHistory() {
+        try {
+          var res = await fetch(API_BASE + '/history');
+          if (res.ok) {
+            var data = await res.json();
+            if (data.history && Array.isArray(data.history)) {
+              jobHistory = data.history.map(function (h) {
+                return {
+                  title: h.title || 'Unknown',
+                  company: h.company || 'Unknown',
+                  result: h.result || 'Unknown',
+                  confidence: h.confidence ? h.confidence + '%' : 'N/A',
+                  risk_score: h.risk_score || 0,
+                  risk_level: h.risk_level || 'low',
+                  date: h.timestamp || new Date().toLocaleString()
+                };
+              });
+              localStorage.setItem('jobHistory', JSON.stringify(jobHistory));
+              renderAll();
+            }
+          }
+        } catch (e) { console.warn("History fetch failed", e); }
+      }
+
+      // ============== RENDER ==============
+      function renderAll() {
+        renderStats();
+        renderTable();
+        renderCharts();
+      }
+
+      function renderStats() {
+        var total = jobHistory.length;
+        var fake = jobHistory.filter(function (h) { return h.result && h.result.toLowerCase().includes('fake'); }).length;
+        var real = jobHistory.filter(function (h) { return h.result && h.result.toLowerCase().includes('real'); }).length;
+        document.getElementById('statTotal').innerText = total;
+        document.getElementById('statFake').innerText = fake;
+        document.getElementById('statReal').innerText = real;
+        document.getElementById('statBlacklist').innerText = 0;
+      }
+
+      function renderTable() {
+        var tbody = document.getElementById('recentHistoryTbody');
+        if (!tbody) return;
+        if (jobHistory.length === 0) {
+          tbody.innerHTML = '<tr><td colspan="7" class="text-center text-muted py-3">No data analyzed yet.</td></tr>';
+          return;
+        }
+
+        // DocumentFragment for faster DOM updates
+        var fragment = document.createDocumentFragment();
+        jobHistory.slice(0, 8).forEach(function (h) {
+          var tr = document.createElement('tr');
+          var isReal = h.result && h.result.toLowerCase().includes('real');
+          var statusBadge = isReal ? '<span class="badge bg-success">Real</span>' : '<span class="badge bg-danger">Fake</span>';
+          var riskClass = h.risk_level === 'critical' ? 'bg-dark' : (h.risk_level === 'high' ? 'bg-danger' : (h.risk_level === 'medium' ? 'bg-warning' : 'bg-success'));
+
+          tr.innerHTML =
+            '<td class="fw-bold text-truncate" style="max-width: 140px;">' + (h.title || 'N/A') + '</td>' +
+            '<td>' + (h.company || 'N/A') + '</td>' +
+            '<td class="small text-muted"><i class="fas fa-map-marker-alt me-1"></i>' + (h.location || 'N/A') + '</td>' +
+            '<td>' + statusBadge + '</td>' +
+            '<td><span class="badge ' + riskClass + '">' + (h.risk_level || 'low').toUpperCase() + '</span></td>' +
+            '<td>' + (h.confidence || 'N/A') + '</td>' +
+            '<td class="text-muted small">' + (h.date || '').split(',')[0] + '</td>';
+          fragment.appendChild(tr);
+        });
+
+        tbody.innerHTML = '';
+        tbody.appendChild(fragment);
+      }
+
+      function renderCharts() {
+        var real = jobHistory.filter(function (h) { return h.result && h.result.toLowerCase().includes('real'); }).length;
+        var fake = jobHistory.filter(function (h) { return h.result && h.result.toLowerCase().includes('fake'); }).length;
+
+        // Pie Chart
+        var pieCtx = document.getElementById('pieChart');
+        if (pieCtx) {
+          if (pieChartInstance) pieChartInstance.destroy();
+          pieChartInstance = new Chart(pieCtx.getContext('2d'), {
+            type: 'doughnut',
+            data: { labels: ['Real', 'Fake'], datasets: [{ data: [real, fake], backgroundColor: ['#10b981', '#ef4444'], borderWidth: 0 }] },
+            options: { responsive: true, maintainAspectRatio: false }
+          });
+        }
+
+        // Trend Chart
+        var trendCtx = document.getElementById('trendChart');
+        if (trendCtx) {
+          if (trendChartInstance) trendChartInstance.destroy();
+          var recent = jobHistory.slice(0, 10).reverse();
+          var scores = recent.map(function (h) { return h.risk_score || 0; });
+          var labels = recent.map(function (h) { return (h.date || '').split(',')[0] || 'N/A'; });
+          trendChartInstance = new Chart(trendCtx.getContext('2d'), {
+            type: 'line',
+            data: { labels: labels, datasets: [{ label: 'Risk Score', data: scores, borderColor: '#f59e0b', tension: 0.4, fill: true, backgroundColor: 'rgba(245, 158, 11, 0.1)' }] },
+            options: { responsive: true, maintainAspectRatio: false, scales: { y: { min: 0, max: 100 } } }
+          });
+        }
+      }
+
+      // ============== INTERACTIVE MAP LOGIC ==============
+      var map;
+      var mapMarkers = [];
+
+      function initGlobe() {
+        // Initialize Leaflet Map
+        map = L.map('threatMap', {
+          center: [20, 0],
+          zoom: 2,
+          zoomControl: false,
+          attributionControl: false
+        });
+
+        // Premium Dark Tiles
+        L.tileLayer('https://{s}.basemaps.cartocdn.com/dark_all/{z}/{x}/{y}{r}.png', {
+          maxZoom: 19
+        }).addTo(map);
+
+        // Add Zoom Control at bottom right
+        L.control.zoom({ position: 'bottomright' }).addTo(map);
+
+        // Add random "simulated" threat dots occasionally
+        setInterval(function () {
+          if (!map) return;
+          var lat = (Math.random() * 120) - 60;
+          var lng = (Math.random() * 300) - 150;
+          var isReal = Math.random() > 0.4;
+
+          var tempMarker = L.circleMarker([lat, lng], {
+            radius: 5,
+            color: isReal ? '#10b981' : '#ef4444',
+            fillColor: isReal ? '#10b981' : '#ef4444',
+            fillOpacity: 0.6,
+            weight: 2
+          }).addTo(map);
+
+          setTimeout(() => map.removeLayer(tempMarker), 4000);
+        }, 3000);
+      }
+
+      function pinLocation(locationName, isReal) {
+        if (!locationName || !map) return;
+
+        // Real World Coordinates
+        var coords = {
+          'usa': [37.09, -95.71], 'us': [37.09, -95.71], 'united states': [37.09, -95.71], 'new york': [40.71, -74.00], 'california': [36.77, -119.41],
+          'uk': [55.37, -3.43], 'london': [51.50, -0.12], 'united kingdom': [55.37, -3.43],
+          'india': [20.59, 78.96], 'bangalore': [12.97, 77.59], 'mumbai': [19.07, 72.87], 'delhi': [28.61, 77.20],
+          'europe': [54.52, 15.25], 'germany': [51.16, 10.45], 'france': [46.22, 2.21], 'spain': [40.46, -3.74],
+          'china': [35.86, 104.19], 'beijing': [39.90, 116.40],
+          'japan': [36.20, 138.25], 'tokyo': [35.67, 139.65],
+          'australia': [-25.27, 133.77], 'sydney': [-33.86, 151.20],
+          'brazil': [-14.23, -51.92], 'south america': [-14.23, -51.92],
+          'africa': [1.29, 36.82], 'nigeria': [9.08, 8.67], 'egypt': [26.82, 30.8],
+          'russia': [61.52, 105.32], 'canada': [56.13, -106.35], 'mexico': [23.63, -102.55],
+          'singapore': [1.35, 103.81], 'uae': [23.42, 53.84], 'dubai': [25.20, 55.27]
+        };
+
+        var key = locationName.toLowerCase().trim();
+        var pos = null;
+
+        for (var c in coords) {
+          if (key.includes(c)) {
+            pos = coords[c];
+            break;
+          }
+        }
+
+        // Fallback: Random but somewhat plausible
+        if (!pos) {
+          pos = [(Math.random() * 80) - 20, (Math.random() * 200) - 100];
+        }
+
+        // Create Custom DivIcon
+        var icon = L.divIcon({
+          className: 'custom-icon',
+          html: `<div class="custom-pin" style="background:${isReal ? '#10b981' : '#ef4444'};"></div>`,
+          iconSize: [20, 20],
+          iconAnchor: [10, 10]
+        });
+
+        // Add Marker
+        var marker = L.marker(pos, { icon: icon }).addTo(map);
+        marker.bindPopup(`<strong>${locationName}</strong><br>${isReal ? '✅ Safe Region' : '🚨 High Risk Area'}`).openPopup();
+
+        mapMarkers.push(marker);
+
+        // FLY TO AND ZOOM!
+        map.flyTo(pos, 6, {
+          animate: true,
+          duration: 2.5
+        });
+
+        // Scroll map into view
+        document.getElementById('threatMap').scrollIntoView({ behavior: 'smooth', block: 'center' });
+      }
+
+      // ============== HANDLERS ==============
+      async function analyzeManual() {
+        var title = document.getElementById('inputTitle').value.trim();
+        var company = document.getElementById('inputCompany').value.trim() || 'Unknown';
+        var desc = document.getElementById('inputDesc').value.trim();
+
+        if (!title || !desc) { alert('Please enter Job Title and Description'); return; }
+
+        closeModal('manualModal');
+        showLoading(true);
+
+        try {
+          var fd = new FormData();
+          fd.append('title', title);
+          fd.append('description', desc);
+          fd.append('company_profile', company);
+
+          var res = await fetch(API_BASE + '/predict-text', { method: 'POST', body: fd });
+          var data = await res.json();
+          if (!res.ok) throw new Error(data.error || 'Failed');
+
+          var loc = document.getElementById('inputLocation').value.trim();
+          var entry = createEntry(title, company, data);
+          entry.location = loc || 'Remote / Not Specified';
+          jobHistory.unshift(entry);
+          localStorage.setItem('jobHistory', JSON.stringify(jobHistory));
+          renderAll();
+          showResult(entry, data);
+
+          // Pin on Map
+          var isReal = entry.result.toLowerCase().includes('real');
+          if (loc) pinLocation(loc, isReal);
+
+        } catch (err) { alert('Error: ' + err.message); }
+        finally { showLoading(false); }
+      }
+
+      async function analyzeUrl() {
+        var url = document.getElementById('inputUrl').value.trim();
+        if (!url) { alert('Please enter a URL'); return; }
+
+        closeModal('urlModal');
+        showLoading(true);
+
+        try {
+          var fd = new FormData();
+          fd.append('url', url);
+          var res = await fetch(API_BASE + '/predict-url', { method: 'POST', body: fd });
+          var data = await res.json();
+          if (!res.ok) throw new Error(data.error || 'Failed');
+
+          var scraped = data.scraped_data || {};
+          var entry = createEntry(scraped.title || 'External Job', scraped.company || 'Unknown', data);
+          entry.location = scraped.location || 'Unknown Location';
+          jobHistory.unshift(entry);
+          localStorage.setItem('jobHistory', JSON.stringify(jobHistory));
+          renderAll();
+          showResult(entry, data);
+
+          // Pin on Map
+          if (entry.location && entry.location !== 'Unknown Location' && typeof pinLocation === 'function') {
+            pinLocation(entry.location, entry.result.toLowerCase().includes('real'));
+          }
+
+        } catch (err) { alert('Error: ' + err.message); }
+        finally { showLoading(false); }
+      }
+
+      async function checkDomain() {
+        var domain = document.getElementById('inputDomain').value.trim();
+        var resultDiv = document.getElementById('domainResults');
+        if (!domain) { alert('Please enter a domain'); return; }
+
+        resultDiv.style.display = 'block';
+        resultDiv.innerHTML = '<div class="text-center"><div class="spinner-border text-warning"></div></div>';
+
+        try {
+          var fd = new FormData();
+          fd.append('url', domain);
+          var res = await fetch(API_BASE + '/check-domain', { method: 'POST', body: fd });
+          var data = await res.json();
+          var colors = { critical: '#dc2626', high: '#ef4444', medium: '#f59e0b', low: '#10b981' };
+
+          let flagsHtml = "";
+          if (data.flags && data.flags.length > 0) {
+            flagsHtml = '<div class="mt-2 text-start">' +
+              data.flags.map(f => '<div class="small mb-1"><i class="fas fa-info-circle me-1"></i>' + f + '</div>').join('') +
+              '</div>';
+          }
+
+          let ageHtml = "";
+          if (data.domain_age && data.domain_age.details) {
+            ageHtml = '<div class="alert alert-info py-2 px-3 mt-2 mb-0 small text-start">' +
+              '<i class="fas fa-history me-2"></i>' + data.domain_age.details +
+              '</div>';
+          }
+
+          resultDiv.innerHTML = '<div class="p-3 rounded glass-card border">' +
+            '<h6 class="fw-bold mb-2">' + (data.domain || domain) + '</h6>' +
+            '<span class="badge" style="background:' + (colors[data.risk_level] || '#666') + '">' + (data.risk_level || 'Unknown').toUpperCase() + ' RISK</span>' +
+            '<div class="mt-2 mb-2 fw-bold">Security Score: ' + (data.risk_score || 0) + '/100</div>' +
+            flagsHtml + ageHtml + '</div>';
+        } catch (err) { resultDiv.innerHTML = '<div class="alert alert-danger">Error: ' + err.message + '</div>'; }
+      }
+
+      function createEntry(title, company, data) {
+        return {
+          title: title,
+          company: company,
+          location: 'Unknown Location',
+          result: data.result || (data.prediction === 1 ? 'Real Job' : 'Fake Job'),
+          confidence: data.confidence || '50%',
+          risk_score: data.risk_analysis ? data.risk_analysis.overall_score : 30,
+          risk_level: data.risk_analysis ? data.risk_analysis.risk_level : 'medium',
+          flags: data.risk_analysis ? data.risk_analysis.flags : [],
+          positive: data.risk_analysis ? data.risk_analysis.positive_signals : [],
+          explanation: data.explanation,
+          company_verification: data.company_verification,
+          date: new Date().toLocaleString()
+        };
+      }
+
+      // ============== RESULT POPUP ==============
+      function showResult(entry, fullData) {
+        var isReal = entry.result.toLowerCase().includes('real');
+
+        document.getElementById('resultTitle').innerText = entry.title;
+        document.getElementById('resultCompany').innerText = entry.company;
+
+        const locEl = document.getElementById('resultLocation');
+        if (locEl) {
+          locEl.querySelector('span').innerText = entry.location || 'Remote / Not Specified';
+        }
+
+        // Badge (NO EMOJIS)
+        var badge = document.getElementById('resultBadge');
+        badge.innerHTML = isReal
+          ? '<span class="badge bg-success px-4 py-2 fs-6 shadow"><i class="fas fa-shield-alt me-2"></i>LEGITIMATE OPPORTUNITY</span>'
+          : '<span class="badge bg-danger px-4 py-2 fs-6 shadow"><i class="fas fa-exclamation-triangle me-2"></i>POTENTIAL FRAUD DETECTED</span>';
+
+        document.getElementById('resultConfidence').innerHTML = '<span class="sky-blue-ai">AI</span> Confidence: ' + entry.confidence;
+
+        // Risk Meter
+        var score = entry.risk_score || 0;
+        document.getElementById('resultRiskScore').innerText = score + '/100';
+        setTimeout(function () { document.getElementById('riskIndicator').style.left = score + '%'; }, 100);
+
+        // Company Intelligence (New Section)
+        var companyDiv = document.getElementById('resultCompanyInfo');
+        if (!companyDiv) {
+          // Create if not exists (insert after flags for now, or before)
+          // Actually let's insert it before flags
+          var container = document.getElementById('resultFlags').parentNode;
+          companyDiv = document.createElement('div');
+          companyDiv.id = 'resultCompanyInfo';
+          companyDiv.className = 'mb-3 bg-light p-3 rounded border';
+          container.insertBefore(companyDiv, document.getElementById('resultFlags'));
+        }
+
+        if (entry.company_verification && entry.company_verification.domain_info && entry.company_verification.domain_info.found) {
+          var info = entry.company_verification.domain_info;
+          var age = info.age_years ? info.age_years + " years" : (info.age_days + " days");
+          var created = info.created || "Unknown";
+
+          companyDiv.style.display = 'block';
+          companyDiv.innerHTML = '<h6 class="small fw-bold text-dark border-bottom pb-2 mb-2"><i class="fas fa-building me-2 text-primary"></i>Company Intelligence</h6>' +
+            '<div class="row g-2 small">' +
+            '<div class="col-6"><span class="text-muted">Domain:</span> <a href="http://' + info.domain + '" target="_blank" class="fw-bold text-decoration-none">' + info.domain + '</a></div>' +
+            '<div class="col-6"><span class="text-muted">Age:</span> <span class="fw-bold">' + age + '</span></div>' +
+            '<div class="col-12"><span class="text-muted">Registered:</span> ' + created + '</div>' +
+            '</div>';
+        } else {
+          companyDiv.style.display = 'none';
+        }
+
+        // Flags (NO EMOJIS)
+        var flagsDiv = document.getElementById('resultFlags');
+        if (entry.flags && entry.flags.length > 0) {
+          flagsDiv.innerHTML = '<h6 class="small fw-bold text-muted border-bottom pb-1">Risk Indicators</h6>' +
+            entry.flags.map(function (f) {
+              var clean = f.replace(/[^\w\s\-\(\)\.\:]/g, '').trim(); // Allow dots/colons
+              return '<div class="d-flex align-items-start mb-1 small text-danger"><i class="fas fa-times-circle me-2 mt-1"></i>' + clean + '</div>';
+            }).join('');
+        } else {
+          flagsDiv.innerHTML = '<div class="text-success small"><i class="fas fa-check-circle me-1"></i> No major risk indicators detected.</div>';
+        }
+
+        // Positive Signals
+        var posDiv = document.getElementById('resultPositive');
+        if (isReal) {
+          posDiv.innerHTML = '<h6 class="small fw-bold text-muted border-bottom pb-1">Verified Signals</h6>' +
+            '<span class="badge bg-light text-success border border-success me-1"><i class="fas fa-check me-1"></i>Professional Format</span>' +
+            '<span class="badge bg-light text-success border border-success"><i class="fas fa-check me-1"></i>Clear Requirements</span>';
+        } else { posDiv.innerHTML = ''; }
+
+        // Explanation
+        var exp = entry.explanation;
+        var expText = 'Standard <span class="sky-blue-ai">AI</span> analysis complete.';
+        if (exp && exp.top_words) { expText = 'Key indicators: ' + exp.top_words.join(', '); }
+        else if (typeof exp === 'string') { expText = exp.replace(/[\u{1F300}-\u{1F9FF}]/gu, ''); }
+        document.getElementById('resultExplanation').innerHTML = '<h6 class="small fw-bold text-primary mb-2"><i class="fas fa-robot me-2"></i><span class="sky-blue-ai">AI</span> Analysis</h6><p class="mb-0">' + expText + '</p>';
+
+        // Recommendation
+        document.getElementById('resultRecommendation').innerHTML = isReal
+          ? '<div class="alert alert-success small mb-0"><i class="fas fa-check-circle me-2"></i>This appears to be a legitimate job posting. Proceed with standard verification.</div>'
+          : '<div class="alert alert-danger small mb-0"><i class="fas fa-ban me-2"></i>Exercise extreme caution. Do not share personal or financial information.</div>';
+
+        // Show
+        document.getElementById('resultOverlay').style.display = 'block';
+        document.getElementById('resultPopup').style.display = 'block';
+      }
+
+      function closeResult() {
+        document.getElementById('resultOverlay').style.display = 'none';
+        document.getElementById('resultPopup').style.display = 'none';
+      }
+
+      function submitFeedback(isCorrect) {
+        document.getElementById('feedbackMsg').style.display = 'block';
+        document.getElementById('feedbackMsg').innerText = isCorrect ? "Thanks for confirming!" : "We'll use this to improve!";
+        setTimeout(closeResult, 1500);
+      }
+
+      // ============== UTILITIES ==============
+      function closeModal(id) {
+        var el = document.getElementById(id);
+        var modal = bootstrap.Modal.getInstance(el);
+        if (modal) modal.hide();
+      }
+
+      function showLoading(show) {
+        document.getElementById('loadingSpinner').style.display = show ? 'block' : 'none';
+      }
+
+      // ============== CSV UPLOAD ==============
+      async function handleCsvUpload(event) {
+        var file = event.target.files[0];
+        if (!file) return;
+
+        if (!file.name.endsWith('.csv')) {
+          alert('Please upload a CSV file');
+          return;
+        }
+
+        showLoading(true);
+
+        try {
+          var fd = new FormData();
+          fd.append('file', file);
+
+          var res = await fetch(API_BASE + '/predict-csv', { method: 'POST', body: fd });
+          var data = await res.json();
+
+          if (!res.ok) throw new Error(data.error || 'CSV processing failed');
+
+          if (data.results && Array.isArray(data.results)) {
+            var newEntries = data.results.map(function (item) {
+              return createEntry(item.Title, item.Company, {
+                result: item.Prediction,
+                confidence: item["Confidence (%)"],
+                risk_analysis: {
+                  overall_score: 0,
+                  risk_level: 'low',
+                  flags: [],
+                  positive_signals: []
+                },
+                explanation: "Batch CSV Analysis"
+              });
+            });
+
+            // Add to history
+            jobHistory = newEntries.concat(jobHistory);
+            localStorage.setItem('jobHistory', JSON.stringify(jobHistory));
+            renderAll();
+            alert('Success! Processed ' + newEntries.length + ' jobs from CSV.');
+          } else {
+            alert('No results returned from CSV analysis.');
+          }
+
+        } catch (err) {
+          console.error(err);
+          alert('Error analyzing CSV: ' + err.message);
+        } finally {
+          showLoading(false);
+          event.target.value = ''; // Reset file input
+        }
+      }
+
+    </script>
+
+    <!-- Authentication Handler -->
+    <script src="assets/js/auth.js"></script>
+
+    <!-- Neural Network Animated Background -->
+    <script src="assets/js/neural-bg.js"></script>
+
+    <!-- Mobile App Logic -->
+    <script src="assets/js/mobile-nav.js"></script>
+
+
+
+    <!-- Auto-Welcome Check -->
+    <script>
+      document.addEventListener('DOMContentLoaded', () => {
+        // Failsafe: If user is logged in but hasn't received the welcome email trigger yet
+        // (e.g. if the login redirect was too fast), send it now from the Dashboard.
+        const user = localStorage.getItem('fakejobai_user');
+        const welcomed = localStorage.getItem('fakejobai_welcomed');
+
+        if (user && window.resendWelcome) {
+          // Check session storage to avoid spamming on every SINGLE refresh
+          if (!sessionStorage.getItem('dashboard_email_sent')) {
+            console.log("🛡️ Dashboard: Triggering welcome email check...");
+            setTimeout(() => {
+              window.resendWelcome();
+              sessionStorage.setItem('dashboard_email_sent', 'true');
+            }, 1500);
+          }
+        }
+      });
+    </script>
+</body>
+
+</html>
+
+</html>
+```

@@ -1,0 +1,390 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <meta name="theme-color" content="#7c4dff">
+  <title>About - FakeJobAI</title>
+
+  <link rel="icon" type="image/svg+xml" href="assets/images/logo.svg">
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet">
+  <link href="https://unpkg.com/aos@2.3.4/dist/aos.css" rel="stylesheet">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+  <link rel="manifest" href="manifest.json">
+
+  <link href="assets/css/style.css" rel="stylesheet">
+  <link href="assets/css/mobile-app.css" rel="stylesheet">
+  <script src="https://kit.fontawesome.com/a2e0b5a50f.js" crossorigin="anonymous"></script>
+
+  <style>
+    /* About-specific refinements */
+    .tech-badge {
+      display: inline-flex;
+      align-items: center;
+      padding: 8px 16px;
+      background: #fff;
+      border-radius: 50px;
+      box-shadow: 0 4px 10px rgba(0, 0, 0, 0.05);
+      margin: 5px;
+      font-weight: 600;
+      color: #555;
+      font-size: 0.9rem;
+      transition: all 0.3s;
+      border: 1px solid rgba(124, 77, 255, 0.1);
+    }
+
+    .tech-badge:hover {
+      transform: scale(1.05);
+      color: var(--primary);
+      box-shadow: 0 6px 15px rgba(124, 77, 255, 0.15);
+      border-color: var(--primary);
+    }
+
+    .step-card-about {
+      background: var(--glass-bg);
+      backdrop-filter: blur(20px);
+      border-radius: 24px;
+      padding: 40px 20px 20px;
+      border: var(--glass-border);
+      position: relative;
+      margin-top: 30px;
+      height: 100%;
+      transition: all 0.3s ease;
+    }
+
+    .step-card-about:hover {
+      transform: translateY(-10px);
+      border-color: var(--primary);
+      box-shadow: var(--card-shadow);
+    }
+
+    .step-number-about {
+      position: absolute;
+      top: -25px;
+      left: 50%;
+      transform: translateX(-50%);
+      background: linear-gradient(135deg, var(--primary), var(--secondary));
+      color: #fff;
+      font-weight: 800;
+      width: 50px;
+      height: 50px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      border-radius: 50%;
+      box-shadow: 0 4px 15px rgba(124, 77, 255, 0.3);
+      border: 3px solid #fff;
+    }
+  </style>
+  <link href="assets/css/mobile-app.css" rel="stylesheet">
+</head>
+
+<body>
+
+  <!-- Backgrounds -->
+  <div class="bg-shape shape-1"></div>
+  <div class="bg-shape shape-2"></div>
+  <div class="bg-shape shape-3"></div>
+
+  <!-- NAVBAR -->
+  <nav class="navbar navbar-expand-lg fixed-top">
+    <div class="container-fluid px-4 px-lg-5">
+      <a class="navbar-brand" href="index.html">
+        <img src="assets/images/logo.svg" alt="FakeJobAI" width="32" height="32">
+        <span>FakeJob<span class="brand-ai">A<span class="heart-i">ı</span></span></span>
+      </a>
+      <button class="navbar-toggler border-0" type="button" data-bs-toggle="collapse" data-bs-target="#navContent">
+        <i class="fas fa-bars"></i>
+      </button>
+      <div class="collapse navbar-collapse" id="navContent">
+        <ul class="navbar-nav ms-auto">
+          <li class="nav-item"><a class="nav-link" href="index.html">Home</a></li>
+          <li class="nav-item"><a class="nav-link" href="dashboard.html">Dashboard</a>
+          </li>
+          <li class="nav-item"><a class="nav-link" href="history.html">History</a></li>
+          <li class="nav-item"><a class="nav-link" href="report.html">Report</a></li>
+          <li class="nav-item"><a class="nav-link active" href="about.html">About</a>
+          </li>
+          <li class="nav-item ms-lg-3"><a class="nav-link login-text" href="login.html">Log in</a></li>
+        </ul>
+      </div>
+    </div>
+  </nav>
+
+  <!-- Main Content -->
+  <main class="page-content container">
+
+    <!-- Hero / Intro -->
+    <div class="text-center mb-5" data-aos="fade-down">
+      <h2 class="display-4 fw-bold mb-3">About <span class="text-gradient">FakeJob<span
+            class="sky-blue-ai">AI</span></span></h2>
+      <p class="lead text-muted mx-auto" style="max-width: 700px;">
+        Empowering job seekers with Artificial Intelligence to identify fraudulent job postings in real-time.
+      </p>
+    </div>
+
+    <!-- Mission & Vision -->
+    <div class="row g-4 mb-5" data-aos="fade-up">
+      <div class="col-md-6">
+        <div class="glass-card h-100">
+          <h3 class="mb-3"><i class="fas fa-bullseye text-primary me-2"></i>Our Mission</h3>
+          <p class="text-secondary lh-lg">
+            The job market is flooded with scams. Our mission is to build a safer employment ecosystem by providing
+            instant, data-driven verification of job listings. We use advanced NLP to analyze patterns that
+            human eyes might miss, protecting your time, data, and money.
+          </p>
+        </div>
+      </div>
+      <div class="col-md-6">
+        <div class="glass-card h-100">
+          <h3 class="mb-3"><i class="fas fa-lightbulb text-warning me-2"></i>The Vision</h3>
+          <p class="text-secondary lh-lg">
+            We envision a world where every job application is secure. By combining community reporting with
+            Machine Learning, FakeJob<span class="brand-ai">A<span class="heart-i">ı</span></span> aims to become the
+            global standard for
+            employment verification,
+            integrating directly with major job boards and recruitment platforms.
+          </p>
+        </div>
+      </div>
+    </div>
+
+    <!-- Key Features -->
+    <div class="mb-5" data-aos="fade-up">
+      <div class="text-center mb-5">
+        <h3 class="fw-bold"><i class="fas fa-star text-warning me-2"></i>Key Features</h3>
+        <p class="text-muted">Advanced tools designed for complete peace of mind.</p>
+      </div>
+      <div class="row g-4">
+        <div class="col-md-4">
+          <div class="glass-card h-100 p-4 text-center">
+            <div class="icon-box mx-auto mb-3 text-primary fs-2">
+              <i class="fas fa-brain"></i>
+            </div>
+            <h5 class="fw-bold">96% <span class="sky-blue-ai">AI</span> Accuracy</h5>
+            <p class="text-secondary small">Our Hybrid Model (Logistic Regression + Random Forest) is trained on
+              thousands of job posts to detect subtle fraud patterns.</p>
+          </div>
+        </div>
+        <div class="col-md-4">
+          <div class="glass-card h-100 p-4 text-center">
+            <div class="icon-box mx-auto mb-3 text-success fs-2">
+              <i class="fas fa-globe"></i>
+            </div>
+            <h5 class="fw-bold">Domain Intelligence</h5>
+            <p class="text-secondary small">Automatically analyzes domain age, DNS records, and WHOIS data to flag
+              "fly-by-night" scam websites created recently.</p>
+          </div>
+        </div>
+        <div class="col-md-4">
+          <div class="glass-card h-100 p-4 text-center">
+            <div class="icon-box mx-auto mb-3 text-danger fs-2">
+              <i class="fas fa-shield-virus"></i>
+            </div>
+            <h5 class="fw-bold">Real-Time Threat Map</h5>
+            <p class="text-secondary small">Visualize global fraud trends instantly. Our dashboard updates live as
+              community reports verify new threats.</p>
+          </div>
+        </div>
+        <div class="col-md-4">
+          <div class="glass-card h-100 p-4 text-center">
+            <div class="icon-box mx-auto mb-3 text-info fs-2">
+              <i class="fas fa-mobile-alt"></i>
+            </div>
+            <h5 class="fw-bold">PWA Mobile App</h5>
+            <p class="text-secondary small">Installable as a native app on iOS and Android. Work securely from anywhere
+              with a responsive, touch-first interface.</p>
+          </div>
+        </div>
+        <div class="col-md-4">
+          <div class="glass-card h-100 p-4 text-center">
+            <div class="icon-box mx-auto mb-3 text-warning fs-2">
+              <i class="fas fa-file-contract"></i>
+            </div>
+            <h5 class="fw-bold">Smart Explanations</h5>
+            <p class="text-secondary small">We don't just say "Fake" or "Real". Our AI explains <em>why</em>,
+              highlighting suspicious keywords like "wire transfer" or "urgent hiring".</p>
+          </div>
+        </div>
+        <div class="col-md-4">
+          <div class="glass-card h-100 p-4 text-center">
+            <div class="icon-box mx-auto mb-3 text-dark fs-2">
+              <i class="fas fa-lock"></i>
+            </div>
+            <h5 class="fw-bold">Secure & Private</h5>
+            <p class="text-secondary small">We prioritize your privacy. No personal data from analysis is stored
+              permanently. Your resume stays with you.</p>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- Technology Stack -->
+    <div class="mb-5" data-aos="fade-up" data-aos-delay="100">
+      <div class="glass-card">
+        <h3 class="text-center mb-4">🛠️ Technology Stack</h3>
+        <p class="text-center text-muted mb-4">Built with modern, scalable, and high-performance technologies.</p>
+
+        <div class="row text-center">
+          <div class="col-md-3 mb-3">
+            <h5 class="mb-3">Frontend & UI</h5>
+            <div>
+              <span class="tech-badge"><i class="fab fa-html5 text-danger"></i> HTML5</span>
+              <span class="tech-badge"><i class="fab fa-css3-alt text-primary"></i> CSS3</span>
+              <span class="tech-badge"><i class="fab fa-js text-warning"></i> JavaScript</span>
+              <span class="tech-badge"><i class="fab fa-bootstrap text-purple"></i> Bootstrap 5</span>
+              <span class="tech-badge"><i class="fas fa-mobile text-info"></i> PWA</span>
+            </div>
+          </div>
+
+          <div class="col-md-3 mb-3">
+            <h5 class="mb-3">Backend & API</h5>
+            <div>
+              <span class="tech-badge"><i class="fab fa-python text-success"></i> Python 3.10</span>
+              <span class="tech-badge"><i class="fas fa-bolt text-warning"></i> FastAPI</span>
+              <span class="tech-badge"><i class="fas fa-server text-secondary"></i> Uvicorn</span>
+              <span class="tech-badge"><i class="fas fa-database text-primary"></i> SQLite</span>
+            </div>
+          </div>
+
+          <div class="col-md-3 mb-3">
+            <h5 class="mb-3">AI & ML</h5>
+            <div>
+              <span class="tech-badge"><i class="fas fa-brain text-danger"></i> Scikit-Learn</span>
+              <span class="tech-badge"><i class="fas fa-tree text-success"></i> Random Forest</span>
+              <span class="tech-badge"><i class="fas fa-language text-secondary"></i> TF-IDF NLP</span>
+            </div>
+          </div>
+
+          <div class="col-md-3 mb-3">
+            <h5 class="mb-3">Infra & Tools</h5>
+            <div>
+              <span class="tech-badge"><i class="fab fa-git-alt text-danger"></i> Git</span>
+              <span class="tech-badge"><i class="fas fa-globe text-success"></i> WHOIS API</span>
+              <span class="tech-badge"><i class="fas fa-chart-pie text-warning"></i> Chart.js</span>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- How It Works Architecture -->
+    <div class="glass-card mb-5" data-aos="fade-up" data-aos-delay="200">
+      <div class="text-center mb-5">
+        <h3 class="fw-bold"><i class="fas fa-cogs me-2 sky-blue-ai"></i>How the <span class="sky-blue-ai">AI</span>
+          Works</h3>
+      </div>
+      <div class="row">
+        <div class="col-md-3 mb-4">
+          <div class="step-card-about">
+            <div class="step-number-about">1</div>
+            <div class="text-center">
+              <i class="fas fa-file-import fa-3x text-primary mb-3"></i>
+              <h6 class="fw-bold">Data Ingestion</h6>
+              <p class="small text-muted">We extract text from URLs or process your uploaded CSV/Manual entry.</p>
+            </div>
+          </div>
+        </div>
+        <div class="col-md-3 mb-4">
+          <div class="step-card-about">
+            <div class="step-number-about">2</div>
+            <div class="text-center">
+              <i class="fas fa-layer-group fa-3x text-primary mb-3"></i>
+              <h6 class="fw-bold">Preprocessing</h6>
+              <p class="small text-muted">Text is cleaned, tokenized, and vectorized using TF-IDF to extract meaningful
+                features.</p>
+            </div>
+          </div>
+        </div>
+        <div class="col-md-3 mb-4">
+          <div class="step-card-about">
+            <div class="step-number-about">3</div>
+            <div class="text-center">
+              <i class="fas fa-microchip fa-3x text-primary mb-3"></i>
+              <h6 class="fw-bold">Prediction</h6>
+              <p class="small text-muted">Our trained Classifier achieved <strong>96% accuracy</strong> on unseen test
+                data.</p>
+            </div>
+          </div>
+        </div>
+        <div class="col-md-3 mb-4">
+          <div class="step-card-about">
+            <div class="step-number-about">4</div>
+            <div class="text-center">
+              <i class="fas fa-shield-alt fa-3x text-primary mb-3"></i>
+              <h6 class="fw-bold">Verification</h6>
+              <p class="small text-muted">Results are cross-referenced with company profiles and domain metadata.</p>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+  </main>
+
+  <!-- FOOTER -->
+  <footer class="footer mt-auto">
+    <div class="container">
+      <div class="footer-card" data-aos="fade-up">
+        <div class="row g-5">
+          <div class="col-lg-4">
+            <a href="#" class="navbar-brand mb-4 d-inline-block">
+              <img src="assets/images/logo.svg" alt="FakeJobAI" width="32" height="32">
+              <span>FakeJob<span class="brand-ai">A<span class="heart-i">ı</span></span></span>
+            </a>
+            <p class="text-muted pe-lg-5">Setting the global standard for employment security through AI and community
+              trust.</p>
+          </div>
+          <div class="col-6 col-lg-2">
+            <div class="footer-section-card">
+              <h6 class="fw-bold mb-4">Resources</h6>
+              <ul class="list-unstyled mb-0">
+                <li><a href="about.html" class="footer-link">About Us</a></li>
+                <li><a href="report.html" class="footer-link">Scam Alerts</a></li>
+                <li><a href="#" class="footer-link">API Access</a></li>
+              </ul>
+            </div>
+          </div>
+          <div class="col-6 col-lg-2">
+            <div class="footer-section-card">
+              <h6 class="fw-bold mb-4">Security</h6>
+              <ul class="list-unstyled mb-0">
+                <li><a href="#" class="footer-link">Privacy Policy</a></li>
+                <li><a href="#" class="footer-link">Audit Logs</a></li>
+                <li><a href="#" class="footer-link">Trust Center</a></li>
+              </ul>
+            </div>
+          </div>
+          <div class="col-lg-4 text-lg-end">
+            <h6 class="fw-bold mb-4">Connect With Us</h6>
+            <div class="social-links mb-4 d-flex justify-content-lg-end gap-3 justify-content-center">
+              <a href="https://github.com/sriramgg" target="_blank" class="social-btn" title="GitHub">
+                <i class="fab fa-github"></i>
+              </a>
+              <a href="mailto:g.g.sriram.2004@gmail.com" class="social-btn" title="Gmail">
+                <i class="fas fa-envelope"></i>
+              </a>
+              <a href="https://www.linkedin.com/in/sriii3029" target="_blank" class="social-btn" title="LinkedIn">
+                <i class="fab fa-linkedin-in"></i>
+              </a>
+            </div>
+            <p class="text-muted small mb-0">&copy; 2025 FakeJobAI. Designed with ❤️ by Sri.</p>
+          </div>
+        </div>
+      </div>
+    </div>
+  </footer>
+
+  <!-- Scripts -->
+  <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"></script>
+  <script src="https://unpkg.com/aos@2.3.4/dist/aos.js"></script>
+  <script>
+    AOS.init({ duration: 800, once: true });
+  </script>
+
+  <script src="assets/js/auth.js"></script>
+  <script src="assets/js/neural-bg.js"></script>
+</body>
+
+</html>

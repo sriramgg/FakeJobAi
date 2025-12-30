@@ -1,0 +1,404 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=5.0, viewport-fit=cover" />
+  <meta name="theme-color" content="#7c4dff">
+  <title>Login - FakeJobAI</title>
+
+  <link rel="icon" type="image/svg+xml" href="assets/images/logo.svg">
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet">
+  <link href="https://unpkg.com/aos@2.3.4/dist/aos.css" rel="stylesheet">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+  <link rel="manifest" href="manifest.json">
+
+  <link href="assets/css/style.css" rel="stylesheet">
+  <link href="assets/css/mobile-app.css" rel="stylesheet">
+
+  <style>
+    /* Login-specific card overrides */
+    .login-card {
+      max-width: 480px;
+      width: 100%;
+      margin: 0 auto;
+      padding: 60px 40px;
+    }
+
+    .form-control {
+      border-radius: 12px;
+      padding: 14px 18px;
+      border: 1px solid rgba(124, 77, 255, 0.1);
+      background: #f8f9fa;
+      transition: all 0.3s ease;
+    }
+
+    .form-control:focus {
+      background: #fff;
+      border-color: var(--primary);
+      box-shadow: 0 0 0 4px rgba(124, 77, 255, 0.1);
+    }
+
+    .google-btn {
+      background: #fff;
+      border: 1px solid rgba(0, 0, 0, 0.05);
+      border-radius: 12px;
+      padding: 14px;
+      width: 100%;
+      font-weight: 700;
+      color: var(--text-main);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      gap: 12px;
+      transition: all 0.3s;
+      box-shadow: 0 4px 12px rgba(0, 0, 0, 0.03);
+    }
+
+    .google-btn:hover {
+      background: #f8f9fa;
+      transform: translateY(-2px);
+      box-shadow: 0 8px 15px rgba(0, 0, 0, 0.06);
+    }
+
+    .divider {
+      display: flex;
+      align-items: center;
+      color: var(--text-muted);
+      margin: 30px 0;
+      font-size: 0.75rem;
+      font-weight: 700;
+      text-transform: uppercase;
+      letter-spacing: 1px;
+    }
+
+    .divider::before,
+    .divider::after {
+      content: '';
+      flex: 1;
+      border-bottom: 1px solid rgba(0, 0, 0, 0.05);
+    }
+
+    /* Status Modal Refinements */
+    .overlay {
+      position: fixed;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      background: rgba(26, 21, 46, 0.8);
+      backdrop-filter: blur(10px);
+      display: none;
+      align-items: center;
+      justify-content: center;
+      z-index: 2000;
+    }
+
+    .status-box {
+      max-width: 480px;
+      width: 90%;
+      text-align: center;
+    }
+
+    .step-item {
+      display: flex;
+      align-items: center;
+      gap: 15px;
+      padding: 15px 20px;
+      background: rgba(255, 255, 255, 0.5);
+      border-radius: 16px;
+      margin-bottom: 12px;
+      border: 1px solid transparent;
+      transition: all 0.3s;
+      text-align: left;
+    }
+
+    .step-item.active {
+      background: #fff;
+      border-color: var(--primary);
+      box-shadow: 0 10px 25px rgba(124, 77, 255, 0.1);
+      transform: scale(1.02);
+    }
+
+    .step-icon {
+      width: 36px;
+      height: 36px;
+      border-radius: 10px;
+      background: #eee;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 0.9rem;
+    }
+
+    .step-item.done .step-icon {
+      background: #10b981;
+      color: white;
+    }
+  </style>
+</head>
+
+<body>
+
+  <!-- Background Shapes -->
+  <div class="bg-shape shape-1"></div>
+  <div class="bg-shape shape-2"></div>
+  <div class="bg-shape shape-3"></div>
+
+  <!-- NAVBAR -->
+  <nav class="navbar navbar-expand-lg fixed-top">
+    <div class="container-fluid px-4 px-lg-5">
+      <a class="navbar-brand" href="index.html">
+        <img src="assets/images/logo.svg" alt="FakeJobAI" width="32" height="32">
+        <span>FakeJob<span class="brand-ai">A<span class="heart-i">ı</span></span></span>
+      </a>
+      <button class="navbar-toggler border-0" type="button" data-bs-toggle="collapse" data-bs-target="#navContent">
+        <i class="fas fa-bars"></i>
+      </button>
+      <div class="collapse navbar-collapse" id="navContent">
+        <ul class="navbar-nav ms-auto">
+          <li class="nav-item"><a class="nav-link" href="index.html">Home</a></li>
+          <li class="nav-item"><a class="nav-link" href="dashboard.html">Dashboard</a>
+          </li>
+          <li class="nav-item"><a class="nav-link" href="history.html">History</a></li>
+          <li class="nav-item"><a class="nav-link" href="report.html">Report</a></li>
+          <li class="nav-item"><a class="nav-link" href="about.html">About</a></li>
+          <li class="nav-item ms-lg-3"><a class="nav-link login-text active" href="login.html">Log in</a></li>
+        </ul>
+      </div>
+    </div>
+  </nav>
+
+  <main class="page-content d-flex align-items-center">
+    <div class="container">
+      <div class="glass-card login-card" data-aos="zoom-in">
+        <div id="authContainer">
+          <div class="text-center mb-5">
+            <h2 class="fw-800 mb-2">Welcome Back</h2>
+            <p class="text-muted">Secure Login to FakeJob<span class="brand-ai">A<span class="heart-i">ı</span></span>
+            </p>
+          </div>
+
+          <div id="errorAlert" class="alert alert-danger p-3 small mb-4" style="display:none; border-radius: 12px;">
+          </div>
+
+          <button id="googleBtn" class="google-btn mb-4">
+            <img src="https://www.gstatic.com/firebasejs/ui/2.0.0/images/auth/google.svg" width="20" alt="Google">
+            <span>Continue with Google</span>
+          </button>
+
+          <div class="divider mx-5">Or use Email</div>
+
+          <form id="emailForm">
+            <div class="mb-3">
+              <input type="email" class="form-control" id="emailInput" placeholder="Email Address" required>
+            </div>
+            <div class="mb-4">
+              <input type="password" class="form-control" id="passInput" placeholder="Password" required>
+            </div>
+            <button type="submit" class="btn btn-primary w-100 py-3 rounded-pill fw-bold shadow">Sign In</button>
+          </form>
+
+          <div class="text-center mt-4">
+            <p class="small text-muted mb-0">
+              New to the platform? <a href="#" id="toggleRegister"
+                class="text-primary fw-bold text-decoration-none ms-1">Create Account</a>
+            </p>
+          </div>
+        </div>
+      </div>
+    </div>
+  </main>
+
+  <!-- STATUS OVERLAY -->
+  <div class="overlay" id="statusOverlay">
+    <div class="glass-card status-box shadow-lg">
+      <div class="mb-5">
+        <div class="icon-box mx-auto mb-4" style="width: 80px; height: 80px; font-size: 2rem;">
+          <i class="fas fa-shield-alt"></i>
+        </div>
+        <h3 class="fw-800 mb-2">FakeJob<span class="brand-ai">A<span class="heart-i">ı</span></span> Securirty</h3>
+        <p class="text-muted">Establishing your encrypted session...</p>
+      </div>
+
+      <div class="px-4">
+        <div class="step-item" id="step1">
+          <div class="step-icon"><i class="fas fa-user-check"></i></div>
+          <div class="step-text">Verifying Credentials</div>
+        </div>
+        <div class="step-item" id="step2">
+          <div class="step-icon"><i class="fas fa-cloud-download-alt"></i></div>
+          <div class="step-text">Syncing Profile</div>
+        </div>
+        <div class="step-item" id="step3">
+          <div class="step-icon"><i class="fas fa-check-circle"></i></div>
+          <div class="step-text fw-bold text-success">Secure Session Active!</div>
+        </div>
+      </div>
+
+      <div id="redirectBox" style="display:none;" class="mt-5 pt-4 border-top animate__animated animate__fadeIn">
+        <div class="spinner-border text-primary mb-3" role="status"></div>
+        <p class="fw-bold text-primary">Redirecting to Dashboard...</p>
+      </div>
+    </div>
+  </div>
+
+  <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"></script>
+  <script src="https://unpkg.com/aos@2.3.4/dist/aos.js"></script>
+  <script>AOS.init({ duration: 800, once: true });</script>
+
+  <script type="module">
+    import { initializeApp } from "https://www.gstatic.com/firebasejs/10.14.0/firebase-app.js";
+    import { getAuth, GoogleAuthProvider, signInWithPopup, signInWithRedirect, onAuthStateChanged, signInWithEmailAndPassword, createUserWithEmailAndPassword, signOut } from "https://www.gstatic.com/firebasejs/10.14.0/firebase-auth.js";
+
+    const firebaseConfig = {
+      apiKey: "AIzaSyDH8_0jeyyiJVlQj62v2kwb0DxF3eH-Ki8",
+      authDomain: "fakejobai-app.firebaseapp.com",
+      projectId: "fakejobai-app",
+      storageBucket: "fakejobai-app.firebasestorage.app",
+      messagingSenderId: "857057101236",
+      appId: "1:857057101236:web:62cd66edc86516f3d0dee1",
+      measurementId: "G-1LXK6MRW21"
+    };
+
+    const app = initializeApp(firebaseConfig);
+    const auth = getAuth(app);
+    const provider = new GoogleAuthProvider();
+
+    let isRegistering = false;
+    let loginInProgress = false;
+
+    onAuthStateChanged(auth, (user) => {
+      if (user) {
+        console.log("👤 Auth State Changed: User logged in", user.email);
+        startLoginProcess(user);
+      }
+    });
+
+    async function startLoginProcess(user) {
+      if (loginInProgress) return;
+      loginInProgress = true;
+
+      const appUser = {
+        email: user.email,
+        uid: user.uid,
+        name: user.displayName || user.email.split('@')[0],
+        photo: user.photoURL
+      };
+
+      // 1. Save Session
+      localStorage.setItem("fakejobai_user", JSON.stringify(appUser));
+      localStorage.setItem("user", JSON.stringify(appUser));
+      document.getElementById('statusOverlay').style.display = 'flex';
+
+      // 2. Determine API URL
+      // If we are on port 8000, use relative path. Otherwise (LiveServer/File), use absolute.
+      let apiUrl = '/analyze/send-welcome-email';
+      if (!window.location.origin.includes(':8000')) {
+        apiUrl = 'http://127.0.0.1:8000/analyze/send-welcome-email';
+      }
+
+      console.log("🚀 Login Sequence Started. Target API:", apiUrl);
+
+      // --- VISUAL STEPS ---
+      const updateStep = (id, status) => {
+        const el = document.getElementById(id);
+        if (el) el.className = `step-item ${status}`;
+      };
+
+      // Step 1: Verify
+      updateStep('step1', 'done');
+      await new Promise(r => setTimeout(r, 600)); // Visual pause
+
+      // Step 2: Protocol (The Email Trigger)
+      updateStep('step2', 'active');
+      document.querySelector('#step2 .step-text').textContent = "Activating Security Shield...";
+
+      try {
+        console.log("📨 Sending Welcome Signal...");
+        const response = await fetch(apiUrl, {
+          method: 'POST',
+          headers: { 'Content-Type': 'application/json' },
+          body: JSON.stringify({
+            email: appUser.email,
+            name: appUser.name,
+            source: 'auto_login_sequence'
+          }),
+          keepalive: true
+        });
+
+        const data = await response.json();
+        console.log("✅ Email Signal Result:", data);
+
+        if (data.success) {
+          localStorage.setItem('fakejobai_welcomed', 'true');
+          if (window.showToast) window.showToast("Security Active: Email Sent!", "success");
+        }
+
+      } catch (e) {
+        console.error("⚠️ Email Signal Warning:", e);
+        // Non-blocking error: we still proceed to dashboard
+      }
+
+      updateStep('step2', 'done');
+
+      // Step 3: Secure Session
+      updateStep('step3', 'done');
+      await new Promise(r => setTimeout(r, 500));
+
+      // FINAL: Redirect
+      document.getElementById('redirectBox').style.display = 'block';
+      setTimeout(() => {
+        console.log("⏩ Redirecting to Dashboard...");
+        window.location.href = "dashboard.html";
+      }, 1000);
+    }
+
+    document.getElementById('googleBtn').addEventListener('click', async () => {
+      console.log("🚀 Google Login Initiated...");
+      sessionStorage.setItem('login_started', 'true');
+      try {
+        await signInWithPopup(auth, provider);
+      } catch (error) {
+        console.warn("⚠️ Popup failed, attempting redirect...", error);
+        await signInWithRedirect(auth, provider);
+      }
+    });
+
+    document.getElementById('emailForm').addEventListener('submit', async (e) => {
+      e.preventDefault();
+      sessionStorage.setItem('login_started', 'true');
+      const email = document.getElementById('emailInput').value;
+      const pass = document.getElementById('passInput').value;
+      const errorBox = document.getElementById('errorAlert');
+      errorBox.style.display = 'none';
+
+      try {
+        if (isRegistering) {
+          await createUserWithEmailAndPassword(auth, email, pass);
+        } else {
+          await signInWithEmailAndPassword(auth, email, pass);
+        }
+      } catch (error) {
+        sessionStorage.removeItem('login_started');
+        errorBox.style.display = 'block';
+        errorBox.innerText = error.message;
+      }
+    });
+
+    document.getElementById('toggleRegister').addEventListener('click', (e) => {
+      e.preventDefault();
+      isRegistering = !isRegistering;
+      const title = document.querySelector('#authContainer h2');
+      const btn = document.querySelector('#emailForm button');
+      const link = document.getElementById('toggleRegister');
+      title.innerText = isRegistering ? "Create Account" : "Welcome Back";
+      btn.innerText = isRegistering ? "Register" : "Sign In";
+      link.innerText = isRegistering ? "Back to Login" : "Create Account";
+    });
+  </script>
+  <script src="assets/js/auth.js"></script>
+  <script src="assets/js/neural-bg.js"></script>
+</body>
+
+</html>

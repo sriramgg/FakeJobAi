@@ -1,0 +1,55 @@
+# Python
+__pycache__/
+*.py[cod]
+*$py.class
+*.so
+.env
+.venv/
+env/
+venv/
+ENV/
+env.bak/
+venv.bak/
+
+# Database (local development data)
+*.db
+*.sqlite3
+backend/data/*.db
+
+# Large Models (if any over 100MB, add here)
+# models/*.pkl
+
+# Node.js
+node_modules/
+package-lock.json
+
+# IDE / Editor
+.idea/
+.vscode/
+*.iml
+*.swp
+*.swo
+*~
+
+# OS Files
+.DS_Store
+Thumbs.db
+desktop.ini
+
+# Build artifacts
+dist/
+build/
+*.egg-info/
+
+# Logs
+*.log
+logs/
+
+# Local environment files
+.env.local
+.env.*.local
+
+# Temporary files
+tmp/
+temp/
+*.tmp

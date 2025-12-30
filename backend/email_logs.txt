@@ -1,0 +1,117 @@
+[2025-12-26 16:58:44] ENDPOINT HIT: Request for agent_test_welcome@fakejob.ai from session_or_redirect
+[2025-12-26 16:58:44] DB: New visitor agent_test_welcome@fakejob.ai detected, registering.
+[2025-12-26 16:58:44] TASK QUEUE: Queuing email for agent_test_welcome@fakejob.ai
+[2025-12-26 16:58:44] START: Preparing welcome email for agent_test_welcome@fakejob.ai
+[2025-12-26 16:58:44] CONNECTING: smtp.gmail.com
+[2025-12-26 16:58:48] SUCCESS: Email delivered to agent_test_welcome@fakejob.ai
+[2025-12-26 16:59:14] ENDPOINT HIT: Request for agent_test_welcome@fakejob.ai from auto_session
+[2025-12-26 16:59:14] DB: Visitor agent_test_welcome@fakejob.ai exists, updating visit_count.
+[2025-12-26 16:59:14] TASK QUEUE: Queuing email for agent_test_welcome@fakejob.ai
+[2025-12-26 16:59:14] START: Preparing welcome email for agent_test_welcome@fakejob.ai
+[2025-12-26 16:59:14] CONNECTING: smtp.gmail.com
+[2025-12-26 16:59:18] SUCCESS: Email delivered to agent_test_welcome@fakejob.ai
+[2025-12-26 16:59:43] ENDPOINT HIT: Request for agent_test_welcome@fakejob.ai from auto_session
+[2025-12-26 16:59:43] DB: Visitor agent_test_welcome@fakejob.ai exists, updating visit_count.
+[2025-12-26 16:59:43] TASK QUEUE: Queuing email for agent_test_welcome@fakejob.ai
+[2025-12-26 16:59:43] START: Preparing welcome email for agent_test_welcome@fakejob.ai
+[2025-12-26 16:59:43] CONNECTING: smtp.gmail.com
+[2025-12-26 16:59:46] SUCCESS: Email delivered to agent_test_welcome@fakejob.ai
+[2025-12-26 17:00:09] ENDPOINT HIT: Request for agent_test_welcome@fakejob.ai from auto_session
+[2025-12-26 17:00:09] DB: Visitor agent_test_welcome@fakejob.ai exists, updating visit_count.
+[2025-12-26 17:00:09] TASK QUEUE: Queuing email for agent_test_welcome@fakejob.ai
+[2025-12-26 17:00:09] START: Preparing welcome email for agent_test_welcome@fakejob.ai
+[2025-12-26 17:00:09] CONNECTING: smtp.gmail.com
+[2025-12-26 17:00:12] SUCCESS: Email delivered to agent_test_welcome@fakejob.ai
+[2025-12-26 17:00:26] ENDPOINT HIT: Request for agent_test_welcome@fakejob.ai from auto_session
+[2025-12-26 17:00:26] DB: Visitor agent_test_welcome@fakejob.ai exists, updating visit_count.
+[2025-12-26 17:00:26] TASK QUEUE: Queuing email for agent_test_welcome@fakejob.ai
+[2025-12-26 17:00:26] START: Preparing welcome email for agent_test_welcome@fakejob.ai
+[2025-12-26 17:00:26] CONNECTING: smtp.gmail.com
+[2025-12-26 17:00:29] SUCCESS: Email delivered to agent_test_welcome@fakejob.ai
+[2025-12-26 17:00:41] ENDPOINT HIT: Request for agent_test_welcome@fakejob.ai from auto_session
+[2025-12-26 17:00:41] DB: Visitor agent_test_welcome@fakejob.ai exists, updating visit_count.
+[2025-12-26 17:00:41] TASK QUEUE: Queuing email for agent_test_welcome@fakejob.ai
+[2025-12-26 17:00:41] START: Preparing welcome email for agent_test_welcome@fakejob.ai
+[2025-12-26 17:00:41] CONNECTING: smtp.gmail.com
+[2025-12-26 17:00:45] SUCCESS: Email delivered to agent_test_welcome@fakejob.ai
+[2025-12-26 17:01:16] ENDPOINT HIT: Request for agent_test_welcome@fakejob.ai from auto_session
+[2025-12-26 17:01:16] DB: Visitor agent_test_welcome@fakejob.ai exists, updating visit_count.
+[2025-12-26 17:01:16] TASK QUEUE: Queuing email for agent_test_welcome@fakejob.ai
+[2025-12-26 17:01:16] START: Preparing welcome email for agent_test_welcome@fakejob.ai
+[2025-12-26 17:01:16] CONNECTING: smtp.gmail.com
+[2025-12-26 17:01:20] SUCCESS: Email delivered to agent_test_welcome@fakejob.ai
+[2025-12-26 17:01:38] ENDPOINT HIT: Request for agent_test_welcome@fakejob.ai from auto_session
+[2025-12-26 17:01:38] DB: Visitor agent_test_welcome@fakejob.ai exists, updating visit_count.
+[2025-12-26 17:01:38] TASK QUEUE: Queuing email for agent_test_welcome@fakejob.ai
+[2025-12-26 17:01:39] START: Preparing welcome email for agent_test_welcome@fakejob.ai
+[2025-12-26 17:01:39] CONNECTING: smtp.gmail.com
+[2025-12-26 17:01:42] SUCCESS: Email delivered to agent_test_welcome@fakejob.ai
+[2025-12-26 17:02:29] ENDPOINT HIT: Request for agent_test_welcome@fakejob.ai from auto_session
+[2025-12-26 17:02:29] DB: Visitor agent_test_welcome@fakejob.ai exists, updating visit_count.
+[2025-12-26 17:02:29] TASK QUEUE: Queuing email for agent_test_welcome@fakejob.ai
+[2025-12-26 17:02:29] START: Preparing welcome email for agent_test_welcome@fakejob.ai
+[2025-12-26 17:02:29] CONNECTING: smtp.gmail.com
+[2025-12-26 17:02:33] SUCCESS: Email delivered to agent_test_welcome@fakejob.ai
+[2025-12-26 17:02:51] ENDPOINT HIT: Request for agent_test_welcome@fakejob.ai from auto_session
+[2025-12-26 17:02:51] DB: Visitor agent_test_welcome@fakejob.ai exists, updating visit_count.
+[2025-12-26 17:02:51] TASK QUEUE: Queuing email for agent_test_welcome@fakejob.ai
+[2025-12-26 17:02:51] START: Preparing welcome email for agent_test_welcome@fakejob.ai
+[2025-12-26 17:02:51] CONNECTING: smtp.gmail.com
+[2025-12-26 17:02:54] SUCCESS: Email delivered to agent_test_welcome@fakejob.ai
+[2025-12-26 17:03:08] ENDPOINT HIT: Request for agent_test_welcome@fakejob.ai from auto_session
+[2025-12-26 17:03:08] DB: Visitor agent_test_welcome@fakejob.ai exists, updating visit_count.
+[2025-12-26 17:03:08] TASK QUEUE: Queuing email for agent_test_welcome@fakejob.ai
+[2025-12-26 17:03:08] START: Preparing welcome email for agent_test_welcome@fakejob.ai
+[2025-12-26 17:03:08] CONNECTING: smtp.gmail.com
+[2025-12-26 17:03:11] SUCCESS: Email delivered to agent_test_welcome@fakejob.ai
+[2025-12-26 17:03:35] ENDPOINT HIT: Request for agent_test_welcome@fakejob.ai from manual_resend
+[2025-12-26 17:03:35] DB: Visitor agent_test_welcome@fakejob.ai exists, updating visit_count.
+[2025-12-26 17:03:35] TASK QUEUE: Queuing email for agent_test_welcome@fakejob.ai
+[2025-12-26 17:03:35] START: Preparing welcome email for agent_test_welcome@fakejob.ai
+[2025-12-26 17:03:35] CONNECTING: smtp.gmail.com
+[2025-12-26 17:03:38] SUCCESS: Email delivered to agent_test_welcome@fakejob.ai
+[2025-12-26 17:04:47] ENDPOINT HIT: Request for agent_test_welcome@fakejob.ai from auto_session
+[2025-12-26 17:04:47] DB: Visitor agent_test_welcome@fakejob.ai exists, updating visit_count.
+[2025-12-26 17:04:47] TASK QUEUE: Queuing email for agent_test_welcome@fakejob.ai
+[2025-12-26 17:04:47] START: Preparing welcome email for agent_test_welcome@fakejob.ai
+[2025-12-26 17:04:47] CONNECTING: smtp.gmail.com
+[2025-12-26 17:04:50] SUCCESS: Email delivered to agent_test_welcome@fakejob.ai
+[2025-12-26 17:08:53] START: Preparing welcome email for g.g.sriram.2004@gmail.com
+[2025-12-26 17:08:53] CONNECTING: smtp.gmail.com
+[2025-12-26 17:08:56] SUCCESS: Email delivered to g.g.sriram.2004@gmail.com
+[2025-12-26 17:26:34] ENDPOINT HIT: Request for g.g.sriram.2004@gmail.com from manual_resend
+[2025-12-26 17:26:34] DB: Visitor g.g.sriram.2004@gmail.com exists, updating visit_count.
+[2025-12-26 17:26:34] TASK QUEUE: Queuing email for g.g.sriram.2004@gmail.com
+[2025-12-26 17:26:34] START: Preparing welcome email for g.g.sriram.2004@gmail.com
+[2025-12-26 17:26:34] CONNECTING: smtp.gmail.com
+[2025-12-26 17:26:38] SUCCESS: Email delivered to g.g.sriram.2004@gmail.com
+[2025-12-26 17:27:31] ENDPOINT HIT: Request for mranishrajkumar@gmail.com from manual_resend
+[2025-12-26 17:27:31] DB: New visitor mranishrajkumar@gmail.com detected, registering.
+[2025-12-26 17:27:31] TASK QUEUE: Queuing email for mranishrajkumar@gmail.com
+[2025-12-26 17:27:31] START: Preparing welcome email for mranishrajkumar@gmail.com
+[2025-12-26 17:27:31] CONNECTING: smtp.gmail.com
+[2025-12-26 17:27:35] SUCCESS: Email delivered to mranishrajkumar@gmail.com
+[2025-12-26 17:32:02] ENDPOINT HIT: Request for mranishrajkumar@gmail.com from manual_resend
+[2025-12-26 17:32:02] DB: Visitor mranishrajkumar@gmail.com exists, updating visit_count.
+[2025-12-26 17:32:02] TASK QUEUE: Queuing email for mranishrajkumar@gmail.com
+[2025-12-26 17:32:02] START: Preparing welcome email for mranishrajkumar@gmail.com
+[2025-12-26 17:32:02] CONNECTING: smtp.gmail.com
+[2025-12-26 17:32:05] SUCCESS: Email delivered to mranishrajkumar@gmail.com
+[2025-12-26 17:33:20] ENDPOINT HIT: Request for sriramgg.ai@gmail.com from manual_resend
+[2025-12-26 17:33:20] DB: Visitor sriramgg.ai@gmail.com exists, updating visit_count.
+[2025-12-26 17:33:20] TASK QUEUE: Queuing email for sriramgg.ai@gmail.com
+[2025-12-26 17:33:20] START: Preparing welcome email for sriramgg.ai@gmail.com
+[2025-12-26 17:33:20] CONNECTING: smtp.gmail.com
+[2025-12-26 17:33:23] SUCCESS: Email delivered to sriramgg.ai@gmail.com
+[2025-12-29 18:55:21] ENDPOINT HIT: Request for itzzsrii@gmail.com from manual_resend
+[2025-12-29 18:55:21] DB: Visitor itzzsrii@gmail.com exists, updating visit_count.
+[2025-12-29 18:55:21] TASK QUEUE: Queuing email for itzzsrii@gmail.com
+[2025-12-29 18:55:21] START: Preparing welcome email for itzzsrii@gmail.com
+[2025-12-29 18:55:21] CONNECTING: smtp.gmail.com
+[2025-12-29 18:55:25] SUCCESS: Email delivered to itzzsrii@gmail.com
+[2025-12-29 18:57:45] ENDPOINT HIT: Request for sriramgg.ai@gmail.com from auto_login_sequence
+[2025-12-29 18:57:45] DB: Visitor sriramgg.ai@gmail.com exists, updating visit_count.
+[2025-12-29 18:57:45] TASK QUEUE: Queuing email for sriramgg.ai@gmail.com
+[2025-12-29 18:57:45] START: Preparing welcome email for sriramgg.ai@gmail.com
+[2025-12-29 18:57:45] CONNECTING: smtp.gmail.com
+[2025-12-29 18:57:48] SUCCESS: Email delivered to sriramgg.ai@gmail.com

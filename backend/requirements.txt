@@ -1,0 +1,41 @@
+
+# FakeJobAI - Backend Requirements
+# Core Framework
+fastapi==0.109.0
+uvicorn==0.27.0
+python-multipart==0.0.6
+pydantic==2.5.3
+
+# ML & AI
+scikit-learn==1.4.0
+pandas==2.1.4
+numpy==1.26.3
+joblib==1.3.2
+
+# Optional: Deep Learning (for future transformer models)
+# torch>=2.0.0
+# transformers>=4.35.0
+
+# API & HTTP
+requests==2.31.0
+python-dotenv==1.0.0
+
+# Database
+SQLAlchemy==2.0.25
+
+# Domain & Company Verification
+python-whois==0.8.0
+
+# Web Scraping
+beautifulsoup4==4.12.2
+lxml==5.1.0
+
+# AI APIs
+openai>=1.0.0
+google-generativeai==0.3.2
+
+# Utilities
+httpx==0.26.0
+aiofiles==23.2.1
+fpdf==1.7.2
+gunicorn==21.2.0

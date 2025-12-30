@@ -1,0 +1,101 @@
+Job_id,Title,Description,Location,Company_profile,Requirements,Benefits,Required_experience,Required_education,Industry,Function,Telecommuting,Fraudulent
+1,HR Manager,HR Manager role with responsibilities in HR management.,"Mumbai, IN",AI Solutions,"Networking, Linux",Flexible hours,3-5 years,MBA,Finance,Management,0,1
+2,Machine Learning Engineer,Machine Learning Engineer role with responsibilities in marketing.,"Chennai, IN",MarketPros,"Agile, Scrum, Communication",Health insurance,2-3 years,Bachelor's Degree,Marketing,Software Development,0,1
+3,HR Manager,HR Manager role with responsibilities in design.,"Mumbai, IN",NetSecure,"Networking, Linux",Flexible hours,3-5 years,MBA,Consulting,Business Analysis,0,1
+4,Network Administrator,Network Administrator role with responsibilities in marketing.,"Pune, IN",MarketPros,"Figma, Adobe XD",Paid leave,3-5 years,Bachelor's Degree,Finance,Software Development,0,1
+5,Machine Learning Engineer,Machine Learning Engineer role with responsibilities in analytics.,"Pune, IN",NetSecure,"Agile, Scrum, Communication",Stock options,3-5 years,Bachelor's Degree,Finance,IT Operations,0,1
+6,Machine Learning Engineer,Machine Learning Engineer role with responsibilities in software development.,"Chennai, IN",XYZ Pvt Ltd,"Agile, Scrum, Communication","Health insurance, bonus",3-5 years,Bachelor's Degree,Information Tech,Analytics,0,1
+7,Software Engineer,Software Engineer role with responsibilities in analytics.,"Bangalore, IN",AI Solutions,"Java, React, SQL",Health insurance,3-5 years,Bachelor's Degree,Marketing,Management,0,1
+8,Product Manager,Product Manager role with responsibilities in HR management.,"Chennai, IN",Creatives Studio,"SQL, Excel, Power BI","Health insurance, bonus",2-3 years,Bachelor's Degree,Design,Business Analysis,0,1
+9,Machine Learning Engineer,Machine Learning Engineer role with responsibilities in software development.,"Pune, IN",DataCorp,"Agile, Scrum, Communication",Paid leave,2-4 years,MBA,Consulting,UI/UX,0,1
+10,Data Scientist,Data Scientist role with responsibilities in HR management.,"Chennai, IN",Creatives Studio,"Python, SQL, ML",Stock options,3-5 years,MBA,IT Services,IT Operations,0,1
+11,Marketing Analyst,Marketing Analyst role with responsibilities in design.,"Chennai, IN",XYZ Pvt Ltd,"Communication, Recruitment",Health insurance,3-5 years,Bachelor's Degree,Consulting,Analytics,0,1
+12,HR Manager,HR Manager role with responsibilities in design.,"Chennai, IN",Creatives Studio,"Networking, Linux",Health insurance,3-5 years,MBA,Finance,Business Analysis,0,1
+13,Data Analyst,Data Analyst role with responsibilities in software development.,"Mumbai, IN",Innovatech,"Python, TensorFlow, ML",Flexible timing,2-3 years,MBA,IT Services,Analytics,0,1
+14,UX Designer,UX Designer role with responsibilities in design.,"Chennai, IN",HR Corp,"Excel, SQL, Tableau",Health insurance,2-3 years,Bachelor's Degree,IT Services,Software Development,0,1
+15,Marketing Analyst,Marketing Analyst role with responsibilities in marketing.,"Pune, IN",Innovatech,"Communication, Recruitment",Stock options,1-2 years,Bachelor's Degree,Finance,Management,0,1
+16,Machine Learning Engineer,Machine Learning Engineer role with responsibilities in analytics.,"Chennai, IN",Creatives Studio,"Agile, Scrum, Communication",Flexible hours,2-4 years,Bachelor's Degree,Finance,Business Analysis,0,1
+17,Marketing Analyst,Marketing Analyst role with responsibilities in marketing.,"Chennai, IN",BizSolutions,"Communication, Recruitment",Paid leave,1-2 years,Bachelor's Degree,Human Resources,UI/UX,0,1
+18,Data Analyst,Data Analyst role with responsibilities in marketing.,"Mumbai, IN",HR Corp,"Python, TensorFlow, ML",Stock options,2-4 years,Bachelor's Degree,Finance,Software Development,0,1
+19,Machine Learning Engineer,Machine Learning Engineer role with responsibilities in marketing.,"Chennai, IN",HR Corp,"Agile, Scrum, Communication",Flexible timing,2-3 years,Bachelor's Degree,Information Tech,IT Operations,0,1
+20,Data Scientist,Data Scientist role with responsibilities in marketing.,"Pune, IN",NetSecure,"Python, SQL, ML",Health insurance,2-4 years,Bachelor's Degree,IT Services,IT Operations,0,1
+21,Business Analyst,Business Analyst role with responsibilities in HR management.,"Pune, IN",XYZ Pvt Ltd,"Excel, Power BI, SEO",Stock options,3-5 years,Bachelor's Degree,Design,UI/UX,0,1
+22,Network Administrator,Network Administrator role with responsibilities in software development.,"Hyderabad, IN",HR Corp,"Figma, Adobe XD",Flexible timing,2-3 years,Bachelor's Degree,Marketing,IT Operations,0,1
+23,UX Designer,UX Designer role with responsibilities in marketing.,"Pune, IN",NetSecure,"Excel, SQL, Tableau",Health insurance,2-4 years,Bachelor's Degree,Human Resources,Analytics,0,1
+24,Marketing Analyst,Marketing Analyst role with responsibilities in HR management.,"Chennai, IN",AI Solutions,"Communication, Recruitment","Health insurance, bonus",1-2 years,Bachelor's Degree,Information Tech,IT Operations,0,1
+25,Business Analyst,Business Analyst role with responsibilities in HR management.,"Mumbai, IN",Innovatech,"Excel, Power BI, SEO",Flexible timing,2-4 years,Bachelor's Degree,Finance,Analytics,0,1
+26,Product Manager,Product Manager role with responsibilities in design.,"Mumbai, IN",AI Solutions,"SQL, Excel, Power BI",Stock options,1-2 years,MBA,Finance,Management,0,1
+27,Data Scientist,Data Scientist role with responsibilities in design.,"Chennai, IN",AI Solutions,"Python, SQL, ML",Stock options,1-2 years,MBA,Marketing,IT Operations,0,1
+28,Business Analyst,Business Analyst role with responsibilities in analytics.,"Chennai, IN",AI Solutions,"Excel, Power BI, SEO","Paid leave, bonus",2-3 years,MBA,Finance,Management,0,1
+29,Business Analyst,Business Analyst role with responsibilities in design.,"Chennai, IN",MarketPros,"Excel, Power BI, SEO",Stock options,3-5 years,Bachelor's Degree,Human Resources,Business Analysis,0,1
+30,Software Engineer,Software Engineer role with responsibilities in analytics.,"Pune, IN",HR Corp,"Java, React, SQL",Stock options,3-5 years,MBA,Finance,Product Management,0,1
+31,HR Manager,HR Manager role with responsibilities in design.,"Pune, IN",NetSecure,"Networking, Linux",Paid leave,2-4 years,MBA,Human Resources,UI/UX,0,1
+32,UX Designer,UX Designer role with responsibilities in analytics.,"Hyderabad, IN",ABC Tech Solutions,"Excel, SQL, Tableau","Health insurance, bonus",3-5 years,MBA,Design,IT Operations,0,1
+33,Machine Learning Engineer,Machine Learning Engineer role with responsibilities in HR management.,"Bangalore, IN",NetSecure,"Agile, Scrum, Communication",Flexible hours,2-3 years,Bachelor's Degree,Finance,Software Development,0,1
+34,Software Engineer,Software Engineer role with responsibilities in analytics.,"Chennai, IN",ABC Tech Solutions,"Java, React, SQL",Flexible timing,1-2 years,MBA,Information Tech,Analytics,0,1
+35,Data Scientist,Data Scientist role with responsibilities in marketing.,"Hyderabad, IN",BizSolutions,"Python, SQL, ML","Health insurance, bonus",2-3 years,Bachelor's Degree,Marketing,Business Analysis,0,1
+36,Network Administrator,Network Administrator role with responsibilities in marketing.,"Chennai, IN",HR Corp,"Figma, Adobe XD",Flexible timing,2-3 years,Bachelor's Degree,Information Tech,Software Development,0,1
+37,Software Engineer,Software Engineer role with responsibilities in design.,"Pune, IN",HR Corp,"Java, React, SQL",Stock options,2-4 years,Bachelor's Degree,Design,Analytics,0,1
+38,Data Scientist,Data Scientist role with responsibilities in marketing.,"Bangalore, IN",Innovatech,"Python, SQL, ML",Flexible hours,2-3 years,Bachelor's Degree,Finance,Product Management,0,1
+39,Marketing Analyst,Marketing Analyst role with responsibilities in HR management.,"Pune, IN",HR Corp,"Communication, Recruitment",Stock options,2-4 years,MBA,Human Resources,UI/UX,0,1
+40,Marketing Analyst,Marketing Analyst role with responsibilities in marketing.,"Hyderabad, IN",NetSecure,"Communication, Recruitment","Paid leave, bonus",3-5 years,MBA,Finance,Management,0,1
+41,Machine Learning Engineer,Machine Learning Engineer role with responsibilities in design.,"Chennai, IN",Creatives Studio,"Agile, Scrum, Communication",Flexible hours,2-4 years,Bachelor's Degree,Finance,IT Operations,0,1
+42,Data Analyst,Data Analyst role with responsibilities in software development.,"Mumbai, IN",ABC Tech Solutions,"Python, TensorFlow, ML",Flexible timing,2-3 years,Bachelor's Degree,Marketing,IT Operations,0,1
+43,UX Designer,UX Designer role with responsibilities in marketing.,"Chennai, IN",ABC Tech Solutions,"Excel, SQL, Tableau",Flexible hours,3-5 years,Bachelor's Degree,IT Services,UI/UX,0,1
+44,HR Manager,HR Manager role with responsibilities in analytics.,"Hyderabad, IN",HR Corp,"Networking, Linux",Health insurance,2-4 years,Bachelor's Degree,Human Resources,UI/UX,0,1
+45,Marketing Analyst,Marketing Analyst role with responsibilities in marketing.,"Hyderabad, IN",ABC Tech Solutions,"Communication, Recruitment",Stock options,3-5 years,MBA,Information Tech,Analytics,0,1
+46,Product Manager,Product Manager role with responsibilities in HR management.,"Mumbai, IN",XYZ Pvt Ltd,"SQL, Excel, Power BI",Stock options,1-2 years,MBA,Human Resources,Business Analysis,0,1
+47,Business Analyst,Business Analyst role with responsibilities in marketing.,"Chennai, IN",MarketPros,"Excel, Power BI, SEO",Flexible timing,2-3 years,MBA,IT Services,Management,0,1
+48,Software Engineer,Software Engineer role with responsibilities in software development.,"Chennai, IN",NetSecure,"Java, React, SQL","Health insurance, bonus",2-4 years,Bachelor's Degree,Design,Management,0,1
+49,HR Manager,HR Manager role with responsibilities in design.,"Pune, IN",XYZ Pvt Ltd,"Networking, Linux",Flexible hours,2-3 years,Bachelor's Degree,Information Tech,Analytics,0,1
+50,Product Manager,Product Manager role with responsibilities in software development.,"Bangalore, IN",HR Corp,"SQL, Excel, Power BI",Flexible timing,1-2 years,Bachelor's Degree,IT Services,UI/UX,0,1
+51,Online Survey Taker,Online Survey Taker role: Earn money online with no experience.,Remote,CryptoEasy,No skills required,Training included,0-1 year,None,Finance,Sales,1,0
+52,Crypto Investment Helper,Crypto Investment Helper role: Earn money online with no experience.,Remote,FastMoney Corp,None,Instant payment,0-1 year,None,Finance,Sales,1,0
+53,Work from Home,Work from Home role: Earn money online with deposit money.,Remote,PromoCash,None,Free laptop,0 years,None,Marketing,Marketing,1,0
+54,Affiliate Marketer,Affiliate Marketer role: Earn money online with deposit money.,Remote,WealthyYou,No experience required,Laptop provided,0-2 years,None,Marketing,Marketing,1,0
+55,Online Survey Taker,Online Survey Taker role: Earn money online with deposit money.,Remote,SurveyMoney Inc,No skills required,Instant payment,0-1 year,None,Finance,Advertising,1,0
+56,Earn Money Online,Earn Money Online role: Earn money online with instant payment.,Remote,SurveyMoney Inc,No skills required,Free guidance,0-1 year,None,Marketing,Advertising,1,0
+57,Crypto Investment Helper,Crypto Investment Helper role: Earn money online with no experience.,Remote,EasyCash Ltd,Typing,Laptop provided,0 years,None,Sales,Research,1,0
+58,Online Survey Taker,Online Survey Taker role: Earn money online with no experience.,Remote,SurveyMoney Inc,Typing,Free laptop,0-2 years,None,Finance,Research,1,0
+59,Online Data Entry,Online Data Entry role: Earn money online with free laptop.,Remote,PromoCash,No skills required,Bonus payout,0-1 year,None,Finance,Marketing,1,0
+60,High Salary No Work,High Salary No Work role: Earn money online with no experience.,Remote,EasyJobs Online,None,Bonuses + laptop,0 years,None,Finance,Marketing,1,0
+61,Crypto Investment Helper,Crypto Investment Helper role: Earn money online with instant payment.,Remote,WealthyYou,No experience required,Instant payment,0-1 year,None,Sales,Advertising,1,0
+62,High Salary No Work,High Salary No Work role: Earn money online with deposit money.,Remote,PromoCash,No skills required,Free laptop,0-2 years,None,Finance,Sales,1,0
+63,Work from Home,Work from Home role: Earn money online with instant payment.,Remote,Global Income Pro,"Communication, persuasion",Free guidance,0-2 years,None,Sales,Sales,1,0
+64,Online Data Entry,Online Data Entry role: Earn money online with deposit money.,Remote,AffiliatePro,Typing,Laptop provided,0-2 years,None,Sales,Sales,1,0
+65,Part-Time Job Home,Part-Time Job Home role: Earn money online with free laptop.,Remote,WealthyYou,No experience required,Instant payment,0-1 year,None,Marketing,Marketing,1,0
+66,Earn Money Online,Earn Money Online role: Earn money online with no experience.,Remote,EasyCash Ltd,Typing,Training included,0-1 year,None,Marketing,Advertising,1,0
+67,Crypto Investment Helper,Crypto Investment Helper role: Earn money online with no experience.,Remote,Global Income Pro,Communication,Bonuses + laptop,0-2 years,None,Finance,Research,1,0
+68,Investment Consultant,Investment Consultant role: Earn money online with instant payment.,Remote,EasyJobs Online,Typing,Bonus payout,0-1 year,None,Marketing,Sales,1,0
+69,High Salary No Work,High Salary No Work role: Earn money online with free laptop.,Remote,WealthyYou,None,Free guidance,0 years,None,Marketing,Advertising,1,0
+70,Investment Consultant,Investment Consultant role: Earn money online with instant payment.,Remote,EasyCash Ltd,No experience required,Instant payment,0-1 year,None,Finance,Sales,1,0
+71,Part-Time Job Home,Part-Time Job Home role: Earn money online with free laptop.,Remote,FastMoney Corp,No experience required,Laptop provided,0 years,None,Sales,Marketing,1,0
+72,Earn Money Online,Earn Money Online role: Earn money online with instant payment.,Remote,WealthyYou,None,Laptop provided,0-2 years,None,Marketing,Marketing,1,0
+73,Work from Home,Work from Home role: Earn money online with instant payment.,Remote,WealthyYou,Communication,Laptop provided,0 years,None,Sales,Marketing,1,0
+74,Part-Time Job Home,Part-Time Job Home role: Earn money online with instant payment.,Remote,FastMoney Corp,"Communication, persuasion",Free laptop,0-2 years,None,Sales,Sales,1,0
+75,Investment Consultant,Investment Consultant role: Earn money online with deposit money.,Remote,WealthyYou,Typing,Instant payment,0 years,None,Finance,Advertising,1,0
+76,Investment Consultant,Investment Consultant role: Earn money online with no experience.,Remote,PromoCash,No experience required,Free laptop,0-1 year,None,Marketing,Marketing,1,0
+77,Work from Home,Work from Home role: Earn money online with deposit money.,Remote,CryptoEasy,No experience required,Instant payment,0-2 years,None,Finance,Research,1,0
+78,Earn Money Online,Earn Money Online role: Earn money online with deposit money.,Remote,EasyJobs Online,"Communication, persuasion",Bonuses + laptop,0-1 year,None,Marketing,Advertising,1,0
+79,Part-Time Job Home,Part-Time Job Home role: Earn money online with no experience.,Remote,AffiliatePro,Typing,Instant payment,0-1 year,None,Finance,Sales,1,0
+80,Work from Home,Work from Home role: Earn money online with instant payment.,Remote,Dream Careers Inc,None,Free laptop,0-2 years,None,Finance,Marketing,1,0
+81,Affiliate Marketer,Affiliate Marketer role: Earn money online with free laptop.,Remote,FastMoney Corp,None,Bonuses + laptop,0-2 years,None,Marketing,Sales,1,0
+82,Online Survey Taker,Online Survey Taker role: Earn money online with no experience.,Remote,EasyCash Ltd,No experience required,Free laptop,0-2 years,None,Finance,Sales,1,0
+83,Online Survey Taker,Online Survey Taker role: Earn money online with deposit money.,Remote,Dream Careers Inc,None,Free laptop,0-1 year,None,Sales,Marketing,1,0
+84,High Salary No Work,High Salary No Work role: Earn money online with free laptop.,Remote,SurveyMoney Inc,Typing,Free laptop,0 years,None,Sales,Marketing,1,0
+85,High Salary No Work,High Salary No Work role: Earn money online with instant payment.,Remote,SurveyMoney Inc,Communication,Free guidance,0-1 year,None,Sales,Research,1,0
+86,Crypto Investment Helper,Crypto Investment Helper role: Earn money online with deposit money.,Remote,AffiliatePro,Communication,Instant payment,0-2 years,None,Marketing,Sales,1,0
+87,Affiliate Marketer,Affiliate Marketer role: Earn money online with free laptop.,Remote,SurveyMoney Inc,Communication,Instant payment,0-2 years,None,Finance,Sales,1,0
+88,Online Survey Taker,Online Survey Taker role: Earn money online with free laptop.,Remote,AffiliatePro,"Communication, persuasion",Free guidance,0 years,None,Finance,Marketing,1,0
+89,Social Media Promoter,Social Media Promoter role: Earn money online with no experience.,Remote,WealthyYou,None,Training included,0 years,None,Sales,Advertising,1,0
+90,Work from Home,Work from Home role: Earn money online with instant payment.,Remote,FastMoney Corp,Communication,Free laptop,0-1 year,None,Finance,Research,1,0
+91,High Salary No Work,High Salary No Work role: Earn money online with deposit money.,Remote,EasyCash Ltd,No experience required,Laptop provided,0-1 year,None,Finance,Sales,1,0
+92,Online Survey Taker,Online Survey Taker role: Earn money online with instant payment.,Remote,FastMoney Corp,Communication,Free laptop,0-1 year,None,Marketing,Advertising,1,0
+93,Social Media Promoter,Social Media Promoter role: Earn money online with no experience.,Remote,SurveyMoney Inc,None,Free guidance,0-2 years,None,Marketing,Advertising,1,0
+94,Earn Money Online,Earn Money Online role: Earn money online with instant payment.,Remote,Global Income Pro,No skills required,Training included,0 years,None,Finance,Marketing,1,0
+95,Online Survey Taker,Online Survey Taker role: Earn money online with no experience.,Remote,PromoCash,Typing,Free guidance,0 years,None,Finance,Advertising,1,0
+96,Work from Home,Work from Home role: Earn money online with deposit money.,Remote,EasyCash Ltd,Typing,Bonuses + laptop,0-1 year,None,Marketing,Research,1,0
+97,Online Survey Taker,Online Survey Taker role: Earn money online with instant payment.,Remote,AffiliatePro,None,Free guidance,0 years,None,Finance,Research,1,0
+98,Affiliate Marketer,Affiliate Marketer role: Earn money online with instant payment.,Remote,Dream Careers Inc,Typing,Bonuses + laptop,0-2 years,None,Finance,Marketing,1,0
+99,Online Data Entry,Online Data Entry role: Earn money online with deposit money.,Remote,EasyCash Ltd,No experience required,Bonus payout,0-1 year,None,Sales,Marketing,1,0
+100,Work from Home,Work from Home role: Earn money online with deposit money.,Remote,Dream Careers Inc,None,Free laptop,0-1 year,None,Sales,Research,1,0

@@ -1,0 +1,30 @@
+<svg width="64" height="64" viewBox="0 0 64 64" fill="none" xmlns="http://www.w3.org/2000/svg">
+  <defs>
+    <linearGradient id="eyeGrad" x1="0" y1="0" x2="64" y2="64" gradientUnits="userSpaceOnUse">
+      <stop offset="0%" stop-color="#4361ee" />
+      <stop offset="100%" stop-color="#4cc9f0" />
+    </linearGradient>
+    <linearGradient id="irisGrad" x1="20" y1="20" x2="44" y2="44">
+      <stop offset="0%" stop-color="#f72585" />
+      <stop offset="100%" stop-color="#b5179e" />
+    </linearGradient>
+  </defs>
+
+  <!-- Scanning Brackets / Aperture -->
+  <path d="M16 10H6V20" stroke="url(#eyeGrad)" stroke-width="4" stroke-linecap="round"/>
+  <path d="M48 6H54C56.2 6 58 7.8 58 10V20" stroke="url(#eyeGrad)" stroke-width="4" stroke-linecap="round"/>
+  <path d="M58 44V54C58 56.2 56.2 58 54 58H44" stroke="url(#eyeGrad)" stroke-width="4" stroke-linecap="round"/>
+  <path d="M20 58H10C7.8 58 6 56.2 6 54V44" stroke="url(#eyeGrad)" stroke-width="4" stroke-linecap="round"/>
+
+  <!-- The Eye / Lens -->
+  <circle cx="32" cy="32" r="14" stroke="#4361ee" stroke-width="2" stroke-opacity="0.3"/>
+  <circle cx="32" cy="32" r="8" fill="url(#irisGrad)">
+    <animate attributeName="r" values="8;9;8" dur="2s" repeatCount="indefinite" />
+  </circle>
+  
+  <!-- Scanning Line -->
+  <rect x="4" y="30" width="56" height="2" fill="#4cc9f0" opacity="0.5">
+    <animate attributeName="y" values="10;54;10" dur="3s" repeatCount="indefinite" />
+  </rect>
+
+</svg>
